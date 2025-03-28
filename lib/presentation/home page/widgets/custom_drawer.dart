@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:salvest_app/presentation/home%20page/widgets/drawer_item.dart';
+import 'package:salvest_app/utility/app_colors.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -8,7 +9,7 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[400], // Light purple background
+      backgroundColor: AppColors.lightPurple, // Light purple background
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,8 +39,9 @@ class CustomDrawer extends StatelessWidget {
           ),
           DrawerItem(icon: Icons.house, title: 'Sale Estate', onTap: () {}),
           DrawerItem(icon: Icons.help, title: 'Help', onTap: () {}),
+          const Divider(thickness: 4, color: AppColors.white, indent: 19),
           DrawerItem(icon: Icons.settings, title: 'Setting', onTap: () {}),
-          const Divider(),
+
           DrawerItem(icon: Icons.logout, title: 'Logout', onTap: () {}),
         ],
       ),

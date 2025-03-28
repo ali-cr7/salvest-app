@@ -9,6 +9,7 @@ import 'package:salvest_app/presentation/home%20page/widgets/home_page_view_body
 import 'package:salvest_app/presentation/home%20page/widgets/property_card.dart';
 import 'package:salvest_app/presentation/home%20page/widgets/property_listview.dart';
 import 'package:salvest_app/presentation/home%20page/widgets/search_bar.dart';
+import 'package:salvest_app/utility/app_colors.dart';
 
 // Home Screen
 class HomePageView extends StatelessWidget {
@@ -20,7 +21,7 @@ class HomePageView extends StatelessWidget {
       //  showShadow: true,
       angle: 0.0,
       borderRadius: 30.0,
-      menuBackgroundColor: Colors.blue[400] ?? Colors.white,
+      menuBackgroundColor: AppColors.lightPurple ?? Colors.white,
       menuScreen: CustomDrawer(),
       mainScreen: HomePageViewBody(),
     );

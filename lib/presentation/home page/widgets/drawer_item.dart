@@ -1,6 +1,7 @@
 // Drawer Item Widget
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:salvest_app/utility/app_colors.dart';
 
 class DrawerItem extends StatelessWidget {
   final IconData icon;
@@ -17,7 +18,7 @@ class DrawerItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(icon, color: Colors.white),
+      leading: Icon(icon, color: AppColors.white),
       title: Text(
         title,
         style: GoogleFonts.poppins(
