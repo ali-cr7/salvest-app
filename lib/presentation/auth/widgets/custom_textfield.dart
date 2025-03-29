@@ -5,7 +5,7 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final IconData icon;
   final bool isPassword;
-  
+
   const CustomTextField({
     super.key,
     required this.hintText,
@@ -19,10 +19,12 @@ class CustomTextField extends StatelessWidget {
       obscureText: isPassword,
       decoration: InputDecoration(
         hintText: hintText,
-        prefixIcon: Icon(icon, color: Colors.grey),
-        suffixIcon: isPassword
-            ? Icon(Icons.visibility_off, color: Colors.grey)
-            : null,
+        hintStyle: TextStyle(color: AppColors.black38),
+        // prefixIcon: Icon(icon, color: Colors.grey),
+        suffixIcon:
+            isPassword
+                ? Icon(Icons.visibility_off, color: Colors.grey)
+                : Icon(icon, color: Colors.grey),
         filled: true,
         fillColor: AppColors.white,
         border: OutlineInputBorder(

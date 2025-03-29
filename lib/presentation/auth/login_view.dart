@@ -29,9 +29,7 @@ class LoginView extends StatelessWidget {
             bottom: 0,
             child: SizedBox(
               width: MediaQuery.of(context).size.width,
-              height:
-                  MediaQuery.of(context).size.height *
-                  0.55, // 50% of screen height
+              height: MediaQuery.of(context).size.height * 0.55,
               child: Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20,
@@ -64,8 +62,8 @@ class LoginView extends StatelessWidget {
                     /// Password Input
                     const CustomTextField(
                       hintText: "Password",
-                      icon: Icons.lock_outline,
-                      isPassword: true,
+                      icon: Icons.visibility_off,
+                      //  isPassword: true,
                     ),
 
                     /// Forget Password
