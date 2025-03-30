@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:go_router/go_router.dart';
 import 'package:salvest_app/presentation/home%20page/widgets/card_tabs.dart';
-import 'package:salvest_app/presentation/home%20page/widgets/custom_appbar.dart';
+
 import 'package:salvest_app/presentation/home%20page/widgets/custom_drawer.dart';
 import 'package:salvest_app/presentation/home%20page/widgets/property_listview.dart';
 import 'package:salvest_app/presentation/home%20page/widgets/search_bar.dart';
+import 'package:salvest_app/utility/router.dart';
 
 class HomePageViewBody extends StatelessWidget {
   const HomePageViewBody({super.key});
@@ -31,8 +33,13 @@ class HomePageViewBody extends StatelessWidget {
             );
           },
         ),
-        actions: const [
-          Icon(Icons.notifications, color: Colors.black),
+        actions: [
+          InkWell(
+            onTap: () {
+              GoRouter.of(context).push(AppRouter.kNotificationView);
+            },
+            child: Icon(Icons.notifications, color: Colors.black),
+          ),
           SizedBox(width: 10),
         ],
       ),

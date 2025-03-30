@@ -11,7 +11,7 @@ class ResetPasswordView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(   
       backgroundColor: AppColors.lightPurple,
       body: Stack(
         children: [

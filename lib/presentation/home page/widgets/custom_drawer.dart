@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:go_router/go_router.dart';
 import 'package:salvest_app/presentation/home%20page/widgets/drawer_item.dart';
 import 'package:salvest_app/utility/app_colors.dart';
+import 'package:salvest_app/utility/router.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -38,7 +39,13 @@ class CustomDrawer extends StatelessWidget {
             onTap: () {},
           ),
           DrawerItem(icon: Icons.house, title: 'Sale Estate', onTap: () {}),
-          DrawerItem(icon: Icons.help, title: 'Help', onTap: () {}),
+          DrawerItem(
+            icon: Icons.help,
+            title: 'Help',
+            onTap: () {
+              GoRouter.of(context).push(AppRouter.kHelpView);
+            },
+          ),
           const Divider(thickness: 4, color: AppColors.white, indent: 19),
           DrawerItem(icon: Icons.settings, title: 'Setting', onTap: () {}),
 

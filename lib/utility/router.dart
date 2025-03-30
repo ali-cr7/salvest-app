@@ -3,12 +3,16 @@ import 'package:salvest_app/presentation/auth/forgot_password_view.dart';
 import 'package:salvest_app/presentation/auth/login_view.dart';
 import 'package:salvest_app/presentation/auth/reset_password_view.dart';
 import 'package:salvest_app/presentation/auth/signup_view.dart';
+import 'package:salvest_app/presentation/help/help_view.dart';
 import 'package:salvest_app/presentation/home%20page/home_page_view.dart';
+import 'package:salvest_app/presentation/notifications/negotiation_notification_view.dart';
+import 'package:salvest_app/presentation/notifications/noftifications_view.dart';
 
 abstract class AppRouter {
   static const kHomePageView = '/homePageView';
   static const kProfileView = 'profileView';
   static const kHelpView = '/helpView';
+  static const kNegotiationNotificationView = '/NegotiationNotificationView';
   static const kNotificationView = '/notificationView';
   static const kChildrensView = '/childrensView';
   static const kAppointmentsView = '/appointmentsView';
@@ -17,22 +21,35 @@ abstract class AppRouter {
   static const kForgotPasswordView = '/forgotPasswordView';
   static final router = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const LoginView()),
+      GoRoute(path: '/', builder: (context, state) => const HomePageView()),
       GoRoute(
         path: kHomePageView,
         builder: (context, state) => const HomePageView(),
       ),
-        GoRoute(
+      GoRoute(
         path: kForgotPasswordView,
         builder: (context, state) => const ForgetPasswordView(),
       ),
-        GoRoute(
+      GoRoute(
+        path: kHelpView,
+        builder: (context, state) => const HelpView(),
+      ),
+      
+       GoRoute(
+        path: kNegotiationNotificationView,
+        builder: (context, state) => const NegotiationNotificationView(),
+      ),
+      GoRoute(
         path: kResetPasswordView,
         builder: (context, state) => const ResetPasswordView(),
       ),
-        GoRoute(
+      GoRoute(
         path: kSignupView,
         builder: (context, state) => const SignUpView(),
+      ),
+      GoRoute(
+        path: kNotificationView,
+        builder: (context, state) => const NotificationsView(),
       ),
     ],
   );

@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:salvest_app/presentation/auth/widgets/custom_button.dart';
 import 'package:salvest_app/presentation/auth/widgets/custom_textfield.dart';
 import 'package:salvest_app/utility/app_colors.dart';
-import 'package:salvest_app/utility/router.dart';
+
 
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});

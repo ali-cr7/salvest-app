@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:salvest_app/presentation/home%20page/home_page_view.dart';
+
 import 'package:salvest_app/utility/router.dart';
 
 void main() {
