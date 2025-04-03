@@ -1,6 +1,6 @@
 // Details Row Class
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 class DetailsRow extends StatelessWidget {
   final String title;
@@ -13,10 +13,10 @@ class DetailsRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title, style: GoogleFonts.poppins(fontSize: 12)),
+        Text(title, style:TextStyle(fontSize: 12)),
         Text(
           value,
-          style: GoogleFonts.poppins(
+          style: TextStyle(
             fontSize: 12,
             color: Colors.black54,
             fontWeight: FontWeight.normal,

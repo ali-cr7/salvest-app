@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 class CardHeader extends StatelessWidget {
   final String category;
@@ -28,7 +28,7 @@ class CardHeader extends StatelessWidget {
           const SizedBox(width: 6),
           Text(
             category,
-            style: GoogleFonts.poppins(
+            style:TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.normal,
             ),

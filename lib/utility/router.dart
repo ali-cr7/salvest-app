@@ -7,10 +7,12 @@ import 'package:salvest_app/presentation/help/help_view.dart';
 import 'package:salvest_app/presentation/home%20page/home_page_view.dart';
 import 'package:salvest_app/presentation/notifications/negotiation_notification_view.dart';
 import 'package:salvest_app/presentation/notifications/noftifications_view.dart';
+import 'package:salvest_app/presentation/profile/profile_view.dart';
+import 'package:salvest_app/presentation/sale%20estate/sale_estate_view.dart';
 
 abstract class AppRouter {
   static const kHomePageView = '/homePageView';
-  static const kProfileView = 'profileView';
+  static const kProfileView = '/profileView';
   static const kHelpView = '/helpView';
   static const kNegotiationNotificationView = '/NegotiationNotificationView';
   static const kNotificationView = '/notificationView';
@@ -19,6 +21,8 @@ abstract class AppRouter {
   static const kSignupView = '/signupView';
   static const kResetPasswordView = '/resetPasswordView';
   static const kForgotPasswordView = '/forgotPasswordView';
+  static const kSaleEstateView = '/SaleEstateView';
+
   static final router = GoRouter(
     routes: [
       GoRoute(path: '/', builder: (context, state) => const HomePageView()),
@@ -30,12 +34,16 @@ abstract class AppRouter {
         path: kForgotPasswordView,
         builder: (context, state) => const ForgetPasswordView(),
       ),
+      GoRoute(path: kHelpView, builder: (context, state) => const HelpView()),
       GoRoute(
-        path: kHelpView,
-        builder: (context, state) => const HelpView(),
+        path: kSaleEstateView,
+        builder: (context, state) => const SaleEstateView(),
       ),
-      
-       GoRoute(
+      GoRoute(
+        path: kProfileView,
+        builder: (context, state) => const ProfileView(),
+      ),
+      GoRoute(
         path: kNegotiationNotificationView,
         builder: (context, state) => const NegotiationNotificationView(),
       ),

@@ -1,7 +1,7 @@
 // Single Tab
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:salvest_app/presentation/home%20page/widgets/card_header.dart';
 import 'package:salvest_app/presentation/home%20page/widgets/details_row.dart';
 
@@ -66,8 +66,8 @@ class _PropertyCardState extends State<PropertyCard> {
                           topLeft: Radius.circular(12),
                           topRight: Radius.circular(12),
                         ),
-                        child: Image.network(
-                          imageUrl,
+                        child: Image( image: AssetImage(imageUrl),
+                        //  imageUrl,
                           width: double.infinity,
                           height: 300,
                           fit: BoxFit.cover,
@@ -137,7 +137,7 @@ class _PropertyCardState extends State<PropertyCard> {
 
                     Text(
                       widget.rating.toString(),
-                      style: GoogleFonts.poppins(
+                      style:TextStyle(
                         color: Colors.white,
                         fontSize: 10,
                         fontWeight: FontWeight.w500,
@@ -161,7 +161,7 @@ class _PropertyCardState extends State<PropertyCard> {
                     const SizedBox(width: 4),
                     Text(
                       widget.location,
-                      style: GoogleFonts.poppins(
+                      style:TextStyle(
                         fontSize: 12,
                         color: Colors.black54,
                       ),
@@ -174,14 +174,14 @@ class _PropertyCardState extends State<PropertyCard> {
                   children: [
                     Text(
                       widget.title,
-                      style: GoogleFonts.poppins(
+                      style:TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
                       widget.availability,
-                      style: GoogleFonts.poppins(
+                      style:TextStyle(
                         color: Colors.green,
                         fontSize: 12,
                       ),
@@ -196,7 +196,7 @@ class _PropertyCardState extends State<PropertyCard> {
                   children: [
                     Text(
                       widget.price,
-                      style: GoogleFonts.poppins(
+                      style: TextStyle(
                         color: Colors.green,
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
@@ -205,7 +205,7 @@ class _PropertyCardState extends State<PropertyCard> {
 
                     Text(
                       widget.investors,
-                      style: GoogleFonts.poppins(
+                      style:TextStyle(
                         color: Colors.black54,
                         fontSize: 12,
                       ),

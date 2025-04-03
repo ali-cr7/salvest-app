@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:salvest_app/utility/app_colors.dart';
 
 class CategoryTab extends StatelessWidget {
@@ -18,7 +18,7 @@ class CategoryTab extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: GoogleFonts.poppins(
+        style:TextStyle(
           color: isSelected ? Colors.white : Colors.grey,
           fontSize: 14,
         ),

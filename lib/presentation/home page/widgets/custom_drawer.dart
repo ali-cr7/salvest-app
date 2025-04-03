@@ -26,7 +26,13 @@ class CustomDrawer extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          DrawerItem(icon: Icons.person, title: 'Profile', onTap: () {}),
+          DrawerItem(
+            icon: Icons.person,
+            title: 'Profile',
+            onTap: () {
+              GoRouter.of(context).push(AppRouter.kProfileView);
+            },
+          ),
           DrawerItem(icon: Icons.pie_chart, title: 'Portfolio', onTap: () {}),
           DrawerItem(
             icon: Icons.account_balance_wallet,
@@ -38,7 +44,13 @@ class CustomDrawer extends StatelessWidget {
             title: 'Auto Invest',
             onTap: () {},
           ),
-          DrawerItem(icon: Icons.house, title: 'Sale Estate', onTap: () {}),
+          DrawerItem(
+            icon: Icons.house,
+            title: 'Sale Estate',
+            onTap: () {
+              GoRouter.of(context).push(AppRouter.kSaleEstateView);
+            },
+          ),
           DrawerItem(
             icon: Icons.help,
             title: 'Help',

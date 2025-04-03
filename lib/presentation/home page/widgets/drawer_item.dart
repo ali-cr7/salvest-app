@@ -1,6 +1,6 @@
 // Drawer Item Widget
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:salvest_app/utility/app_colors.dart';
 
 class DrawerItem extends StatelessWidget {
@@ -21,7 +21,7 @@ class DrawerItem extends StatelessWidget {
       leading: Icon(icon, color: AppColors.white),
       title: Text(
         title,
-        style: GoogleFonts.poppins(
+        style:TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w500,
           color: Colors.white,

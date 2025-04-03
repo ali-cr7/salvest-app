@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:salvest_app/presentation/home%20page/widgets/property_card.dart';
+import 'package:salvest_app/utility/app_assests.dart';
 
 class PropertyListView extends StatelessWidget {
   const PropertyListView({super.key});
@@ -26,9 +27,9 @@ class PropertyListView extends StatelessWidget {
           iconData: CupertinoIcons.money_dollar_circle_fill,
           categoryColor: Colors.green,
           imageUrls: [
-            'https://as2.ftcdn.net/jpg/03/00/10/35/1000_F_300103505_oBLUa4dEG8mFdP60givbyNdoy7aHFmuu.webp',
-            'https://as2.ftcdn.net/jpg/03/00/10/35/1000_F_300103505_oBLUa4dEG8mFdP60givbyNdoy7aHFmuu.webp',
-            'https://as2.ftcdn.net/jpg/03/00/10/35/1000_F_300103505_oBLUa4dEG8mFdP60givbyNdoy7aHFmuu.webp',
+          AppAssets.property,
+             AppAssets.property,
+             AppAssets.property,
           ], // Replace with real URL
           rating: 4.5,
         );
