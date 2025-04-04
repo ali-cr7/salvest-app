@@ -9,6 +9,7 @@ import 'package:salvest_app/presentation/notifications/negotiation_notification_
 import 'package:salvest_app/presentation/notifications/noftifications_view.dart';
 import 'package:salvest_app/presentation/profile/profile_view.dart';
 import 'package:salvest_app/presentation/sale%20estate/sale_estate_view.dart';
+import 'package:salvest_app/presentation/wallet/wallet_view.dart';
 
 abstract class AppRouter {
   static const kHomePageView = '/homePageView';
@@ -22,6 +23,7 @@ abstract class AppRouter {
   static const kResetPasswordView = '/resetPasswordView';
   static const kForgotPasswordView = '/forgotPasswordView';
   static const kSaleEstateView = '/SaleEstateView';
+  static const kWalitView = '/walitView';
 
   static final router = GoRouter(
     routes: [
@@ -33,6 +35,10 @@ abstract class AppRouter {
       GoRoute(
         path: kForgotPasswordView,
         builder: (context, state) => const ForgetPasswordView(),
+      ),
+         GoRoute(
+        path: kWalitView,
+        builder: (context, state) => const WalletView(),
       ),
       GoRoute(path: kHelpView, builder: (context, state) => const HelpView()),
       GoRoute(

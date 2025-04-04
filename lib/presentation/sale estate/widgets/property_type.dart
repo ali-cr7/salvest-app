@@ -80,32 +80,24 @@ class _PropertyTypeWidgetState extends State<PropertyTypeWidget> {
           //      const SizedBox(height: 18, width: 52.02),
           Padding(
             padding: const EdgeInsets.only(left: 16.0),
-            child: Column(
-              spacing: -20,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Other :',
-                  style: TextStyle(
+            child: SizedBox(
+              width: 259.02,
+              height: 18.50,
+              child: TextField(
+                controller: _otherController,
+                decoration: InputDecoration(
+                  hintText: 'Other :',
+                  hintStyle: TextStyle(
                     color: Colors.black.withValues(alpha: 79),
                     fontSize: 14,
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w400,
                   ),
+                  border: UnderlineInputBorder(),
                 ),
-                SizedBox(
-                  width: 259.02,
-                  height: 18.50,
-                  child: TextField(
-                    controller: _otherController,
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
+          ),  
         ],
       ],
     );

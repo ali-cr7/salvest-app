@@ -37,7 +37,9 @@ class CustomDrawer extends StatelessWidget {
           DrawerItem(
             icon: Icons.account_balance_wallet,
             title: 'Wallet',
-            onTap: () {},
+            onTap: () {
+               GoRouter.of(context).push(AppRouter.kWalitView);
+            },
           ),
           DrawerItem(
             icon: Icons.auto_graph,
