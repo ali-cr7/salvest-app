@@ -3,12 +3,15 @@ import 'package:salvest_app/presentation/auth/forgot_password_view.dart';
 import 'package:salvest_app/presentation/auth/login_view.dart';
 import 'package:salvest_app/presentation/auth/reset_password_view.dart';
 import 'package:salvest_app/presentation/auth/signup_view.dart';
+import 'package:salvest_app/presentation/auto%20investment/auto_investment_view.dart';
 import 'package:salvest_app/presentation/help/help_view.dart';
 import 'package:salvest_app/presentation/home%20page/home_page_view.dart';
 import 'package:salvest_app/presentation/notifications/negotiation_notification_view.dart';
 import 'package:salvest_app/presentation/notifications/noftifications_view.dart';
 import 'package:salvest_app/presentation/profile/profile_view.dart';
+import 'package:salvest_app/presentation/property%20details/property_details_view.dart';
 import 'package:salvest_app/presentation/sale%20estate/sale_estate_view.dart';
+import 'package:salvest_app/presentation/wallet/profits_wallet_view.dart';
 import 'package:salvest_app/presentation/wallet/wallet_view.dart';
 
 abstract class AppRouter {
@@ -24,6 +27,9 @@ abstract class AppRouter {
   static const kForgotPasswordView = '/forgotPasswordView';
   static const kSaleEstateView = '/SaleEstateView';
   static const kWalitView = '/walitView';
+  static const kProfitWalletView = '/kProfitWalletView';
+  static const kPropertyDetailsView = '/propertyDetailsView';
+  static const kAutoInvestmentView = '/AutoInvestmentView';
 
   static final router = GoRouter(
     routes: [
@@ -32,14 +38,25 @@ abstract class AppRouter {
         path: kHomePageView,
         builder: (context, state) => const HomePageView(),
       ),
+          GoRoute(
+        path: kPropertyDetailsView,
+        builder: (context, state) => const PropertyDetailsView(),
+      ),
+   
       GoRoute(
         path: kForgotPasswordView,
         builder: (context, state) => const ForgetPasswordView(),
       ),
-         GoRoute(
+      GoRoute(
         path: kWalitView,
         builder: (context, state) => const WalletView(),
       ),
+        GoRoute(
+        path: kProfitWalletView,
+        builder: (context, state) => const ProfitWalletView(),
+      ),
+      GoRoute(path: kAutoInvestmentView,
+      builder: (context, state) => const AutoInvestmentView()),
       GoRoute(path: kHelpView, builder: (context, state) => const HelpView()),
       GoRoute(
         path: kSaleEstateView,

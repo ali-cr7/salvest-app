@@ -124,7 +124,9 @@ class SaleEstateView extends StatelessWidget {
 
                       Padding(
                         padding: EdgeInsets.only(top: 20, bottom: 8.0),
-                        child: CustomSendButton(onTap: () {}),
+                        child: CustomSendButton(
+                          buttonName: 'send',
+                          onTap: () {}),
                       ),
                     ],
                   ),

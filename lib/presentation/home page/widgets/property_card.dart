@@ -59,6 +59,7 @@ class _PropertyCardState extends State<PropertyCard> {
             children: [
               // Image Slider
               CarouselSlider(
+                disableGesture: true,
                 items:
                     widget.imageUrls.map((imageUrl) {
                       return ClipRRect(
@@ -66,8 +67,9 @@ class _PropertyCardState extends State<PropertyCard> {
                           topLeft: Radius.circular(12),
                           topRight: Radius.circular(12),
                         ),
-                        child: Image( image: AssetImage(imageUrl),
-                        //  imageUrl,
+                        child: Image(
+                          image: AssetImage(imageUrl),
+                          //  imageUrl,
                           width: double.infinity,
                           height: 300,
                           fit: BoxFit.cover,
@@ -76,7 +78,7 @@ class _PropertyCardState extends State<PropertyCard> {
                     }).toList(),
                 options: CarouselOptions(
                   height: 300,
-                  autoPlay: true,
+                  autoPlay: false,
                   enlargeCenterPage: true,
                   viewportFraction: 1,
                   onPageChanged: (index, reason) {
@@ -137,7 +139,7 @@ class _PropertyCardState extends State<PropertyCard> {
 
                     Text(
                       widget.rating.toString(),
-                      style:TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
                         fontSize: 10,
                         fontWeight: FontWeight.w500,
@@ -161,10 +163,7 @@ class _PropertyCardState extends State<PropertyCard> {
                     const SizedBox(width: 4),
                     Text(
                       widget.location,
-                      style:TextStyle(
-                        fontSize: 12,
-                        color: Colors.black54,
-                      ),
+                      style: TextStyle(fontSize: 12, color: Colors.black54),
                     ),
                   ],
                 ),
@@ -174,17 +173,14 @@ class _PropertyCardState extends State<PropertyCard> {
                   children: [
                     Text(
                       widget.title,
-                      style:TextStyle(
+                      style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
                       widget.availability,
-                      style:TextStyle(
-                        color: Colors.green,
-                        fontSize: 12,
-                      ),
+                      style: TextStyle(color: Colors.green, fontSize: 12),
                     ),
                   ],
                 ),
@@ -205,10 +201,7 @@ class _PropertyCardState extends State<PropertyCard> {
 
                     Text(
                       widget.investors,
-                      style:TextStyle(
-                        color: Colors.black54,
-                        fontSize: 12,
-                      ),
+                      style: TextStyle(color: Colors.black54, fontSize: 12),
                     ),
                   ],
                 ),

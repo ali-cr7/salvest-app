@@ -38,13 +38,16 @@ class CustomDrawer extends StatelessWidget {
             icon: Icons.account_balance_wallet,
             title: 'Wallet',
             onTap: () {
-               GoRouter.of(context).push(AppRouter.kWalitView);
+              // GoRouter.of(context).push(AppRouter.kWalitView);
+              GoRouter.of(context).push(AppRouter.kWalitView);
             },
           ),
           DrawerItem(
             icon: Icons.auto_graph,
             title: 'Auto Invest',
-            onTap: () {},
+            onTap: () {
+              GoRouter.of(context).push(AppRouter.kAutoInvestmentView);
+            },
           ),
           DrawerItem(
             icon: Icons.house,
