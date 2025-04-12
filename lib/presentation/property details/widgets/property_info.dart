@@ -1,21 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:salvest_app/presentation/home%20page/widgets/details_row.dart';
 import 'package:salvest_app/utility/app_assests.dart';
 import 'package:salvest_app/utility/app_colors.dart';
 
 class PropertyInfo extends StatelessWidget {
-  const PropertyInfo({
-    super.key,
-  });
+  const PropertyInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-        left: 12.0,
-        right: 12.0,
-        top: 12.0,
-      ),
+      padding: const EdgeInsets.only(left: 12.0, right: 12.0, top: 12.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -29,10 +25,41 @@ class PropertyInfo extends StatelessWidget {
           ),
           Row(
             children: [
-              Image(
-                image: AssetImage(AppAssets.bedRoomImage),
+              Row(
+                children: [
+                  Image(image: AssetImage(AppAssets.bedRoomImage)),
+                  SizedBox(width: 5),
+                  Text(
+                    '3',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 12,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(width: 5),
+                  Container(width: 3, height: 12, color: AppColors.black38),
+                  SizedBox(width: 5),
+                  Icon(
+                    FontAwesomeIcons
+                        .bath, // This looks very close to your image
+                    size: 16,
+                    // color: Colors.black,
+                  ),
+                  SizedBox(width: 5),
+                  Text(
+                    '2',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 12,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
               ),
-    
+
               Spacer(),
               Column(
                 children: [
@@ -53,12 +80,9 @@ class PropertyInfo extends StatelessWidget {
               ),
             ],
           ),
-    
+
           Container(
-            padding: const EdgeInsets.symmetric(
-              vertical: 8,
-              horizontal: 12,
-            ),
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
             decoration: BoxDecoration(
               color: Colors.grey[300],
               borderRadius: BorderRadius.circular(8),

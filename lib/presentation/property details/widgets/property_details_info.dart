@@ -9,9 +9,8 @@ class ProertyDetailsInfo extends StatelessWidget {
       children: [
         Container(
           color: Colors.white,
-
           width: 345,
-          height: 927,
+          height: 970,
           child: Text.rich(
             TextSpan(
               children: [

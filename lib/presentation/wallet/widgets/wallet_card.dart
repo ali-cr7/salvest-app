@@ -12,7 +12,8 @@ class WalletCard extends StatelessWidget {
     required this.cardStrting,
     required this.cardIcon,
     required this.arrowCallback,
-    required this.walletValue, required this.arrowIconData,
+    required this.walletValue,
+    required this.arrowIconData,
   });
   final Color cardColr;
   final String walletValue;
@@ -71,9 +72,7 @@ class WalletCard extends StatelessWidget {
               onTap: arrowCallback,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Icon(arrowIconData, color: AppColors.white),
-                ],
+                children: [Icon(arrowIconData, color: AppColors.white)],
               ),
             ),
           ),

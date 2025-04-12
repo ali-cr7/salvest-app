@@ -33,7 +33,13 @@ class CustomDrawer extends StatelessWidget {
               GoRouter.of(context).push(AppRouter.kProfileView);
             },
           ),
-          DrawerItem(icon: Icons.pie_chart, title: 'Portfolio', onTap: () {}),
+          DrawerItem(
+            icon: Icons.pie_chart,
+            title: 'Portfolio',
+            onTap: () {
+              GoRouter.of(context).push(AppRouter.kPortfolioView);
+            },
+          ),
           DrawerItem(
             icon: Icons.account_balance_wallet,
             title: 'Wallet',

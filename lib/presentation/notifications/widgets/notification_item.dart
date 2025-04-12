@@ -54,7 +54,7 @@ class NotificationItem extends StatelessWidget {
                   //    const SizedBox(height: 8), // Adds spacing between texts
                   Flexible(
                     child: Text(
-                      secondText,
+                      '$secondText\n',
 
                       style: TextStyle(color: Colors.black38, fontSize: 12),
                       softWrap: false, // Ensures proper wrapping

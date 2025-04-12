@@ -14,5 +14,9 @@ class AppAssets {
   static const investmentBlueSvg = "assets/images/investment_blue.png";
   static const cashGreen = 'assets/images/cash_green.png';
   static const cashGreenSvg = 'assets/images/cash_green.svg';
-  static const bedRoomImage = 'assets/images/bedroom.png';
+  static const bedRoomImage = 'assets/images/bed_room_icon.png';
+  static const bathRoomIcon = 'assets/images/bathroom_icon.png';
+  static const balanceIcon = 'assets/images/balance.png';
+  static const highIncome = 'assets/images/high_incoming.png';
+  static const syriaFlag = 'assets/images/new_syria_flag.png';
 }
