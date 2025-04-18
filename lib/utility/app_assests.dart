@@ -19,4 +19,16 @@ class AppAssets {
   static const balanceIcon = 'assets/images/balance.png';
   static const highIncome = 'assets/images/high_incoming.png';
   static const syriaFlag = 'assets/images/new_syria_flag.png';
+  static const homeIcon = 'assets/images/home.png';
+  static const profileIcon = 'assets/images/profile.png';
+  static const saleState = 'assets/images/sale_state.png';
+  static const questionMark = 'assets/images/question_mark.png';
+  static const settingICon = 'assets/images/setting.png';
+  static const logoutIcon = 'assets/images/logout.png';
+    static const walletWhite = 'assets/images/wallet_white.png';
+  static const certificateWhite = 'assets/images/certificate_white.png';
+  static const autoInvestment = 'assets/images/auto_investment.png';
+  static const chart = 'assets/images/Chart.png';
+    static const certificateGreen = 'assets/images/E-learning_certificate_green.png';
+        static const certificateBlue = 'assets/images/E-learning_certificate_blue.png';
 }

@@ -1,0 +1,69 @@
+import 'dart:convert';
+
+class Data {
+	int? id;
+	String? name;
+	String? email;
+	dynamic emailVerifiedAt;
+	String? phone;
+	dynamic verificationCode;
+	int? roleId;
+	String? createdAt;
+	String? updatedAt;
+
+	Data({
+		this.id, 
+		this.name, 
+		this.email, 
+		this.emailVerifiedAt, 
+		this.phone, 
+		this.verificationCode, 
+		this.roleId, 
+		this.createdAt, 
+		this.updatedAt, 
+	});
+
+	factory Data.fromMessageDataId1NameAliAliEmailAliGmailComEmailVerifiedAtNullPhone09823824825VerificationCodeNullRoleId1CreatedAt20250414T013914000000ZUpdatedAt20250414T013914000000ZTokenEyJ0eXAiOiJkv1QiLcJhbGciOiJsUzI1NiJ9EyJhdWQiOiIxIiwianRpIjoiOdJlYzQ2ZdUxZmMxYmVmNzQ3ZmJjZda0NdJhNDkzZDcyN2RiZwu1OTdhNjU2YjY2ZjBiNjM4Mjk5ZjI4YzEyYzM1NzU1NjM3Zdm5OtYzZjgiLcJpYxQiOjE3Ndq3MjYyNTcuMty5NjE2LcJuYmYiOjE3Ndq3MjYyNTcuMty5NjE4LcJleHAiOjE3NzYyNjIyNtYuOtAzNTc0LcJzdWIiOiIxIiwic2NvcGVzIjpbXx0FuqAjg0Ty8EqohnzRvsro6J7B0ReZdxRyG29gNHlNchYxRjubj97KdEnBzd7Dr7Xoeim49VdbNmR4A9raxO4jHpYEs0IJtLsgGnDCdl5OXsq5O16BroWo8VusvxlaF5fUs3iHmJzJ8YoPhIcmxikwAbTo1mDQznNkf6GfNaInzUfPdWgGtHwQc7drkHlYGqPe4cCqMZqIqLGnvJkLLkfAdwZeznjt2wrsOotyQpjzF10mXGnDiemtwXcWcaz2r3JBvn0rSi1yxAAroS9rCrIaWqEhxhSwwSiNHuNRhGgVbzWBZvbzThiUxuEGaLaXdcWFil8nxZuJPtVl9aQ7khaVmes3Y24W27pyPbpsEDeVaI0pzFwvJiz65PvOCaB5qCvjMDqgmMRuScMv5ySCpusE7z9gSwUBBbDtgifQ9Tr3LcbkGbYiQnahGLvUiOrEtGjhsH7gI755Bq9BmDsJaPyHtyxUqsXiqXlBTnvfKbzM99zz6aEy63HNgFx06Vzk3FwbcSsy7WhReW0wK1CDdmDJaHbRLmhORgVeiTHcGexPlrnF6EpP2m7w5h1fKmOcDYqudwMTas0kD92useWQtizadR0a0IysUb6XIiIkj7BoGxivHjr4IqhmRwdfNjYOqS8lkX0e0UncHu10d3LmymE2ssM(Map<String, dynamic> data) {
+		return Data(
+			id: data['id'] as int?,
+			name: data['name'] as String?,
+			email: data['email'] as String?,
+			emailVerifiedAt: data['email_verified_at'] as dynamic,
+			phone: data['phone'] as String?,
+			verificationCode: data['verification_code'] as dynamic,
+			roleId: data['role_id'] as int?,
+			createdAt: data['created_at'] == null
+						? null
+						: data['updated_at'] as String,
+			updatedAt: data['updated_at'] == null
+						? null
+						: data['updated_at'] as String,
+		);
+	}
+
+
+
+	Map<String, dynamic> toMessageDataId1NameAliAliEmailAliGmailComEmailVerifiedAtNullPhone09823824825VerificationCodeNullRoleId1CreatedAt20250414T013914000000ZUpdatedAt20250414T013914000000ZTokenEyJ0eXAiOiJkv1QiLcJhbGciOiJsUzI1NiJ9EyJhdWQiOiIxIiwianRpIjoiOdJlYzQ2ZdUxZmMxYmVmNzQ3ZmJjZda0NdJhNDkzZDcyN2RiZwu1OTdhNjU2YjY2ZjBiNjM4Mjk5ZjI4YzEyYzM1NzU1NjM3Zdm5OtYzZjgiLcJpYxQiOjE3Ndq3MjYyNTcuMty5NjE2LcJuYmYiOjE3Ndq3MjYyNTcuMty5NjE4LcJleHAiOjE3NzYyNjIyNtYuOtAzNTc0LcJzdWIiOiIxIiwic2NvcGVzIjpbXx0FuqAjg0Ty8EqohnzRvsro6J7B0ReZdxRyG29gNHlNchYxRjubj97KdEnBzd7Dr7Xoeim49VdbNmR4A9raxO4jHpYEs0IJtLsgGnDCdl5OXsq5O16BroWo8VusvxlaF5fUs3iHmJzJ8YoPhIcmxikwAbTo1mDQznNkf6GfNaInzUfPdWgGtHwQc7drkHlYGqPe4cCqMZqIqLGnvJkLLkfAdwZeznjt2wrsOotyQpjzF10mXGnDiemtwXcWcaz2r3JBvn0rSi1yxAAroS9rCrIaWqEhxhSwwSiNHuNRhGgVbzWBZvbzThiUxuEGaLaXdcWFil8nxZuJPtVl9aQ7khaVmes3Y24W27pyPbpsEDeVaI0pzFwvJiz65PvOCaB5qCvjMDqgmMRuScMv5ySCpusE7z9gSwUBBbDtgifQ9Tr3LcbkGbYiQnahGLvUiOrEtGjhsH7gI755Bq9BmDsJaPyHtyxUqsXiqXlBTnvfKbzM99zz6aEy63HNgFx06Vzk3FwbcSsy7WhReW0wK1CDdmDJaHbRLmhORgVeiTHcGexPlrnF6EpP2m7w5h1fKmOcDYqudwMTas0kD92useWQtizadR0a0IysUb6XIiIkj7BoGxivHjr4IqhmRwdfNjYOqS8lkX0e0UncHu10d3LmymE2ssM() {
+		return {
+			'id': id,
+			'name': name,
+			'email': email,
+			'email_verified_at': emailVerifiedAt,
+			'phone': phone,
+			'verification_code': verificationCode,
+			'role_id': roleId,
+			'created_at': createdAt,
+			'updated_at': updatedAt,		};
+	}
+
+  /// `dart:convert`
+  ///
+  /// Parses the string and returns the resulting Json object as [Data].
+	factory Data.fromJson(String data) {
+		return Data.fromMessageDataId1NameAliAliEmailAliGmailComEmailVerifiedAtNullPhone09823824825VerificationCodeNullRoleId1CreatedAt20250414T013914000000ZUpdatedAt20250414T013914000000ZTokenEyJ0eXAiOiJkv1QiLcJhbGciOiJsUzI1NiJ9EyJhdWQiOiIxIiwianRpIjoiOdJlYzQ2ZdUxZmMxYmVmNzQ3ZmJjZda0NdJhNDkzZDcyN2RiZwu1OTdhNjU2YjY2ZjBiNjM4Mjk5ZjI4YzEyYzM1NzU1NjM3Zdm5OtYzZjgiLcJpYxQiOjE3Ndq3MjYyNTcuMty5NjE2LcJuYmYiOjE3Ndq3MjYyNTcuMty5NjE4LcJleHAiOjE3NzYyNjIyNtYuOtAzNTc0LcJzdWIiOiIxIiwic2NvcGVzIjpbXx0FuqAjg0Ty8EqohnzRvsro6J7B0ReZdxRyG29gNHlNchYxRjubj97KdEnBzd7Dr7Xoeim49VdbNmR4A9raxO4jHpYEs0IJtLsgGnDCdl5OXsq5O16BroWo8VusvxlaF5fUs3iHmJzJ8YoPhIcmxikwAbTo1mDQznNkf6GfNaInzUfPdWgGtHwQc7drkHlYGqPe4cCqMZqIqLGnvJkLLkfAdwZeznjt2wrsOotyQpjzF10mXGnDiemtwXcWcaz2r3JBvn0rSi1yxAAroS9rCrIaWqEhxhSwwSiNHuNRhGgVbzWBZvbzThiUxuEGaLaXdcWFil8nxZuJPtVl9aQ7khaVmes3Y24W27pyPbpsEDeVaI0pzFwvJiz65PvOCaB5qCvjMDqgmMRuScMv5ySCpusE7z9gSwUBBbDtgifQ9Tr3LcbkGbYiQnahGLvUiOrEtGjhsH7gI755Bq9BmDsJaPyHtyxUqsXiqXlBTnvfKbzM99zz6aEy63HNgFx06Vzk3FwbcSsy7WhReW0wK1CDdmDJaHbRLmhORgVeiTHcGexPlrnF6EpP2m7w5h1fKmOcDYqudwMTas0kD92useWQtizadR0a0IysUb6XIiIkj7BoGxivHjr4IqhmRwdfNjYOqS8lkX0e0UncHu10d3LmymE2ssM(json.decode(data) as Map<String, dynamic>);
+	}
+  /// `dart:convert`
+  ///
+  /// Converts [Data] to a JSON string.
+	String toJson() => json.encode(toMessageDataId1NameAliAliEmailAliGmailComEmailVerifiedAtNullPhone09823824825VerificationCodeNullRoleId1CreatedAt20250414T013914000000ZUpdatedAt20250414T013914000000ZTokenEyJ0eXAiOiJkv1QiLcJhbGciOiJsUzI1NiJ9EyJhdWQiOiIxIiwianRpIjoiOdJlYzQ2ZdUxZmMxYmVmNzQ3ZmJjZda0NdJhNDkzZDcyN2RiZwu1OTdhNjU2YjY2ZjBiNjM4Mjk5ZjI4YzEyYzM1NzU1NjM3Zdm5OtYzZjgiLcJpYxQiOjE3Ndq3MjYyNTcuMty5NjE2LcJuYmYiOjE3Ndq3MjYyNTcuMty5NjE4LcJleHAiOjE3NzYyNjIyNtYuOtAzNTc0LcJzdWIiOiIxIiwic2NvcGVzIjpbXx0FuqAjg0Ty8EqohnzRvsro6J7B0ReZdxRyG29gNHlNchYxRjubj97KdEnBzd7Dr7Xoeim49VdbNmR4A9raxO4jHpYEs0IJtLsgGnDCdl5OXsq5O16BroWo8VusvxlaF5fUs3iHmJzJ8YoPhIcmxikwAbTo1mDQznNkf6GfNaInzUfPdWgGtHwQc7drkHlYGqPe4cCqMZqIqLGnvJkLLkfAdwZeznjt2wrsOotyQpjzF10mXGnDiemtwXcWcaz2r3JBvn0rSi1yxAAroS9rCrIaWqEhxhSwwSiNHuNRhGgVbzWBZvbzThiUxuEGaLaXdcWFil8nxZuJPtVl9aQ7khaVmes3Y24W27pyPbpsEDeVaI0pzFwvJiz65PvOCaB5qCvjMDqgmMRuScMv5ySCpusE7z9gSwUBBbDtgifQ9Tr3LcbkGbYiQnahGLvUiOrEtGjhsH7gI755Bq9BmDsJaPyHtyxUqsXiqXlBTnvfKbzM99zz6aEy63HNgFx06Vzk3FwbcSsy7WhReW0wK1CDdmDJaHbRLmhORgVeiTHcGexPlrnF6EpP2m7w5h1fKmOcDYqudwMTas0kD92useWQtizadR0a0IysUb6XIiIkj7BoGxivHjr4IqhmRwdfNjYOqS8lkX0e0UncHu10d3LmymE2ssM());
+}

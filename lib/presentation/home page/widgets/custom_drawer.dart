@@ -1,6 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:salvest_app/business_logic/sale%20property%20bloc/sale_property_bloc.dart';
+import 'package:salvest_app/business_logic/send%20property%20bloc/send_property_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salvest_app/presentation/home%20page/widgets/drawer_item.dart';
+import 'package:salvest_app/utility/app_assests.dart';
 import 'package:salvest_app/utility/app_colors.dart';
 import 'package:salvest_app/utility/router.dart';
 
@@ -16,32 +22,30 @@ class CustomDrawer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         //  padding: EdgeInsets.zero,
         children: [
-          // Drawer Header
-
-          // Drawer Items
+  
           DrawerItem(
-            icon: Icons.home,
+            icon: AppAssets.homeIcon,
             title: 'Home',
             onTap: () {
               Navigator.pop(context);
             },
           ),
-          DrawerItem(
-            icon: Icons.person,
+          DrawerItem( 
+            icon: AppAssets.profileIcon,
             title: 'Profile',
             onTap: () {
               GoRouter.of(context).push(AppRouter.kProfileView);
             },
           ),
           DrawerItem(
-            icon: Icons.pie_chart,
+            icon: AppAssets.chart,
             title: 'Portfolio',
             onTap: () {
               GoRouter.of(context).push(AppRouter.kPortfolioView);
             },
           ),
           DrawerItem(
-            icon: Icons.account_balance_wallet,
+            icon: AppAssets.walletWhite,
             title: 'Wallet',
             onTap: () {
               // GoRouter.of(context).push(AppRouter.kWalitView);
@@ -49,30 +53,43 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           DrawerItem(
-            icon: Icons.auto_graph,
+            icon: AppAssets.autoInvestment,
             title: 'Auto Invest',
             onTap: () {
               GoRouter.of(context).push(AppRouter.kAutoInvestmentView);
             },
           ),
           DrawerItem(
-            icon: Icons.house,
+            icon: AppAssets.saleState,
             title: 'Sale Estate',
             onTap: () {
-              GoRouter.of(context).push(AppRouter.kSaleEstateView);
+                  final sendPropertyBloc = context.read<SalePropertyBloc>();
+              GoRouter.of(context).push(AppRouter.kSaleEstateView,
+              extra: sendPropertyBloc.state );
             },
           ),
           DrawerItem(
-            icon: Icons.help,
+            icon: AppAssets.certificateWhite,
+            title: 'certifications ',
+            onTap: () {
+              GoRouter.of(context).push(AppRouter.kCertificationsView);
+            },
+          ),
+          DrawerItem(
+            icon: AppAssets.questionMark,
             title: 'Help',
             onTap: () {
               GoRouter.of(context).push(AppRouter.kHelpView);
             },
           ),
           const Divider(thickness: 4, color: AppColors.white, indent: 19),
-          DrawerItem(icon: Icons.settings, title: 'Setting', onTap: () {}),
+          DrawerItem(
+            icon: AppAssets.settingICon,
+            title: 'Setting',
+            onTap: () {},
+          ),
 
-          DrawerItem(icon: Icons.logout, title: 'Logout', onTap: () {}),
+          DrawerItem(icon: AppAssets.logoutIcon, title: 'Logout', onTap: () {}),
         ],
       ),
     );

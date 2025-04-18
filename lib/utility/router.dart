@@ -1,9 +1,12 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:salvest_app/business_logic/sale%20property%20bloc/sale_property_bloc.dart';
 import 'package:salvest_app/presentation/auth/forgot_password_view.dart';
 import 'package:salvest_app/presentation/auth/login_view.dart';
 import 'package:salvest_app/presentation/auth/reset_password_view.dart';
 import 'package:salvest_app/presentation/auth/signup_view.dart';
 import 'package:salvest_app/presentation/auto%20investment/auto_investment_view.dart';
+import 'package:salvest_app/presentation/certification/certifications_view.dart';
 import 'package:salvest_app/presentation/help/help_view.dart';
 import 'package:salvest_app/presentation/home%20page/home_page_view.dart';
 import 'package:salvest_app/presentation/notifications/negotiation_notification_view.dart';
@@ -34,10 +37,11 @@ abstract class AppRouter {
   static const kPortfolioView = '/PortfolioView';
   static const kAutoInvestmentView = '/AutoInvestmentView';
   static const kCapitalGrowthView = '/CapitalGrowthView';
+  static const kCertificationsView = '/CertificationsView';
 
   static final router = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const HomePageView()),
+      GoRoute(path: '/', builder: (context, state) => const LoginView()),
       GoRoute(
         path: kHomePageView,
         builder: (context, state) => const HomePageView(),
@@ -46,6 +50,11 @@ abstract class AppRouter {
         path: kPropertyDetailsView,
         builder: (context, state) => const PropertyDetailsView(),
       ),
+      GoRoute(
+        path: kCertificationsView,
+        builder: (context, state) => const CertificationsView(),
+      ),
+
       GoRoute(
         path: kCapitalGrowthView,
         builder: (context, state) => const CapitalGrowthView(),
@@ -71,9 +80,21 @@ abstract class AppRouter {
         builder: (context, state) => const AutoInvestmentView(),
       ),
       GoRoute(path: kHelpView, builder: (context, state) => const HelpView()),
+
       GoRoute(
         path: kSaleEstateView,
-        builder: (context, state) => const SaleEstateView(),
+        builder: (context, state) {
+          // Get the state from route extra or parameters
+              // salePropertyState args = settings.arguments as AddPropertyState;
+          final salePropertyState =
+              state.extra as SalePropertyState? ??
+              SalePropertyState(propertyType: 'default_type');
+
+          return BlocProvider(
+            create: (context) => SalePropertyBloc(),
+            child: SaleEstateView(salePropertyState: salePropertyState),
+          );
+        },
       ),
       GoRoute(
         path: kProfileView,

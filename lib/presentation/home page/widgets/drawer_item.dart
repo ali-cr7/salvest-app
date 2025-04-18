@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:salvest_app/utility/app_colors.dart';
 
 class DrawerItem extends StatelessWidget {
-  final IconData icon;
+  final String icon;
   final String title;
   final VoidCallback onTap;
 
@@ -18,10 +18,10 @@ class DrawerItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(icon, color: AppColors.white),
+      leading: Image(image: AssetImage(icon), color: AppColors.white),
       title: Text(
         title,
-        style:TextStyle(
+        style: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w500,
           color: Colors.white,

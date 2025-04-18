@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
+import 'package:salvest_app/constants.dart';
 import 'package:salvest_app/presentation/profile/widgets/profile_info_row.dart';
 import 'package:salvest_app/utility/app_assests.dart';
 import 'package:salvest_app/utility/app_colors.dart';
@@ -49,7 +51,7 @@ class ProfileView extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      'AM',
+                      getInitials(name!),
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 36,
@@ -63,7 +65,7 @@ class ProfileView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Ali Mossa',
+                      name!,
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 20,
@@ -72,7 +74,7 @@ class ProfileView extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'joined in 2 April 2020',
+                      formatJoinedDate(joinDate!),
                       style: TextStyle(
                         color: Colors.black.withValues(alpha: 135),
                         fontSize: 13,
@@ -102,13 +104,13 @@ class ProfileView extends StatelessWidget {
                 children: [
                   ProfileInfoRow(
                     icon: AppAssets.messageIcon,
-                    text: 'email.email@gmail.com',
+                    text: email!,
                     onTap: () {},
                   ),
                   SizedBox(height: 10),
                   ProfileInfoRow(
                     icon: AppAssets.phoneIcon,
-                    text: '+963 9933445588',
+                    text: phone!,
                     onTap: () {},
                   ),
                 ],
@@ -118,5 +120,32 @@ class ProfileView extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String formatJoinedDate(String isoDate) {
+    try {
+      // Parse the ISO date string into a DateTime object
+      DateTime date = DateTime.parse(isoDate);
+
+      // Format the date as "d MMMM yyyy" (e.g., "14 April 2025")
+      String formattedDate = DateFormat('d MMMM yyyy').format(date);
+
+      return 'joined in $formattedDate';
+    } catch (e) {
+      // Fallback if parsing fails
+      return 'joined in Unknown date';
+    }
+  }
+
+  String getInitials(String fullName) {
+    if (fullName.isEmpty) return "";
+
+    List<String> parts =
+        fullName.trim().split(' ').where((s) => s.isNotEmpty).toList();
+
+    String firstInitial = parts.isNotEmpty ? parts.first[0] : '';
+    String lastInitial = parts.length > 1 ? parts.last[0] : '';
+
+    return (firstInitial + lastInitial).toUpperCase();
   }
 }

@@ -9,7 +9,7 @@ class AppColors {
   static const Color black38 = Color(0x61000000); // 38% opacity
   static const Color darkGreen = Color(0xFF22842D);
   static const Color green15 = Color(0x26FFCC02);
-
+static const Color redColor = Color(0xFFD81721);
   static const Color lightBlue = Color(0x3F9A8AEC);
   static const Color black82 = Color(0xD1000000); // 82% opacity
   static const Color lightPurple = Color(0xFF9A8AEC);
