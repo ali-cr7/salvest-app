@@ -31,4 +31,5 @@ class AppAssets {
   static const chart = 'assets/images/Chart.png';
     static const certificateGreen = 'assets/images/E-learning_certificate_green.png';
         static const certificateBlue = 'assets/images/E-learning_certificate_blue.png';
+         static const appICnon = 'assets/images/app_icon.png';
 }

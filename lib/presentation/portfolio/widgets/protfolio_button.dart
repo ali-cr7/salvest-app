@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:salvest_app/presentation/portfolio/widgets/protfolio_item.dart';
 import 'package:salvest_app/utility/app_assests.dart';
+import 'package:salvest_app/utility/app_colors.dart';
 import 'package:salvest_app/utility/router.dart';
 
 class ProtfolioButtons extends StatelessWidget {
@@ -20,13 +21,13 @@ class ProtfolioButtons extends StatelessWidget {
                 GoRouter.of(context).push(AppRouter.kCapitalGrowthView);
               },
               child: ProtfolioItem(
-                color: const Color(0x998CE996),
+                gradient:AppColors.greenGradient.withOpacity(0.6),
                 icon: AppAssets.cashGreen,
                 text: 'Capital Growth',
               ),
             ),
             ProtfolioItem(
-              color: const Color(0x99D8EC43),
+              gradient:AppColors.yellowGradient.withOpacity(0.6),
               icon: AppAssets.balanceIcon,
               text: 'Balanced',
             ),
@@ -34,7 +35,7 @@ class ProtfolioButtons extends StatelessWidget {
         ),
         SizedBox(height: 20),
         ProtfolioItem(
-          color: const Color(0x99C0B4FF),
+          gradient:AppColors.blueGradient.withOpacity(0.6),
           icon: AppAssets.highIncome,
           text: 'High Incoming',
         ),

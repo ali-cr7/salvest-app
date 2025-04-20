@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:salvest_app/presentation/certification/widgets/certification_item.dart';
 import 'package:salvest_app/utility/app_assests.dart';
 import 'package:salvest_app/utility/app_colors.dart';
 import 'package:salvest_app/utility/router.dart';
 
-class CertificationsView extends StatelessWidget {
-  const CertificationsView({super.key});
+class InvestingCertificationView extends StatelessWidget {
+  const InvestingCertificationView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class CertificationsView extends StatelessWidget {
           },
         ),
         title: const Text(
-          ' Investing Certifications',
+          'Certifications',
           style: TextStyle(color: Colors.black, fontSize: 18),
         ),
         centerTitle: true,
@@ -33,16 +34,16 @@ class CertificationsView extends StatelessWidget {
           child: Column(
             spacing: 20,
             children: [
-              CertifiactionsItem(
-                icon: AppAssets.certificateGreen,
-                itemColor: Color(0x477BF383),
-                text: 'Baying Certification',
-              ),
+            CertifiactionsItem(
+                  icon: AppAssets.certificateBlue,
+                  itemColor: Color(0x3F9A8AEC),
+                  text: 'Investing Certification',
+                ),
               InkWell(
                 onTap: () {
                   GoRouter.of(
                     context,
-                  ).push(AppRouter.kInvestingCertificationView);
+                  ).push(AppRouter.kInvestingCertificationDetailsView);
                 },
                 child: CertifiactionsItem(
                   icon: AppAssets.certificateBlue,
@@ -56,4 +57,4 @@ class CertificationsView extends StatelessWidget {
       ),
     );
   }
-}
+}     

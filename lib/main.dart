@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:salvest_app/business_logic/help%20bloc/help_bloc.dart';
 import 'package:salvest_app/business_logic/sale%20property%20bloc/sale_property_bloc.dart';
 import 'package:salvest_app/business_logic/send%20property%20bloc/send_property_bloc.dart';
 import 'package:salvest_app/business_logic/user/bloc/user_bloc.dart';
 import 'package:salvest_app/data/services/auth%20services/auth_repo_impl.dart';
+import 'package:salvest_app/data/services/help%20services/help_repo_impl.dart';
 import 'package:salvest_app/data/services/sale%20property%20service/sale_property_repo_impl.dart';
 import 'package:salvest_app/utility/app_bloc_observer.dart';
 import 'package:salvest_app/utility/app_colors.dart';
@@ -51,6 +53,9 @@ class SalvestApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => UserBloc(getIt.get<AuthRepoImpl>())),
+
+        //HelpBloc
+                BlocProvider(create: (context) => HelpBloc(getIt.get<HelpRepoImpl>())),
         BlocProvider(create: (context) => SalePropertyBloc()),
         BlocProvider(
           create:

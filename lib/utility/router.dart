@@ -1,12 +1,17 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:salvest_app/business_logic/help%20bloc/help_bloc.dart';
 import 'package:salvest_app/business_logic/sale%20property%20bloc/sale_property_bloc.dart';
+import 'package:salvest_app/data/services/help%20services/help_repo_impl.dart';
 import 'package:salvest_app/presentation/auth/forgot_password_view.dart';
 import 'package:salvest_app/presentation/auth/login_view.dart';
 import 'package:salvest_app/presentation/auth/reset_password_view.dart';
 import 'package:salvest_app/presentation/auth/signup_view.dart';
 import 'package:salvest_app/presentation/auto%20investment/auto_investment_view.dart';
 import 'package:salvest_app/presentation/certification/certifications_view.dart';
+import 'package:salvest_app/presentation/certification/widgets/investing_certification__details_view.dart';
+import 'package:salvest_app/presentation/certification/widgets/investing_certification_view.dart';
+import 'package:salvest_app/presentation/help/common_question_view.dart';
 import 'package:salvest_app/presentation/help/help_view.dart';
 import 'package:salvest_app/presentation/home%20page/home_page_view.dart';
 import 'package:salvest_app/presentation/notifications/negotiation_notification_view.dart';
@@ -18,6 +23,7 @@ import 'package:salvest_app/presentation/property%20details/property_details_vie
 import 'package:salvest_app/presentation/sale%20estate/sale_estate_view.dart';
 import 'package:salvest_app/presentation/wallet/profits_wallet_view.dart';
 import 'package:salvest_app/presentation/wallet/wallet_view.dart';
+import 'package:salvest_app/utility/service_locator.dart';
 
 abstract class AppRouter {
   static const kHomePageView = '/homePageView';
@@ -38,23 +44,44 @@ abstract class AppRouter {
   static const kAutoInvestmentView = '/AutoInvestmentView';
   static const kCapitalGrowthView = '/CapitalGrowthView';
   static const kCertificationsView = '/CertificationsView';
+  static const kCommonQuestionView = '/CommonQuestionView';
+  static const kInvestingCertificationView = '/InvestingCertificationView';
+  static const kInvestingCertificationDetailsView =
+      '/InvestingCertificationDetailsView';
 
   static final router = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const LoginView()),
+      GoRoute(path: '/', builder: (context, state) => const HomePageView()),
       GoRoute(
         path: kHomePageView,
         builder: (context, state) => const HomePageView(),
+      ),
+      GoRoute(
+        path: kInvestingCertificationDetailsView,
+        builder: (context, state) => const InvestingCertificationDetailsView(),
       ),
       GoRoute(
         path: kPropertyDetailsView,
         builder: (context, state) => const PropertyDetailsView(),
       ),
       GoRoute(
+        path: kInvestingCertificationView,
+        builder: (context, state) => const InvestingCertificationView(),
+      ),
+      GoRoute(
         path: kCertificationsView,
         builder: (context, state) => const CertificationsView(),
       ),
-
+      GoRoute(
+        path: kCommonQuestionView,
+        builder:
+            (context, state) => BlocProvider(
+              create:
+                  (context) =>
+                      HelpBloc(getIt.get<HelpRepoImpl>())..add(GetFqmEvent()),
+              child: const CommonQuestionView(),
+            ),
+      ),
       GoRoute(
         path: kCapitalGrowthView,
         builder: (context, state) => const CapitalGrowthView(),
@@ -85,7 +112,7 @@ abstract class AppRouter {
         path: kSaleEstateView,
         builder: (context, state) {
           // Get the state from route extra or parameters
-              // salePropertyState args = settings.arguments as AddPropertyState;
+          // salePropertyState args = settings.arguments as AddPropertyState;
           final salePropertyState =
               state.extra as SalePropertyState? ??
               SalePropertyState(propertyType: 'default_type');

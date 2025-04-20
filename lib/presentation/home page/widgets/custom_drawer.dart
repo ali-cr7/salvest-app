@@ -16,80 +16,89 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.lightPurple, // Light purple background
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        //  padding: EdgeInsets.zero,
+      backgroundColor: Colors.transparent, // Light purple background
+      body: Stack(
         children: [
-  
-          DrawerItem(
-            icon: AppAssets.homeIcon,
-            title: 'Home',
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          DrawerItem( 
-            icon: AppAssets.profileIcon,
-            title: 'Profile',
-            onTap: () {
-              GoRouter.of(context).push(AppRouter.kProfileView);
-            },
-          ),
-          DrawerItem(
-            icon: AppAssets.chart,
-            title: 'Portfolio',
-            onTap: () {
-              GoRouter.of(context).push(AppRouter.kPortfolioView);
-            },
-          ),
-          DrawerItem(
-            icon: AppAssets.walletWhite,
-            title: 'Wallet',
-            onTap: () {
-              // GoRouter.of(context).push(AppRouter.kWalitView);
-              GoRouter.of(context).push(AppRouter.kWalitView);
-            },
-          ),
-          DrawerItem(
-            icon: AppAssets.autoInvestment,
-            title: 'Auto Invest',
-            onTap: () {
-              GoRouter.of(context).push(AppRouter.kAutoInvestmentView);
-            },
-          ),
-          DrawerItem(
-            icon: AppAssets.saleState,
-            title: 'Sale Estate',
-            onTap: () {
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            //  padding: EdgeInsets.zero,
+            children: [
+              DrawerItem(
+                icon: AppAssets.homeIcon,
+                title: 'Home',
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              DrawerItem(
+                icon: AppAssets.profileIcon,
+                title: 'Profile',
+                onTap: () {
+                  GoRouter.of(context).push(AppRouter.kProfileView);
+                },
+              ),
+              DrawerItem(
+                icon: AppAssets.chart,
+                title: 'Portfolio',
+                onTap: () {
+                  GoRouter.of(context).push(AppRouter.kPortfolioView);
+                },
+              ),
+              DrawerItem(
+                icon: AppAssets.walletWhite,
+                title: 'Wallet',
+                onTap: () {
+                  // GoRouter.of(context).push(AppRouter.kWalitView);
+                  GoRouter.of(context).push(AppRouter.kWalitView);
+                },
+              ),
+              DrawerItem(
+                icon: AppAssets.autoInvestment,
+                title: 'Auto Invest',
+                onTap: () {
+                  GoRouter.of(context).push(AppRouter.kAutoInvestmentView);
+                },
+              ),
+              DrawerItem(
+                icon: AppAssets.saleState,
+                title: 'Sale Estate',
+                onTap: () {
                   final sendPropertyBloc = context.read<SalePropertyBloc>();
-              GoRouter.of(context).push(AppRouter.kSaleEstateView,
-              extra: sendPropertyBloc.state );
-            },
-          ),
-          DrawerItem(
-            icon: AppAssets.certificateWhite,
-            title: 'certifications ',
-            onTap: () {
-              GoRouter.of(context).push(AppRouter.kCertificationsView);
-            },
-          ),
-          DrawerItem(
-            icon: AppAssets.questionMark,
-            title: 'Help',
-            onTap: () {
-              GoRouter.of(context).push(AppRouter.kHelpView);
-            },
-          ),
-          const Divider(thickness: 4, color: AppColors.white, indent: 19),
-          DrawerItem(
-            icon: AppAssets.settingICon,
-            title: 'Setting',
-            onTap: () {},
-          ),
+                  GoRouter.of(context).push(
+                    AppRouter.kSaleEstateView,
+                    extra: sendPropertyBloc.state,
+                  );
+                },
+              ),
+              DrawerItem(
+                icon: AppAssets.certificateWhite,
+                title: 'certifications ',
+                onTap: () {
+                  GoRouter.of(context).push(AppRouter.kCertificationsView);
+                },
+              ),
+              DrawerItem(
+                icon: AppAssets.questionMark,
+                title: 'Help',
+                onTap: () {
+                  GoRouter.of(context).push(AppRouter.kHelpView);
+                },
+              ),
+              const Divider(thickness: 4, color: AppColors.white, indent: 19),
+              DrawerItem(
+                icon: AppAssets.settingICon,
+                title: 'Setting',
+                onTap: () {},
+              ),
 
-          DrawerItem(icon: AppAssets.logoutIcon, title: 'Logout', onTap: () {}),
+              DrawerItem(
+                icon: AppAssets.logoutIcon,
+                title: 'Logout',
+                onTap: () {},
+              ),
+            ],
+          ),
         ],
       ),
     );

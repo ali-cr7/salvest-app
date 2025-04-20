@@ -17,6 +17,8 @@ import 'package:salvest_app/presentation/sale%20estate/widgets/send_property_but
 import 'package:salvest_app/utility/app_colors.dart';
 import 'package:intl/intl.dart';
 import 'package:salvest_app/utility/dialogs_snackBar.dart';
+import 'package:salvest_app/utility/enums.dart';
+import 'package:salvest_app/utility/router.dart';
 
 class SaleEstateView extends StatelessWidget {
   const SaleEstateView({super.key, required this.salePropertyState});
@@ -30,15 +32,18 @@ class SaleEstateView extends StatelessWidget {
           EasyLoading.show(status: 'loading...');
         }
 
-        if (state is SendPropertyStatus) {
+        if (state is SendPropertyStatus &&
+            state.helperResponse.servicesResponse ==
+                ServicesResponseStatues.success) {
           EasyLoading.dismiss();
           EasyLoading.showSuccess('Sent Succefully');
-          DialogsWidgetsSnackBar.showSnackBarFromStatus(
-            context: context,
-            helperResponse: state.helperResponse,
-            showServerError: true,
-            popOnSuccessCount: 2,
-          );
+          GoRouter.of(context).push(AppRouter.kHomePageView);
+          // DialogsWidgetsSnackBar.showSnackBarFromStatus(
+          //   context: context,
+          //   helperResponse: state.helperResponse,
+          //   showServerError: true,
+          //   popOnSuccessCount: 2,
+          // );
         }
       },
       child: Scaffold(

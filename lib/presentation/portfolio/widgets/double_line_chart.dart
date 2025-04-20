@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:salvest_app/utility/app_colors.dart';
 
 class DoubleLineChartCard extends StatelessWidget {
   const DoubleLineChartCard({super.key});
@@ -10,7 +11,8 @@ class DoubleLineChartCard extends StatelessWidget {
         width: 345,
             height: 200,
             decoration: ShapeDecoration(
-              color: const Color(0xFF9A8AEC),
+              gradient: AppColors.purple2Gradient,
+          //    color: const Color(0xFF9A8AEC),
               shape: RoundedRectangleBorder(
                 side: BorderSide(width: 1, color: const Color(0x7F9A8AEC)),
                 borderRadius: BorderRadius.circular(20),

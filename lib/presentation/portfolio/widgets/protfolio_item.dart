@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class ProtfolioItem extends StatelessWidget {
   const ProtfolioItem({
     super.key,
-    required this.color,
+    required this.gradient,
     required this.text,
     required this.icon,
   });
-  final Color color;
+  final Gradient gradient;
   final String text;
   final String icon;
 
@@ -17,7 +17,7 @@ class ProtfolioItem extends StatelessWidget {
       width: 157,
       height: 93,
       decoration: ShapeDecoration(
-        color: color,
+        gradient: gradient,
         shape: RoundedRectangleBorder(
           side: BorderSide(width: 1),
           borderRadius: BorderRadius.circular(20),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:salvest_app/utility/app_assests.dart';
+import 'package:salvest_app/utility/app_colors.dart';
 
 class InvestmentsOfWallet extends StatelessWidget {
   const InvestmentsOfWallet({
@@ -12,6 +13,7 @@ class InvestmentsOfWallet extends StatelessWidget {
       width: 345,
       height: 200,
       decoration: ShapeDecoration(
+        gradient: AppColors.purple2Gradient,
         image: const DecorationImage(
           image: AssetImage(AppAssets.walletBackg),
           fit: BoxFit.fill,

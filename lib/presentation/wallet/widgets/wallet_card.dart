@@ -15,7 +15,7 @@ class WalletCard extends StatelessWidget {
     required this.walletValue,
     required this.arrowIconData,
   });
-  final Color cardColr;
+  final Gradient cardColr;
   final String walletValue;
   final String cardStrting;
   final String cardIcon;
@@ -32,7 +32,7 @@ class WalletCard extends StatelessWidget {
           image: AssetImage(AppAssets.walletBackg),
           fit: BoxFit.fill,
         ),
-        color: cardColr,
+        gradient: cardColr,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
       child: Column(

@@ -17,7 +17,8 @@ class CustomSendButton extends StatelessWidget {
         width: 350,
         height: 44,
         decoration: ShapeDecoration(
-          color: AppColors.green,
+          gradient: AppColors.greenGradient.withOpacity(0.65),
+          //  color: AppColors.green,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),

@@ -12,7 +12,8 @@ class HelpViewItem extends StatelessWidget {
       width: 345,
       height: 56,
       decoration: ShapeDecoration(
-        color: const Color(0x9E9A8AEC),
+        gradient: AppColors.purple2Gradient.withOpacity(0.62),
+        // color: const Color(0x9E9A8AEC),
         shape: RoundedRectangleBorder(
           side: BorderSide(width: 1, color: const Color(0x755B5B5B)),
           borderRadius: BorderRadius.circular(7),

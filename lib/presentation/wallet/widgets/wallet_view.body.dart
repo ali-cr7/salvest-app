@@ -5,6 +5,7 @@ import 'package:salvest_app/presentation/wallet/widgets/wallet_card.dart'
 import 'package:salvest_app/presentation/wallet/widgets/wallet_listview_item.dart'
     show WalletListViewItem;
 import 'package:salvest_app/utility/app_assests.dart';
+import 'package:salvest_app/utility/app_colors.dart';
 import 'package:salvest_app/utility/router.dart';
 
 class WalletViewBody extends StatelessWidget {
@@ -25,7 +26,7 @@ class WalletViewBody extends StatelessWidget {
                 arrowCallback: () {
                   GoRouter.of(context).push(AppRouter.kProfitWalletView);
                 },
-                cardColr: Color(0xFF9A8AEC),
+                cardColr: AppColors.purple2Gradient,
                 cardIcon: AppAssets.investmentSvg,
                 cardStrting: 'Investment wallet',
               ),

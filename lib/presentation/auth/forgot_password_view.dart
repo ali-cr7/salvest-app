@@ -49,7 +49,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
             EasyLoading.dismiss();
             EasyLoading.showSuccess('Code Sent successfully!');
             GoRouter.of(context).pushReplacement(AppRouter.kResetPasswordView);
-          }
+          } 
         },
         child: Stack(
           children: [

@@ -9,7 +9,7 @@ enum ServicesResponseStatues {
   modelError,
   wrongData,
   locationError,
-}
+} 
 
 final EnumValues serviceValues = EnumValues({
   "Sent Successfully": ServicesResponseStatues.success,
