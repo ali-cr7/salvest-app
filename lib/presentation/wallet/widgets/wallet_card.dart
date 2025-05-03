@@ -14,13 +14,17 @@ class WalletCard extends StatelessWidget {
     required this.arrowCallback,
     required this.walletValue,
     required this.arrowIconData,
+    required this.deposite, required this.rfreshCallback, required this.isLoading,
   });
   final Gradient cardColr;
   final String walletValue;
   final String cardStrting;
   final String cardIcon;
   final VoidCallback arrowCallback;
+   final VoidCallback rfreshCallback;
   final IconData arrowIconData;
+  final VoidCallback deposite;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -38,33 +42,47 @@ class WalletCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text.rich(
-              TextSpan(
-                children: [
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: 
+                isLoading
+      ? const CupertinoActivityIndicator(radius: 12)
+      :Text.rich(
                   TextSpan(
-                    text: '\$',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.w400,
-                    ),
+                    children: [
+                      TextSpan(
+                        text: '\$',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontFamily: 'Inter',
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      TextSpan(
+                        text: walletValue,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 32,
+                          fontFamily: 'Inter',
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
                   ),
-                  TextSpan(
-                    text: walletValue,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 32,
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
+              Spacer(),
+              IconButton(
+                icon: const Icon(Icons.refresh, color: Colors.white),
+                onPressed: rfreshCallback,
+                tooltip: 'Refresh',
+              ),
+            ],
           ),
+
           const Expanded(child: SizedBox()),
           Padding(
             padding: const EdgeInsets.only(right: 6.0),
@@ -84,7 +102,13 @@ class WalletCard extends StatelessWidget {
               spacing: 10,
               //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                WalletButton(iconData: CupertinoIcons.plus, text: 'Deposit'),
+                InkWell(
+                  onTap: deposite,
+                  child: WalletButton(
+                    iconData: CupertinoIcons.plus,
+                    text: 'Deposit',
+                  ),
+                ),
                 WalletButton(
                   iconData: CupertinoIcons.arrow_2_circlepath,
                   text: 'Exchange',

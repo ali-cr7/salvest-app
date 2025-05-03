@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "10212303261",
+    "project_id": "real-estate-investment-7aad8",
+    "storage_bucket": "real-estate-investment-7aad8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:10212303261:android:452a53fd6d23a498280f74",
+        "android_client_info": {
+          "package_name": "com.example.salvest_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkbE7z4YahOvzcHyQfB_N-89-JBLdJIo0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

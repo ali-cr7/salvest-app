@@ -31,7 +31,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
           if (state is UserLoading) {
             EasyLoading.show(status: 'loading...');
           }
-
+   
           if (state is ResetSuccessState) {
             EasyLoading.dismiss();
             EasyLoading.showSuccess('Password Changed successfully!');

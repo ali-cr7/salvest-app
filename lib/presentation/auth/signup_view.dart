@@ -28,7 +28,7 @@ class _SignUpViewState extends State<SignUpView> {
       backgroundColor: AppColors.lightPurple,
       body: BlocListener<UserBloc, UserState>(
         listener: (context, state) {
-          if (state is UserLoggedState) {
+          if (state is UserLoggedState) { 
             GoRouter.of(context).push(AppRouter.kHomePageView);
           }
           if (state is UserErrorState) {

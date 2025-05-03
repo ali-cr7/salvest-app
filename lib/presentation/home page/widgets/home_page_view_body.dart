@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:go_router/go_router.dart';
+import 'package:salvest_app/constants.dart';
 import 'package:salvest_app/presentation/home%20page/widgets/card_tabs.dart';
 
 import 'package:salvest_app/presentation/home%20page/widgets/custom_drawer.dart';
@@ -18,10 +19,7 @@ class HomePageViewBody extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: const Text(
-          'Ali Mossa',
-          style: TextStyle(color: Colors.black, fontSize: 18),
-        ),
+        title: Text(name!, style: TextStyle(color: Colors.black, fontSize: 18)),
         centerTitle: true,
         leading: Builder(
           builder: (BuildContext context) {

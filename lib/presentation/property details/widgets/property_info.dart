@@ -6,8 +6,12 @@ import 'package:salvest_app/utility/app_assests.dart';
 import 'package:salvest_app/utility/app_colors.dart';
 
 class PropertyInfo extends StatelessWidget {
-  const PropertyInfo({super.key});
-
+  const PropertyInfo({super.key, required this.bedRoomNum, required this.bathRoomNum, required this.yearlyProfit, required this.deadLine, required this.valuation});
+  final String bedRoomNum;
+  final String bathRoomNum;
+  final String yearlyProfit;
+  final String deadLine;
+  final String valuation;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -91,17 +95,17 @@ class PropertyInfo extends StatelessWidget {
               children: [
                 DetailsRow(
                   title: 'yearly investment return',
-                  value: ' widget.yearlyReturn',
+                  value: yearlyProfit,
                 ),
                 //    const Divider(height: 12, thickness: 0.5),
                 DetailsRow(
-                  title: 'dead line investment',
-                  value: ' widget.deadline',
+                  title: 'Dead line investment',
+                  value: deadLine,
                 ),
                 //  const Divider(height: 12, thickness: 0.5),
                 DetailsRow(
                   title: 'current valuation',
-                  value: ' widget.valuation,',
+                  value: valuation,
                 ),
               ],
             ),

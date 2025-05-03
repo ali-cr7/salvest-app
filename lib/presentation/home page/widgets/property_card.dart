@@ -1,9 +1,11 @@
 // Single Tab
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:salvest_app/presentation/home%20page/widgets/card_header.dart';
 import 'package:salvest_app/presentation/home%20page/widgets/details_row.dart';
+import 'package:salvest_app/utility/api_config/api_config.dart';
 
 class PropertyCard extends StatefulWidget {
   final String title;
@@ -17,7 +19,7 @@ class PropertyCard extends StatefulWidget {
   final String category;
   final IconData iconData;
   final Color categoryColor;
-  final List<String> imageUrls;
+  final List<String?> imageUrls;
   final double rating;
 
   const PropertyCard({
@@ -53,26 +55,49 @@ class _PropertyCardState extends State<PropertyCard> {
         borderRadius: BorderRadius.circular(12),
         color: Colors.white,
       ),
-      child: Column(
+      child: Column(  
         children: [
           Stack(
             children: [
               // Image Slider
               CarouselSlider(
-                disableGesture: true,
                 items:
                     widget.imageUrls.map((imageUrl) {
+                      final fullImageUrl =
+                          Uri.parse(
+                            APIConfig.baseUrl,
+                          ).resolve(imageUrl!).toString();
+
+                      print('Image URL: $fullImageUrl');
                       return ClipRRect(
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(12),
                           topRight: Radius.circular(12),
                         ),
-                        child: Image(
-                          image: AssetImage(imageUrl),
-                          //  imageUrl,
-                          width: double.infinity,
+                        child: CachedNetworkImage(
+                          imageUrl: fullImageUrl,
+                          width: 200,
                           height: 300,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
+                          placeholder:
+                              (context, url) => Container(
+                                color: Colors.grey[300],
+                                child: const Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              ),
+                          errorWidget:
+                              (context, url, error) => Container(
+                                color: Colors.grey[300],
+                                child: const Center(child: Icon(Icons.error)),
+                              ),
+                          imageBuilder:
+                              (context, imageProvider) => Image(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: 300,
+                              ),
                         ),
                       );
                     }).toList(),
@@ -89,32 +114,6 @@ class _PropertyCardState extends State<PropertyCard> {
                 ),
               ),
 
-              // Page Indicators (Dots)
-              Positioned(
-                bottom: 8,
-                left: 0,
-                right: 0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children:
-                      widget.imageUrls.asMap().entries.map((entry) {
-                        return Container(
-                          width: _currentImageIndex == entry.key ? 10 : 6,
-                          height: _currentImageIndex == entry.key ? 10 : 6,
-                          margin: const EdgeInsets.symmetric(horizontal: 3),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color:
-                                _currentImageIndex == entry.key
-                                    ? Colors.white
-                                    : Colors.white.withOpacity(0.5),
-                          ),
-                        );
-                      }).toList(),
-                ),
-              ),
-
-              // Category Tag
               Positioned(
                 top: 10,
                 left: 10,
@@ -169,7 +168,6 @@ class _PropertyCardState extends State<PropertyCard> {
                 ),
                 const SizedBox(height: 6),
                 Row(
-                  spacing: 110,
                   children: [
                     Text(
                       widget.title,
@@ -178,6 +176,7 @@ class _PropertyCardState extends State<PropertyCard> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                    Spacer(),
                     Text(
                       widget.availability,
                       style: TextStyle(color: Colors.green, fontSize: 12),

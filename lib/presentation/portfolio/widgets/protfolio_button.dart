@@ -21,13 +21,22 @@ class ProtfolioButtons extends StatelessWidget {
                 GoRouter.of(context).push(AppRouter.kCapitalGrowthView);
               },
               child: ProtfolioItem(
-                gradient:AppColors.greenGradient.withOpacity(0.6),
+                gradient: LinearGradient(
+                  begin: Alignment(0.04, 1.00),
+                  end: Alignment(1.00, 0.00),
+                  colors: [
+                    const Color(0xFF8CE996),
+                    const Color(0xFF6DB675),
+                    const Color(0xFF4E8354),
+                  ],
+                ).withOpacity(0.6),
+                //AppColors.greenGradient.withOpacity(0.6),
                 icon: AppAssets.cashGreen,
                 text: 'Capital Growth',
               ),
             ),
             ProtfolioItem(
-              gradient:AppColors.yellowGradient.withOpacity(0.6),
+              gradient: AppColors.yellowGradient.withOpacity(0.6),
               icon: AppAssets.balanceIcon,
               text: 'Balanced',
             ),
@@ -35,7 +44,17 @@ class ProtfolioButtons extends StatelessWidget {
         ),
         SizedBox(height: 20),
         ProtfolioItem(
-          gradient:AppColors.blueGradient.withOpacity(0.6),
+          gradient: LinearGradient(
+            begin: Alignment(-0.00, 1.00),
+            end: Alignment(1.00, -0.00),
+            colors: [
+              const Color(0xFFC0B4FF),
+              const Color(0xFF9990CC),
+              const Color(0xFF736C99),
+            ],
+          ).withOpacity(0.6),
+
+          //AppColors.blueGradient.withOpacity(0.6),
           icon: AppAssets.highIncome,
           text: 'High Incoming',
         ),

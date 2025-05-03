@@ -64,11 +64,12 @@ class CustomDrawer extends StatelessWidget {
                 icon: AppAssets.saleState,
                 title: 'Sale Estate',
                 onTap: () {
-                  final sendPropertyBloc = context.read<SalePropertyBloc>();
-                  GoRouter.of(context).push(
-                    AppRouter.kSaleEstateView,
-                    extra: sendPropertyBloc.state,
-                  );
+                  GoRouter.of(context).push(AppRouter.kSaleStateRequestView);
+                  // final sendPropertyBloc = context.read<SalePropertyBloc>();
+                  // GoRouter.of(context).push(
+                  //   AppRouter.kSaleEstateView,
+                  //   extra: sendPropertyBloc.state,
+                  // );
                 },
               ),
               DrawerItem(

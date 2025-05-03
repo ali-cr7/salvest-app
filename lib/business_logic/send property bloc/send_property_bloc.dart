@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:salvest_app/business_logic/sale%20property%20bloc/sale_property_bloc.dart';
-import 'package:salvest_app/data/services/sale%20property%20service/sale_property_repo_impl.dart';
+import 'package:salvest_app/data/services/property%20service/sale_property_repo_impl.dart';
 import 'package:salvest_app/utility/api_config/api_service.dart';
 
 part 'send_property_event.dart';

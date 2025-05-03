@@ -21,9 +21,9 @@ Future<void> setCache(LogInResponse response) async {
 
 Future<void> getCache() async {
   token = await CacheHelper.getData(key: 'token') ?? '';
-  // email = await CacheHelper.getData(key: 'email') ?? '';
-  // name = await CacheHelper.getData(key: 'name') ?? '';
-  // phone = await CacheHelper.getData(key: 'phone') ?? '';
+  email = await CacheHelper.getData(key: 'email') ?? '';
+  name = await CacheHelper.getData(key: 'name') ?? '';
+  phone = await CacheHelper.getData(key: 'phone') ?? '';
 
   // isAdmin = await CacheHelper.getData(key: 'isAdmin') ?? false;
 }

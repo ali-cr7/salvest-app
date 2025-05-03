@@ -30,7 +30,7 @@ class SaleEstateView extends StatelessWidget {
       listener: (context, state) {
         if (state is SendPropertyLoading) {
           EasyLoading.show(status: 'loading...');
-        }
+        }  
 
         if (state is SendPropertyStatus &&
             state.helperResponse.servicesResponse ==
@@ -40,10 +40,20 @@ class SaleEstateView extends StatelessWidget {
           GoRouter.of(context).push(AppRouter.kHomePageView);
           // DialogsWidgetsSnackBar.showSnackBarFromStatus(
           //   context: context,
-          //   helperResponse: state.helperResponse,
+          //   helperResponse:  ,
           //   showServerError: true,
           //   popOnSuccessCount: 2,
           // );
+        }
+        if (state is SendPropertyStatus &&
+            state.helperResponse.servicesResponse ==
+                ServicesResponseStatues.someThingWrong) {
+          EasyLoading.dismiss();
+          DialogsWidgetsSnackBar.showSnackBarFromStatus(
+            context: context,
+            helperResponse: state.helperResponse,
+            showServerError: true,
+          );
         }
       },
       child: Scaffold(

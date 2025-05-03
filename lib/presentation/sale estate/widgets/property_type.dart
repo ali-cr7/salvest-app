@@ -15,7 +15,7 @@ class _PropertyTypeWidgetState extends State<PropertyTypeWidget> {
   String? selectedProperty;
   bool showOtherField = false;
   final TextEditingController _otherController = TextEditingController();
-
+ 
   @override
   Widget build(BuildContext context) {
     return BlocListener<SalePropertyBloc, SalePropertyState>(
@@ -26,7 +26,7 @@ class _PropertyTypeWidgetState extends State<PropertyTypeWidget> {
           setState(() {
             selectedProperty = state.propertyType;
             showOtherField = false;
-          });
+          });   
         }
       },
       child: Column(

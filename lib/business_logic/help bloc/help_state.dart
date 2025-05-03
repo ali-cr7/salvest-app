@@ -8,7 +8,7 @@ final class HelpInitial extends HelpState {}
 final class FaqInLoadingState extends HelpState {}
 
 final class FaqLoadingFailure extends HelpState {
-  final HelperResponse helperResponse;
+  final HelperResponse helperResponse; 
 
   FaqLoadingFailure({required this.helperResponse});
 }

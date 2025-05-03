@@ -1,0 +1,53 @@
+import 'dart:convert';
+
+class Pagination {
+	int? currentPage;
+	int? lastPage;
+	int? perPage;
+	int? total;
+	dynamic nextPageUrl;
+	dynamic prevPageUrl;
+
+	Pagination({
+		this.currentPage, 
+		this.lastPage, 
+		this.perPage, 
+		this.total, 
+		this.nextPageUrl, 
+		this.prevPageUrl, 
+	});
+
+	factory Pagination.fromMessageDataPropertiesPropertyForInvestmentId1Id8NumberOfChances3ExpectedPrice10000000ProfitPercent1500ProgressPercent5000ChancePrice200000InvestmentTime20250501IncomingTime20250601InvestmentModeBalancedIsCompleted0PropertyTypeLandArea30000NumberOfRooms4NumberOfBathrooms2PropertyAge2DecorationDeluxeKitchenTypeWestrenFlooringTypeGraniteOverlookFrom4BalconySize10000PaintingTypeRegularPayWayCashStateDamascusExactPositionJaramanaContractBuyingCreatedAt20250426UpdatedAt20250428PropertyImagesId8NameScreenshot17451650381745688251PngPathPropertyImageScreenshot17451650381745688251PngPropertyForSaleId8CreatedAt20250426T172411000000ZUpdatedAt20250426T172411000000ZPaginationCurrentPage1LastPage1PerPage5Total1NextPageUrlNullPrevPageUrlNull(Map<String, dynamic> data) {
+		return Pagination(
+			currentPage: data['current_page'] as int?,
+			lastPage: data['last_page'] as int?,
+			perPage: data['per_page'] as int?,
+			total: data['total'] as int?,
+			nextPageUrl: data['next_page_url'] as dynamic,
+			prevPageUrl: data['prev_page_url'] as dynamic,
+		);
+	}
+
+
+
+	Map<String, dynamic> toMessageDataPropertiesPropertyForInvestmentId1Id8NumberOfChances3ExpectedPrice10000000ProfitPercent1500ProgressPercent5000ChancePrice200000InvestmentTime20250501IncomingTime20250601InvestmentModeBalancedIsCompleted0PropertyTypeLandArea30000NumberOfRooms4NumberOfBathrooms2PropertyAge2DecorationDeluxeKitchenTypeWestrenFlooringTypeGraniteOverlookFrom4BalconySize10000PaintingTypeRegularPayWayCashStateDamascusExactPositionJaramanaContractBuyingCreatedAt20250426UpdatedAt20250428PropertyImagesId8NameScreenshot17451650381745688251PngPathPropertyImageScreenshot17451650381745688251PngPropertyForSaleId8CreatedAt20250426T172411000000ZUpdatedAt20250426T172411000000ZPaginationCurrentPage1LastPage1PerPage5Total1NextPageUrlNullPrevPageUrlNull() {
+		return {
+			'current_page': currentPage,
+			'last_page': lastPage,
+			'per_page': perPage,
+			'total': total,
+			'next_page_url': nextPageUrl,
+			'prev_page_url': prevPageUrl,		};
+	}
+
+  /// `dart:convert`
+  ///
+  /// Parses the string and returns the resulting Json object as [Pagination].
+	factory Pagination.fromJson(String data) {
+		return Pagination.fromMessageDataPropertiesPropertyForInvestmentId1Id8NumberOfChances3ExpectedPrice10000000ProfitPercent1500ProgressPercent5000ChancePrice200000InvestmentTime20250501IncomingTime20250601InvestmentModeBalancedIsCompleted0PropertyTypeLandArea30000NumberOfRooms4NumberOfBathrooms2PropertyAge2DecorationDeluxeKitchenTypeWestrenFlooringTypeGraniteOverlookFrom4BalconySize10000PaintingTypeRegularPayWayCashStateDamascusExactPositionJaramanaContractBuyingCreatedAt20250426UpdatedAt20250428PropertyImagesId8NameScreenshot17451650381745688251PngPathPropertyImageScreenshot17451650381745688251PngPropertyForSaleId8CreatedAt20250426T172411000000ZUpdatedAt20250426T172411000000ZPaginationCurrentPage1LastPage1PerPage5Total1NextPageUrlNullPrevPageUrlNull(json.decode(data) as Map<String, dynamic>);
+	}
+  /// `dart:convert`
+  ///
+  /// Converts [Pagination] to a JSON string.
+	String toJson() => json.encode(toMessageDataPropertiesPropertyForInvestmentId1Id8NumberOfChances3ExpectedPrice10000000ProfitPercent1500ProgressPercent5000ChancePrice200000InvestmentTime20250501IncomingTime20250601InvestmentModeBalancedIsCompleted0PropertyTypeLandArea30000NumberOfRooms4NumberOfBathrooms2PropertyAge2DecorationDeluxeKitchenTypeWestrenFlooringTypeGraniteOverlookFrom4BalconySize10000PaintingTypeRegularPayWayCashStateDamascusExactPositionJaramanaContractBuyingCreatedAt20250426UpdatedAt20250428PropertyImagesId8NameScreenshot17451650381745688251PngPathPropertyImageScreenshot17451650381745688251PngPropertyForSaleId8CreatedAt20250426T172411000000ZUpdatedAt20250426T172411000000ZPaginationCurrentPage1LastPage1PerPage5Total1NextPageUrlNullPrevPageUrlNull());
+}

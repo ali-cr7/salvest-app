@@ -11,7 +11,7 @@ import 'package:salvest_app/utility/handle_cash.dart';
 
 class AuthRepoImpl implements AuthRepo {
   final ApiService _apiService;
-
+  
   AuthRepoImpl(this._apiService);
   @override
   Future register(SignUpEvent event) async {
@@ -54,8 +54,7 @@ class AuthRepoImpl implements AuthRepo {
           helperResponse.fullBody!,
         );
         print('Full response: ${helperResponse.fullBody}');
-        print(logInResponse);
-        print('hiii22');
+ 
         print(logInResponse.message);
         await setCache(logInResponse);
         return logInResponse;

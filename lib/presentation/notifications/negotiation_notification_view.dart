@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:salvest_app/utility/app_assests.dart';
 import 'package:salvest_app/utility/app_colors.dart';
+import 'package:salvest_app/utility/router.dart';
 
 class NegotiationNotificationView extends StatelessWidget {
   const NegotiationNotificationView({super.key});
@@ -68,7 +69,7 @@ class NegotiationNotificationView extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 65.0),
                 child: Row(
-                  spacing: 80,
+                  spacing: 10,
                   children: [
                     InkWell(
                       child: Container(
@@ -85,6 +86,34 @@ class NegotiationNotificationView extends StatelessWidget {
                             'Accept',
                             style: TextStyle(
                               color: const Color(0xFF036D0F),
+                              fontSize: 12,
+
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        GoRouter.of(
+                          context,
+                        ).push(AppRouter.kNegotitionChatView);
+                      },
+                      child: Container(
+                        width: 67,
+                        height: 33,
+                        decoration: ShapeDecoration(
+                          color: const Color(0x87786CB9),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(7),
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Negotiate',
+                            style: TextStyle(
+                              color: const Color(0xFF685D9F),
                               fontSize: 12,
 
                               fontWeight: FontWeight.w400,

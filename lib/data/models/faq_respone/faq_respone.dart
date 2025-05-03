@@ -24,7 +24,7 @@ class FaqRespone {
 			'message': message,
 			'data': data?.map((e) => e.toMessageDataId1QuestionCanIInvestTwoPropertiesAtTheSameTimeAnswerOfCourseYouCanCreatedAt20250418T172057000000ZUpdatedAt20250418T172057000000ZId2QuestionCanIInvestThreePropertiesAtTheSameTimeAnswerOfCourseYouCanYouCanInvest10CreatedAt20250419T041137000000ZUpdatedAt20250419T041137000000Z()).toList(),		};
 	}
-
+   
   /// `dart:convert`
   ///
   /// Parses the string and returns the resulting Json object as [FaqRespone].
