@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+
 import 'package:salvest_app/data/models/get_wallet_balance_response/get_wallet_balance_response.dart';
+import 'package:salvest_app/data/models/investment_of_wallet_percentage_response/investment_of_wallet_percentage_response.dart';
 import 'package:salvest_app/data/services/wallet%20services/wallet_services_repo_impl.dart';
 import 'package:salvest_app/utility/api_config/api_service.dart';
 
@@ -46,6 +48,15 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
         emit(InvestSuccess(message: response));
       } else {
         emit(InvestFailure(helperResponse: response));
+      }
+    });
+         on<GetWalletPercentageEvent>((event, emit) async {
+      emit(GetWalletBalanceLoading());
+      final response = await walletServicesRepoImpl.getWalletPercentage(event);
+      if (response is InvestmentOfWalletPercentageResponse) {
+        emit(GetWalletPerecentageSuccess(response: response));
+      } else {
+        emit(GetWalletBalanceFailure(helperResponse: response));
       }
     });
     // InvestEvent

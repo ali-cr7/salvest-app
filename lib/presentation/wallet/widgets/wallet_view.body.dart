@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:go_router/go_router.dart';
 import 'package:salvest_app/business_logic/wallet%20bloc/wallet_bloc.dart';
+import 'package:salvest_app/presentation/wallet/widgets/investing_history_list.dart';
 import 'package:salvest_app/presentation/wallet/widgets/wallet_card.dart'
     show WalletCard;
 import 'package:salvest_app/presentation/wallet/widgets/wallet_listview_item.dart'
@@ -108,20 +109,7 @@ class WalletViewBody extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  return const Padding(
-                    padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 18),
-                    child: WalletListViewItem(
-                      itemColor: Color(0x3F9A8AEC),
-                      date: '7 April 2024',
-                      iconAsset: AppAssets.investmentBlueSvg,
-                      mainText: '70 invested in Kaseon Mole',
-                    ),
-                  );
-                },
-              ),
+              child: InvestingHistoryList(),
             ),
           ],
         ),
@@ -129,3 +117,4 @@ class WalletViewBody extends StatelessWidget {
     );
   }
 }
+

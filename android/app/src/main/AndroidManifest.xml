@@ -22,6 +22,18 @@
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize">
+                   <!-- Firebase configuration -->
+        <meta-data
+            android:name="com.google.firebase.auth.package"
+            android:value="com.example.salvest_app" />
+            
+        <meta-data
+            android:name="com.google.firebase.auth.EMULATOR_HOST"
+            android:value="10.0.2.2:9099" />
+            
+        <meta-data
+            android:name="com.google.firebase.auth.EMULATOR_HOST_ENABLED"
+            android:value="false" />
 
             <meta-data
                 android:name="io.flutter.embedding.android.NormalTheme"

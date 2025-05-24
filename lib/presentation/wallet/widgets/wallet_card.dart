@@ -43,7 +43,7 @@ class WalletCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            children: [
+            children: [ 
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: 

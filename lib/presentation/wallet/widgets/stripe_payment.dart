@@ -14,6 +14,14 @@ class StripePaymentScreen extends StatefulWidget {
 
 class _StripePaymentScreenState extends State<StripePaymentScreen> {
   final TextEditingController amountController = TextEditingController();
+  void _pay(String token, int amount) async {
+    context.read<WalletBloc>().add(
+      ChargeInvestmentWalletEvent(
+        amount: amount * 100, // Convert to cents
+        token: token,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +29,7 @@ class _StripePaymentScreenState extends State<StripePaymentScreen> {
       listener: (context, state) {
         if (state is WalletChargeSuccess) {
           EasyLoading.showSuccess(state.message);
-          GoRouter.of(context).push(AppRouter.kWalitView);
+          GoRouter.of(context).pop(AppRouter.kHomePageView);
         }
         if (state is WalletChargeFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -61,7 +69,7 @@ class _StripePaymentScreenState extends State<StripePaymentScreen> {
                     onPressed:
                         state is WalletChargeLoading
                             ? null
-                            : () => _handlePayment(context),
+                            : () => _handlePayment(),
                     child:
                         state is WalletChargeLoading
                             ? CircularProgressIndicator()
@@ -76,7 +84,7 @@ class _StripePaymentScreenState extends State<StripePaymentScreen> {
     );
   }
 
-  void _handlePayment(BuildContext context) async {
+  void _handlePayment() async {
     final amount = int.tryParse(amountController.text);
     if (amount == null || amount <= 0) {
       ScaffoldMessenger.of(
@@ -86,21 +94,18 @@ class _StripePaymentScreenState extends State<StripePaymentScreen> {
     }
 
     try {
+      EasyLoading.show(status: 'loading...');
       final token = await Stripe.instance.createToken(
         const CreateTokenParams.card(
           params: CardTokenParams(type: TokenType.Card, currency: 'usd'),
         ),
       );
-
-     // context.read<WalletBloc>().add(
-      //  ChargeInvestmentWalletEvent(
-        //  amount: amount * 100, // Convert to cents
-         // token: token.id,
-        //),
-    //  );
+      EasyLoading.dismiss();
+      _pay(token.id, amount);
       print('tokin.id:${token.id}');
     } catch (e) {
       print(e);
+      EasyLoading.dismiss();
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text('Error: ${e.toString()}')));

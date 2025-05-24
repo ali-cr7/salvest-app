@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:salvest_app/business_logic/wallet%20bloc/wallet_bloc.dart';
+import 'package:salvest_app/presentation/wallet/widgets/profits_history_list.dart';
 import 'package:salvest_app/presentation/wallet/widgets/wallet_card.dart'
     show WalletCard;
 import 'package:salvest_app/presentation/wallet/widgets/wallet_listview_item.dart'
@@ -98,25 +99,7 @@ class ProfitWalletViewBody extends StatelessWidget {
             ),
 
             Expanded(
-              child: ListView.builder(
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(
-                      left: 20.0,
-                      right: 20.0,
-                      top: 18,
-                    ),
-                    child: WalletListViewItem(
-                      itemColor: const Color(0x477AF383),
-                      date:
-                          'your investment in Tartous Chalet has been received to 8 Nov 2023.',
-                      iconAsset: AppAssets.cashGreen,
-                      mainText: '50 of investment has been received!',
-                    ),
-                  );
-                },
-              ),
+              child: ProfitsHistoryList(),
             ),
           ],
         ),
@@ -124,3 +107,4 @@ class ProfitWalletViewBody extends StatelessWidget {
     );
   }
 }
+

@@ -57,32 +57,43 @@ class PropertyDetailsView extends StatefulWidget {
 
 class _PropertyDetailsViewState extends State<PropertyDetailsView> {
   bool _isAuthenticated = false;
-  int _opportunityCount = 15; // Add this in your _PropertyDetailsViewState
+  int _opportunityCount = 1; // Add this in your _PropertyDetailsViewState
   final LocalAuthentication _auth = LocalAuthentication();
+
   @override
   Widget build(BuildContext context) {
-    return BlocListener<WalletBloc, WalletState>(
-      listener: (context, state) {
-        if (state is GetWalletBalanceLoading) {
-          EasyLoading.show(status: 'loading...');
-        }
-        if (state is InvestSuccess) {
-          EasyLoading.dismiss();
-          EasyLoading.showSuccess(state.message);
-          GoRouter.of(context).push(AppRouter.kResetPasswordView);
-        }
-        if (state is InvestFailure) {
-          EasyLoading.dismiss();
-          DialogsWidgetsSnackBar.showSnackBarFromStatus(
-            context: context,
-            helperResponse: state.helperResponse,
-            showServerError: true,
-          );
-        }
-      },
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Column(
+    void _pay() async {
+      context.read<WalletBloc>().add(
+        InvestEvent(
+          chanceInvested: _opportunityCount,
+          propertyForInvestmentId: widget.propertyId,
+        ),
+      );
+    }
+
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: BlocListener<WalletBloc, WalletState>(
+        listener: (context, state) {
+          if (state is GetWalletBalanceLoading) {
+            EasyLoading.show(status: 'loading...');
+          }
+          if (state is InvestSuccess) {
+            EasyLoading.dismiss();
+            EasyLoading.showSuccess(state.message);
+            GoRouter.of(context).push(AppRouter.kHomePageView);
+          }
+          if (state is InvestFailure) {
+            EasyLoading.dismiss();
+            DialogsWidgetsSnackBar.showSnackBarFromStatus(
+              context: context,
+              helperResponse: state.helperResponse,
+              showServerError: true,
+            );
+          }
+        },
+
+        child: Column(
           children: [
             PropertyDetailsCard(
               yearlyReturn: widget.yearlyReturn,
@@ -276,19 +287,15 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> {
                                   print(e);
                                 }
                               }
+                              EasyLoading.showSuccess('Authentication success');
 
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  backgroundColor: AppColors.green,
-                                  content: Text('Authentication success'),
-                                ),
-                              );
-                              context.read<WalletBloc>().add(
-                                InvestEvent(
-                                  chanceInvested: _opportunityCount,
-                                  propertyForInvestmentId: widget.propertyId,
-                                ),
-                              );
+                              // ScaffoldMessenger.of(context).showSnackBar(
+                              //   SnackBar(
+                              //     backgroundColor: AppColors.green,
+                              //     content: Text('Authentication success'),
+                              //   ),
+                              // );
+                              _pay();
                             } else {
                               // Show an error message
                               setState(() {

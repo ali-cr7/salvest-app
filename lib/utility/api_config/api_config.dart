@@ -20,8 +20,24 @@ class APIConfig {
   static const String getMyQuestion = 'api/get_myQuestion';
   static const String chargeInvestment = 'api/stripe/ChargeInvestmentWallet';
   static const String showInvestmentWallet = 'api/wallets/ShowInvestmentWallet';
-   static const String showProfitInvestmentWallet = 'api/wallets/ShowProfitWallet';
+  static const String showProfitInvestmentWallet =
+      'api/wallets/ShowProfitWallet';
   static const String getOfferedProperties = 'api/get_my_properties';
   static const String getPrpertyForInvestments = 'api/ShowPropertyByType';
   static const String invest = '/api/invest';
+  static const String getMyInvestingHistory = 'api/ShowListOfUserInvestment';
+  static const String getMyInvestingProfitHistory = 'api/ShowListOfUserProfit';
+  static const String getInvestmentPercentage =
+      'api/ShowPercentageOfInvestments';
+  static const String getFcmToken = 'api/storeFcmToken';
+  static const String showListOfUserInvestmentByInvestMode =
+      'api/ShowListOfUserInvestmentByInvestMode';
+  static const String getAgreedNegotiation =
+      'api/get_Agreed_Negotiation_for_user';
+  static const String acceptNegotiation =
+      'api/accept_Agreed_Negotiation_by_user/';
+
+  static const String rejecttNegotiation =
+      'api/reject_Agreed_Negotiation_by_user/';
+     
 }

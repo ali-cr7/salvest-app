@@ -24,7 +24,13 @@ class SalePropertyRepoImpl implements SalePropertyRepo {
       final formData = await event.salePropertyState.toFormData();
       print("alllllllllllllll");
       print(formData.fields);
-
+      print(
+        _apiService.post(
+          endpoint: APIConfig.sendPropertyForSale,
+          data: formData,
+          token: token,
+        ),
+      );
       return await _apiService.post(
         endpoint: APIConfig.sendPropertyForSale,
         data: formData,
@@ -60,13 +66,13 @@ class SalePropertyRepoImpl implements SalePropertyRepo {
   }
 
   @override
-  Future getPropertiesForInvestment(GetPropertiesForInvestmentsEvent event) async {
-     HelperResponse helperResponse = await _apiService.post(
+  Future getPropertiesForInvestment(
+    GetPropertiesForInvestmentsEvent event,
+  ) async {
+    HelperResponse helperResponse = await _apiService.post(
       endpoint: APIConfig.getPrpertyForInvestments,
       token: token,
-      data: {
-        'property_type' : event.propertyType
-      }
+      data: {'property_type': event.propertyType},
     );
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {

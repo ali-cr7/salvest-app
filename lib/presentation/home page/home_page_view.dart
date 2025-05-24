@@ -17,7 +17,6 @@ class HomePageView extends StatelessWidget {
         angle: 0.0,
         borderRadius: 30.0,
         mainScreenOverlayColor: Colors.transparent,
-
         menuBackgroundColor: Colors.transparent,
         menuScreen: CustomDrawer(),
         mainScreen: HomePageViewBody(),

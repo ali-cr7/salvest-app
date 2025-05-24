@@ -144,7 +144,7 @@ class _LoginViewState extends State<LoginView> {
                           onPressed: () {
                             GoRouter.of(
                               context,
-                            ).push(AppRouter.kStripeTokenTestScreen);
+                            ).push(AppRouter.kSignupView);
                           },
                           child: const Text.rich(
                             TextSpan(

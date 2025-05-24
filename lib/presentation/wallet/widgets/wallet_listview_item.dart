@@ -18,7 +18,7 @@ class WalletListViewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 345,
-      height: 56,
+      height: 65,
       decoration: ShapeDecoration(
         color: itemColor,
         shape: RoundedRectangleBorder(
@@ -67,7 +67,7 @@ class WalletListViewItem extends StatelessWidget {
                     ),
                   ),
                   //    const SizedBox(height: 8), // Adds spacing between texts
-                  Flexible(
+                  Expanded(
                     child: Text(
                       date,
 

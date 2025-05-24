@@ -23,6 +23,15 @@ final class GetWalletBalanceSuccess extends WalletState {
 
   GetWalletBalanceSuccess({required this.response});
 }
+final class GetWalletPerecentageSuccess extends WalletState {
+  final InvestmentOfWalletPercentageResponse response;
+
+  GetWalletPerecentageSuccess({required this.response});
+}
+
+
+
+
 final class GetWalletBalanceFailure extends WalletState {
     final HelperResponse helperResponse;
 

@@ -2,6 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:salvest_app/business_logic/help%20bloc/help_bloc.dart';
 import 'package:salvest_app/business_logic/property%20for%20investment%20bloc/properties_for_investment_bloc.dart';
@@ -14,6 +15,7 @@ import 'package:salvest_app/data/services/auth%20services/auth_repo_impl.dart';
 import 'package:salvest_app/data/services/help%20services/help_repo_impl.dart';
 import 'package:salvest_app/data/services/property%20service/sale_property_repo_impl.dart';
 import 'package:salvest_app/data/services/wallet%20services/wallet_services_repo_impl.dart';
+import 'package:salvest_app/firebase/flutter_notifications.dart';
 import 'package:salvest_app/utility/app_bloc_observer.dart';
 import 'package:salvest_app/utility/app_colors.dart';
 import 'package:salvest_app/utility/cash_helper.dart';
@@ -23,10 +25,32 @@ import 'firebase_options.dart';
 import 'package:salvest_app/utility/router.dart';
 import 'package:salvest_app/utility/service_locator.dart';
 
-void main() async {
+FlutterNotificationsClass flutterNotifications = FlutterNotificationsClass();
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  print('Handling a background message ${message.messageId}');
+  flutterNotifications.flutterLocalNotificationsPlugin.show(
+    message.data.hashCode,
+    message.data['title'],
+    message.data['body'],
+    NotificationDetails(
+      android: AndroidNotificationDetails(
+        FlutterNotificationsClass.channel.id,
+        FlutterNotificationsClass.channel.name,
+        enableVibration: true,
+      ),
+    ),
+  );
+}
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  const AndroidInitializationSettings('@drawable/app_icon');
+  FirebaseMessaging.instance.requestPermission();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   String? token = await FirebaseMessaging.instance.getToken();
   print('here is the token');
@@ -61,10 +85,23 @@ void configLoading() {
     ..dismissOnTap = false;
 }
 
-class SalvestApp extends StatelessWidget {
+class SalvestApp extends StatefulWidget {
   const SalvestApp({super.key});
 
+  @override
+  State<SalvestApp> createState() => _SalvestAppState();
+}
+
+class _SalvestAppState extends State<SalvestApp> {
   // This widget is the root of your application.
+  @override
+  void initState() {
+    flutterNotifications = FlutterNotificationsClass();
+    flutterNotifications.localNotificationsRequestPermission();
+    flutterNotifications.handleForeGroundNotification();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(

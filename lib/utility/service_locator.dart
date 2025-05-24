@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:salvest_app/data/services/auth%20services/auth_repo_impl.dart';
 import 'package:salvest_app/data/services/help%20services/help_repo_impl.dart';
+import 'package:salvest_app/data/services/negotiation%20services/negotiation_repo_imp.dart';
 import 'package:salvest_app/data/services/property%20service/sale_property_repo_impl.dart';
 import 'package:salvest_app/data/services/wallet%20services/wallet_services_repo_impl.dart';
 import 'package:salvest_app/utility/api_config/api_config.dart';
@@ -40,6 +41,10 @@ void setupServiceLocator() {
   );
    getIt.registerSingleton<WalletServicesRepoImpl>(
     WalletServicesRepoImpl(
+      getIt.get<ApiService>(),
+    ),
+  );   getIt.registerSingleton<NegotiationRepoImp>(
+    NegotiationRepoImp(
       getIt.get<ApiService>(),
     ),
   );

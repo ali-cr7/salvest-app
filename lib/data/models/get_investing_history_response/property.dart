@@ -1,0 +1,65 @@
+import 'dart:convert';
+
+class InvestedProperty {
+	int? id;
+	int? userId;
+	int? propertyForInvestmentId;
+	String? amountPayed;
+	int? chanceInvested;
+	String? propertyType;
+	String? exactPosition;
+	String? createdAt;
+	String? updatedAt;
+
+	InvestedProperty({
+		this.id, 
+		this.userId, 
+		this.propertyForInvestmentId, 
+		this.amountPayed, 
+		this.chanceInvested, 
+		this.propertyType, 
+		this.exactPosition, 
+		this.createdAt, 
+		this.updatedAt, 
+	});
+
+	factory InvestedProperty.fromMessageDataPropertiesId1UserId4PropertyForInvestmentId2AmountPayed200000ChanceInvested1PropertyTypeVilaExactPositionJaramanaCreatedAt20250505UpdatedAt20250505Id2UserId4PropertyForInvestmentId2AmountPayed200000ChanceInvested1PropertyTypeVilaExactPositionJaramanaCreatedAt20250506UpdatedAt20250506Id3UserId4PropertyForInvestmentId2AmountPayed200000ChanceInvested1PropertyTypeVilaExactPositionJaramanaCreatedAt20250506UpdatedAt20250506Id4UserId4PropertyForInvestmentId2AmountPayed200000ChanceInvested1PropertyTypeVilaExactPositionJaramanaCreatedAt20250506UpdatedAt20250506Id5UserId4PropertyForInvestmentId1AmountPayed200000ChanceInvested1PropertyTypeLandExactPositionJaramanaCreatedAt20250506UpdatedAt20250506PaginationCurrentPage1LastPage3PerPage5Total14NextPageUrlHttp1270018000ApiShowListOfUserInvestmentPage2PrevPageUrlNull(Map<String, dynamic> data) {
+		return InvestedProperty(
+			id: data['id'] as int?,
+			userId: data['user_id'] as int?,
+			propertyForInvestmentId: data['property_for_investment_id'] as int?,
+			amountPayed: data['amount_payed'] as String?,
+			chanceInvested: data['chance_invested'] as int?,
+			propertyType: data['property_type'] as String?,
+			exactPosition: data['exact_position'] as String?,
+			createdAt: data['created_at'] as String?,
+			updatedAt: data['updated_at'] as String?,
+		);
+	}
+
+
+
+	Map<String, dynamic> toMessageDataPropertiesId1UserId4PropertyForInvestmentId2AmountPayed200000ChanceInvested1PropertyTypeVilaExactPositionJaramanaCreatedAt20250505UpdatedAt20250505Id2UserId4PropertyForInvestmentId2AmountPayed200000ChanceInvested1PropertyTypeVilaExactPositionJaramanaCreatedAt20250506UpdatedAt20250506Id3UserId4PropertyForInvestmentId2AmountPayed200000ChanceInvested1PropertyTypeVilaExactPositionJaramanaCreatedAt20250506UpdatedAt20250506Id4UserId4PropertyForInvestmentId2AmountPayed200000ChanceInvested1PropertyTypeVilaExactPositionJaramanaCreatedAt20250506UpdatedAt20250506Id5UserId4PropertyForInvestmentId1AmountPayed200000ChanceInvested1PropertyTypeLandExactPositionJaramanaCreatedAt20250506UpdatedAt20250506PaginationCurrentPage1LastPage3PerPage5Total14NextPageUrlHttp1270018000ApiShowListOfUserInvestmentPage2PrevPageUrlNull() {
+		return {
+			'id': id,
+			'user_id': userId,
+			'property_for_investment_id': propertyForInvestmentId,
+			'amount_payed': amountPayed,
+			'chance_invested': chanceInvested,
+			'property_type': propertyType,
+			'exact_position': exactPosition,
+			'created_at': createdAt,
+			'updated_at': updatedAt,		};
+	}
+
+  /// `dart:convert`
+  ///
+  /// Parses the string and returns the resulting Json object as [Property].
+	factory InvestedProperty.fromJson(String data) {
+		return InvestedProperty.fromMessageDataPropertiesId1UserId4PropertyForInvestmentId2AmountPayed200000ChanceInvested1PropertyTypeVilaExactPositionJaramanaCreatedAt20250505UpdatedAt20250505Id2UserId4PropertyForInvestmentId2AmountPayed200000ChanceInvested1PropertyTypeVilaExactPositionJaramanaCreatedAt20250506UpdatedAt20250506Id3UserId4PropertyForInvestmentId2AmountPayed200000ChanceInvested1PropertyTypeVilaExactPositionJaramanaCreatedAt20250506UpdatedAt20250506Id4UserId4PropertyForInvestmentId2AmountPayed200000ChanceInvested1PropertyTypeVilaExactPositionJaramanaCreatedAt20250506UpdatedAt20250506Id5UserId4PropertyForInvestmentId1AmountPayed200000ChanceInvested1PropertyTypeLandExactPositionJaramanaCreatedAt20250506UpdatedAt20250506PaginationCurrentPage1LastPage3PerPage5Total14NextPageUrlHttp1270018000ApiShowListOfUserInvestmentPage2PrevPageUrlNull(json.decode(data) as Map<String, dynamic>);
+	}
+  /// `dart:convert`
+  ///
+  /// Converts [Property] to a JSON string.
+	String toJson() => json.encode(toMessageDataPropertiesId1UserId4PropertyForInvestmentId2AmountPayed200000ChanceInvested1PropertyTypeVilaExactPositionJaramanaCreatedAt20250505UpdatedAt20250505Id2UserId4PropertyForInvestmentId2AmountPayed200000ChanceInvested1PropertyTypeVilaExactPositionJaramanaCreatedAt20250506UpdatedAt20250506Id3UserId4PropertyForInvestmentId2AmountPayed200000ChanceInvested1PropertyTypeVilaExactPositionJaramanaCreatedAt20250506UpdatedAt20250506Id4UserId4PropertyForInvestmentId2AmountPayed200000ChanceInvested1PropertyTypeVilaExactPositionJaramanaCreatedAt20250506UpdatedAt20250506Id5UserId4PropertyForInvestmentId1AmountPayed200000ChanceInvested1PropertyTypeLandExactPositionJaramanaCreatedAt20250506UpdatedAt20250506PaginationCurrentPage1LastPage3PerPage5Total14NextPageUrlHttp1270018000ApiShowListOfUserInvestmentPage2PrevPageUrlNull());
+}

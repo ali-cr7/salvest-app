@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:meta/meta.dart';
 import 'package:salvest_app/data/models/log_in_response/log_in_response.dart';
 import 'package:salvest_app/data/models/sign_up_response/sign_up_response.dart';
@@ -16,6 +17,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc(this.authRepoImpl) : super(UserInitial()) {
     on<SignUpEvent>((event, emit) async {
       emit(UserLoading());
+
       final response = await authRepoImpl.register(event);
       print(response is SignUpResponse);
       print(response is HelperResponse);
@@ -28,7 +30,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     });
     on<LogInEvent>((event, emit) async {
       emit(UserLoading());
-      final response = await authRepoImpl.logIn(event);
+      final fcm = await FirebaseMessaging.instance.getToken();
+      print('here is the device token :$fcm');
+      final response = await authRepoImpl.logIn(event, fcm!);
 
       if (response is LogInResponse) {
         emit(UserLoginState(user: response));

@@ -1,0 +1,38 @@
+import 'dart:convert';
+
+import 'data.dart';
+
+class GetMyInvestingProfitsHistoryResponse {
+	String? message;
+	Data? data;
+
+	GetMyInvestingProfitsHistoryResponse({this.message, this.data});
+
+	factory GetMyInvestingProfitsHistoryResponse.from(Map<String, dynamic> data) {
+		return GetMyInvestingProfitsHistoryResponse(
+			message: data['message'] as String?,
+			data: data['data'] == null
+						? null
+						: Data.fromMessageDataPropertiesId1CompletedPropertyId1UserId4ProfitAmount998PropertyTypeVilaExactPositionJaramanaScheduledDate20250601TransferStatusPendingId2CompletedPropertyId2UserId4ProfitAmount998PropertyTypeLandExactPositionJaramanaScheduledDate20250601TransferStatusPendingId3CompletedPropertyId3UserId4ProfitAmount998PropertyTypeApartmentExactPositionJaramanaScheduledDate20250601TransferStatusPendingPaginationCurrentPage1LastPage1PerPage5Total3NextPageUrlNullPrevPageUrlNull(data['data'] as Map<String, dynamic>),
+		);
+	}
+
+
+
+	Map<String, dynamic> toMessageDataPropertiesId1CompletedPropertyId1UserId4ProfitAmount998PropertyTypeVilaExactPositionJaramanaScheduledDate20250601TransferStatusPendingId2CompletedPropertyId2UserId4ProfitAmount998PropertyTypeLandExactPositionJaramanaScheduledDate20250601TransferStatusPendingId3CompletedPropertyId3UserId4ProfitAmount998PropertyTypeApartmentExactPositionJaramanaScheduledDate20250601TransferStatusPendingPaginationCurrentPage1LastPage1PerPage5Total3NextPageUrlNullPrevPageUrlNull() {
+		return {
+			'message': message,
+			'data': data?.toMessageDataPropertiesId1CompletedPropertyId1UserId4ProfitAmount998PropertyTypeVilaExactPositionJaramanaScheduledDate20250601TransferStatusPendingId2CompletedPropertyId2UserId4ProfitAmount998PropertyTypeLandExactPositionJaramanaScheduledDate20250601TransferStatusPendingId3CompletedPropertyId3UserId4ProfitAmount998PropertyTypeApartmentExactPositionJaramanaScheduledDate20250601TransferStatusPendingPaginationCurrentPage1LastPage1PerPage5Total3NextPageUrlNullPrevPageUrlNull(),		};
+	}
+
+  /// `dart:convert`
+  ///
+  /// Parses the string and returns the resulting Json object as [GetMyInvestingProfitsHistoryResponse].
+	factory GetMyInvestingProfitsHistoryResponse.fromJson(String data) {
+		return GetMyInvestingProfitsHistoryResponse.from(json.decode(data) as Map<String, dynamic>);
+	}
+  /// `dart:convert`
+  ///
+  /// Converts [GetMyInvestingProfitsHistoryResponse] to a JSON string.
+	String toJson() => json.encode(toMessageDataPropertiesId1CompletedPropertyId1UserId4ProfitAmount998PropertyTypeVilaExactPositionJaramanaScheduledDate20250601TransferStatusPendingId2CompletedPropertyId2UserId4ProfitAmount998PropertyTypeLandExactPositionJaramanaScheduledDate20250601TransferStatusPendingId3CompletedPropertyId3UserId4ProfitAmount998PropertyTypeApartmentExactPositionJaramanaScheduledDate20250601TransferStatusPendingPaginationCurrentPage1LastPage1PerPage5Total3NextPageUrlNullPrevPageUrlNull());
+}

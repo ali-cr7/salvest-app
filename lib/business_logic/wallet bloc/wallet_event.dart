@@ -36,3 +36,10 @@ class GetWalletBalanceEvent extends WalletEvent {
   @override
   List<Object?> get props => [];
 }
+class GetWalletPercentageEvent extends WalletEvent {
+  GetWalletPercentageEvent();
+
+  
+  @override
+  List<Object?> get props => [];
+}

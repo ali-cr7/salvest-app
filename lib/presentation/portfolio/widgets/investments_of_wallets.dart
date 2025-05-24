@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:salvest_app/business_logic/wallet%20bloc/wallet_bloc.dart';
 import 'package:salvest_app/utility/app_assests.dart';
-import 'package:salvest_app/utility/app_colors.dart';
 
 class InvestmentsOfWallet extends StatelessWidget {
   const InvestmentsOfWallet({super.key});
@@ -10,22 +12,12 @@ class InvestmentsOfWallet extends StatelessWidget {
     return Container(
       width: 345,
       height: 200,
-      decoration: ShapeDecoration(
-        gradient: LinearGradient(
-          begin: Alignment(-0.00, 0.92),
-          end: Alignment(1.00, -0.00),
-          colors: [
-            const Color(0xFF9A8AEC),
-            const Color(0xFF786CB9),
-            const Color(0xFF685D9F),
-            const Color(0xFF574E86),
-          ],
-        ),
+      decoration: ShapeDecoration(  
         image: const DecorationImage(
           image: AssetImage(AppAssets.walletBackg),
           fit: BoxFit.fill,
         ),
-        //    color: const Color(0xFF9A8AEC),
+        color: const Color(0xFF9A8AEC),
         shape: RoundedRectangleBorder(
           side: BorderSide(width: 2, color: const Color(0x7F9A8AEC)),
           borderRadius: BorderRadius.circular(20),
@@ -48,33 +40,48 @@ class InvestmentsOfWallet extends StatelessWidget {
                     strokeWidth: 10,
                   ),
                 ),
-                Column(
-                  children: [
-                    Text(
-                      "87%",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'investments of your wallet\n',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
+                BlocBuilder<WalletBloc, WalletState>(
+                  builder: (context, state) {
+                    if (state is GetWalletBalanceLoading) {
+                      return CupertinoActivityIndicator(radius: 12);
+                    } else if (state is GetWalletPerecentageSuccess) {
+                      return Text(
+                        "${state.response.data!.percentage!}%",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      );
+                    }
+                    else {
+                        return Text(
+                        "failed to download",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      );
+                    }
+                  },
                 ),
               ],
             ),
           ),
-
           // Expanded(child: SizedBox()),
+          Expanded(
+            child: Text(
+              'investments of your wallet\n',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
         ],
       ),
     );
