@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:salvest_app/constants.dart';
@@ -37,33 +38,49 @@ class ProfileView extends StatelessWidget {
             child: Row(
               spacing: 35,
               children: [
-                Container(
-                  width: 103,
-                  height: 103,
-                  decoration: ShapeDecoration(
-                    color: const Color(0x669A8AEC),
-                    shape: OvalBorder(
-                      side: BorderSide(
-                        width: 4,
-                        color: const Color(0xFF836DF3),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  // alignment: Alignment.topCenter,
+                  // clipBehavior: Clip.none,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 16.0),
+                      child: _buildCrownWidget('platinum'),
+                    ),
+
+                    // 👤 Profile initials badg
+                    Container(
+                      width: 103,
+                      height: 103,
+                      decoration: ShapeDecoration(
+                        color: const Color(0x669A8AEC),
+                        shape: OvalBorder(
+                          side: BorderSide(
+                            width: 4,
+                            color: const Color(0xFF836DF3),
+                          ),
+                        ),
+                      ),
+                      child: Center(
+                        child: Text(
+                          getInitials(name!),
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 36,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                  child: Center(
-                    child: Text(
-                      getInitials(name!),
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 36,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
+                  ],
                 ),
+
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(height: 60),
                     Text(
                       name!,
                       style: TextStyle(
@@ -148,4 +165,28 @@ class ProfileView extends StatelessWidget {
 
     return (firstInitial + lastInitial).toUpperCase();
   }
+}
+
+Widget _buildCrownWidget(String tier) {
+  Color crownColor;
+
+  switch (tier.toLowerCase()) {
+    case 'silver':
+      crownColor = const Color(0xFFC0C0C0); // Silver
+      break;
+    case 'gold':
+      crownColor = const Color(0xFFFFD700); // Gold
+      break;
+    case 'platinum':
+      crownColor = const Color(0xFFB0E0E6); // Platinum
+      break;
+    default:
+      crownColor = Colors.grey;
+  }
+
+  return Icon(
+    FontAwesomeIcons.crown, // Trophy icon as placeholder crown
+    color: crownColor,
+    size: 80,
+  );
 }

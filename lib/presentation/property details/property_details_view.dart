@@ -8,18 +8,13 @@ import 'package:intl/intl.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:salvest_app/business_logic/wallet%20bloc/wallet_bloc.dart';
 import 'package:salvest_app/data/models/get_proprties_for_investment_response/property_image.dart';
-
-import 'package:salvest_app/presentation/home%20page/widgets/details_row.dart';
+import 'package:salvest_app/presentation/home%20page/widgets/card_header.dart';
 import 'package:salvest_app/presentation/property%20details/widgets/property_details_card.dart';
 import 'package:salvest_app/presentation/property%20details/widgets/property_details_info.dart';
 import 'package:salvest_app/presentation/property%20details/widgets/property_info.dart';
 import 'package:salvest_app/presentation/sale%20estate/widgets/custom_button.dart';
-import 'package:salvest_app/utility/app_assests.dart';
-import 'package:salvest_app/utility/app_colors.dart';
-import 'package:salvest_app/utility/biometric.dart';
 import 'package:salvest_app/utility/dialogs_snackBar.dart';
 import 'package:salvest_app/utility/router.dart';
-
 class PropertyDetailsView extends StatefulWidget {
   const PropertyDetailsView({
     super.key,
@@ -54,12 +49,10 @@ class PropertyDetailsView extends StatefulWidget {
   @override
   State<PropertyDetailsView> createState() => _PropertyDetailsViewState();
 }
-
 class _PropertyDetailsViewState extends State<PropertyDetailsView> {
   bool _isAuthenticated = false;
   int _opportunityCount = 1; // Add this in your _PropertyDetailsViewState
   final LocalAuthentication _auth = LocalAuthentication();
-
   @override
   Widget build(BuildContext context) {
     void _pay() async {
@@ -72,6 +65,26 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> {
     }
 
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CardHeader(
+              category: widget.category,
+              iconData: widget.iconData,
+              categoryColor: widget.categoryColor,
+            ),
+          ),
+        ],
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          onPressed: () {
+            //GoRouter.of(context).push(AppRouter.kHomePageView);
+            GoRouter.of(context).pop();
+          },
+          icon: Icon(Icons.arrow_back_ios),
+        ),
+      ),
       backgroundColor: Colors.white,
       body: BlocListener<WalletBloc, WalletState>(
         listener: (context, state) {

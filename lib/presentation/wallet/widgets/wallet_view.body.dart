@@ -47,7 +47,12 @@ class WalletViewBody extends StatelessWidget {
                       cardStrting: 'Investment wallet',
                     ),
                   );
-                } else if (state is GetWalletBalanceSuccess) {
+                  
+                } 
+                //else if(state is GetWalletPerecentageSuccess &&state.response.data.)
+                
+                
+                else if (state is GetWalletBalanceSuccess) {
                   return Center(
                     child: WalletCard(
                       isLoading: false,

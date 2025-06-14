@@ -128,22 +128,8 @@ class _PropertyDetailsCardState extends State<PropertyDetailsCard> {
                       }).toList(),
                 ),
               ),
-              IconButton(
-                onPressed: () {
-                  GoRouter.of(context).push(AppRouter.kHomePageView);
-                },
-                icon: Icon(Icons.arrow_back_ios),
-              ),
-              // Category Tag
-              Positioned(
-                top: 10,
-                right: 10,
-                child: CardHeader(
-                  category: widget.category,
-                  iconData: widget.iconData,
-                  categoryColor: widget.categoryColor,
-                ),
-              ),
+
+         
 
               // Star Rating
             ],

@@ -26,7 +26,7 @@ import 'package:salvest_app/utility/router.dart';
 import 'package:salvest_app/utility/service_locator.dart';
 
 FlutterNotificationsClass flutterNotifications = FlutterNotificationsClass();
-
+ 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   print('Handling a background message ${message.messageId}');

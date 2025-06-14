@@ -30,7 +30,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     });
     on<LogInEvent>((event, emit) async {
       emit(UserLoading());
-      final fcm = await FirebaseMessaging.instance.getToken();
+      final fcm = 
+      await FirebaseMessaging.instance.getToken();
       print('here is the device token :$fcm');
       final response = await authRepoImpl.logIn(event, fcm!);
 

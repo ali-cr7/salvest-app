@@ -135,7 +135,7 @@ class WalletServicesRepoImpl implements WalletServicesRepo {
       return helperResponse;
     }
 
-    // 🛑 This is the fix — handle unexpected event
+   
     return HelperResponse(
       servicesResponse: ServicesResponseStatues.modelError,
       fullBody: {},

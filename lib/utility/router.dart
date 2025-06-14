@@ -75,7 +75,7 @@ abstract class AppRouter {
 
   static final router = GoRouter(
     routes: [
-   //  GoRoute(path: '/', builder: (context, state) => const LoginView()),
+    // GoRoute(path: '/', builder: (context, state) => const LoginView()),
       if (token != null)
         GoRoute(
           path: '/',
