@@ -126,7 +126,7 @@ class NegotiationNotificationView extends StatelessWidget {
                                   textColor: const Color(0xFF685D9F),
                                   onTap: () {
                                     GoRouter.of(context).push(
-                                      '${AppRouter.kNegotitionChatView}?userId= user_${item.expertId}&userName=${item.expertName}',
+                                      '${AppRouter.kNegotitionChatView}?userId=user_${item.expertId}&userName=${item.expertName}',
                                     );
                                   },
                                 ),

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:salvest_app/data/models/investment/datum.mode.dart';
 import 'package:salvest_app/presentation/portfolio/widgets/custom_row_info.dart';
 import 'package:salvest_app/utility/app_assests.dart';
 import 'package:salvest_app/utility/app_colors.dart';
 
 class CapitalGrowthListViewItem extends StatelessWidget {
-  const CapitalGrowthListViewItem({super.key});
+  final InvestmentMode mode;
+  const CapitalGrowthListViewItem({super.key, required this.mode});
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,7 @@ class CapitalGrowthListViewItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(17),
         ),
       ),
+
       child: Column(
         children: [
           Padding(
@@ -33,8 +36,9 @@ class CapitalGrowthListViewItem extends StatelessWidget {
                 Container(width: 2, height: 9, color: AppColors.black82),
                 SizedBox(width: 8),
                 Image(image: AssetImage(AppAssets.syriaFlag)),
+                const SizedBox(width: 4),
                 Text(
-                  'Lattakia',
+                  mode.propertyLocation ?? '',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 12,
@@ -50,11 +54,11 @@ class CapitalGrowthListViewItem extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                 child: CustomRowInfo(
-                  availability: '46% available',
+                  availability: '${mode.profitPercent}%',
                   availabilityColor: const Color(0xB5088610),
                   availabilityFontSize: 10,
                   availabilityFontWeight: FontWeight.w700,
-                  title: 'Super Deluxe Villa ',
+                  title: mode.propertyName ?? '',
                   titleColor: Colors.black,
                   titleFontSize: 12,
                   titleFontWeight: FontWeight.w900,
@@ -67,9 +71,9 @@ class CapitalGrowthListViewItem extends StatelessWidget {
                   titleColor: const Color(0xFF21D836),
                   titleFontSize: 10,
                   titleFontWeight: FontWeight.w700,
-                  availability: '1500 investors',
+                  availability: '${mode.investorCount} investors',
                   availabilityColor: Colors.black.withValues(alpha: 117),
-                  availabilityFontSize: 10,
+                  availabilityFontSize: 15,
                   availabilityFontWeight: FontWeight.w700,
                 ),
               ),
@@ -91,33 +95,33 @@ class CapitalGrowthListViewItem extends StatelessWidget {
                 spacing: 2,
                 children: [
                   CustomRowInfo(
-                    title: 'yearly investment  ',
+                    title: 'profit_percent  ',
                     titleColor: Colors.black,
-                    titleFontSize: 10,
+                    titleFontSize: 12,
                     titleFontWeight: FontWeight.w400,
-                    availability: '12.4%',
+                    availability: '${mode.profitPercent}%',
                     availabilityColor: Colors.black,
-                    availabilityFontSize: 10,
+                    availabilityFontSize: 12,
                     availabilityFontWeight: FontWeight.w400,
                   ),
                   CustomRowInfo(
-                    title: 'dead line investment  ',
+                    title: 'investment_end_time  ',
                     titleColor: Colors.black,
-                    titleFontSize: 10,
+                    titleFontSize: 12,
                     titleFontWeight: FontWeight.w400,
-                    availability: '2April 2025',
+                    availability: mode.investmentEndTime ?? '',
                     availabilityColor: Colors.black,
-                    availabilityFontSize: 10,
+                    availabilityFontSize: 12,
                     availabilityFontWeight: FontWeight.w400,
                   ),
                   CustomRowInfo(
-                    title: 'current valuation  ',
+                    title: 'user_profit  ',
                     titleColor: Colors.black,
-                    titleFontSize: 10,
+                    titleFontSize: 12,
                     titleFontWeight: FontWeight.w400,
-                    availability: '\$200,340',
+                    availability: '\$${mode.userProfit}',
                     availabilityColor: Colors.black,
-                    availabilityFontSize: 10,
+                    availabilityFontSize: 12,
                     availabilityFontWeight: FontWeight.w400,
                   ),
                 ],

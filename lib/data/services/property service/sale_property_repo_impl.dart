@@ -22,20 +22,13 @@ class SalePropertyRepoImpl implements SalePropertyRepo {
   Future<HelperResponse> saleProperty(SendPropertyApiEvent event) async {
     try {
       final formData = await event.salePropertyState.toFormData();
-      print("alllllllllllllll");
-      print(formData.fields);
-      print(
-        _apiService.post(
-          endpoint: APIConfig.sendPropertyForSale,
-          data: formData,
-          token: token,
-        ),
-      );
-      return await _apiService.post(
+      HelperResponse helperResponse = await _apiService.post(
         endpoint: APIConfig.sendPropertyForSale,
         data: formData,
         token: token,
       );
+
+      return helperResponse;
     } catch (e) {
       // Handle any unexpected errors during form data conversion
       return HelperResponse(

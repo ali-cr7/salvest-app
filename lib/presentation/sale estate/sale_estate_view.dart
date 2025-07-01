@@ -30,13 +30,14 @@ class SaleEstateView extends StatelessWidget {
       listener: (context, state) {
         if (state is SendPropertyLoading) {
           EasyLoading.show(status: 'loading...');
-        }  
+        }
 
         if (state is SendPropertyStatus &&
             state.helperResponse.servicesResponse ==
                 ServicesResponseStatues.success) {
           EasyLoading.dismiss();
           EasyLoading.showSuccess('Sent Succefully');
+          print("property Sent Succefully");
           GoRouter.of(context).push(AppRouter.kHomePageView);
           // DialogsWidgetsSnackBar.showSnackBarFromStatus(
           //   context: context,

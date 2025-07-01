@@ -7,6 +7,7 @@ class SalePropertyState {
   final String numberOfRooms;
   final String numberOfBathRooms;
   final String propertyAge;
+  final String contract;
   final String decoration;
   final String kitchenType;
   final String flooringType;
@@ -23,6 +24,7 @@ class SalePropertyState {
 
   const SalePropertyState({
     this.propertyType = 'Villa',
+    this.contract = 'buying',
     this.area = '',
     this.numberOfRooms = '',
     this.numberOfBathRooms = '',
@@ -47,6 +49,7 @@ class SalePropertyState {
       'SalePropertyState('
       'propertyType: $propertyType, '
       'area: $area, '
+      'contract: $contract, '
       'numberOfRooms: $numberOfRooms, '
       'numberOfBathRooms: $numberOfBathRooms, '
       'propertyAge: $propertyAge, '
@@ -68,6 +71,7 @@ class SalePropertyState {
   Map<String, dynamic> toMap() => {
     'property_type': propertyType,
     'area': area,
+    'contract': contract,
     'number_of_rooms': numberOfRooms,
     'number_of_bathrooms': numberOfBathRooms,
     'property_age': propertyAge,
@@ -93,6 +97,7 @@ class SalePropertyState {
       numberOfRooms: map['number_of_rooms'] as String? ?? '',
       numberOfBathRooms: map['number_of_bathrooms'] as String? ?? '',
       propertyAge: map['property_age'] as String? ?? '',
+      contract: map['contract'] as String? ?? '',
       decoration: map['decoration'] as String? ?? 'deluxe',
       kitchenType: map['kitchen_type'] as String? ?? 'western',
       flooringType: map['flooring_type'] as String? ?? 'granite',
@@ -215,35 +220,50 @@ class SalePropertyState {
     );
   }
 
-Future<FormData> toFormData() async {
-  final map = toMap();
-  
-  final formData = FormData.fromMap(map);
+  Future<FormData> toFormData() async {
+    final map = toMap();
 
-  // Add property images with array syntax
-  for (var file in images.where((f) => f.path.isNotEmpty)) {
-    formData.files.add(MapEntry(
-      'property_images[]',
-      await MultipartFile.fromFile(file.path, filename: file.path.split('/').last),
-    ));
+    final formData = FormData.fromMap(map);
+
+    // Add property images with array syntax
+    for (var file in images.where((f) => f.path.isNotEmpty)) {
+      formData.files.add(
+        MapEntry(
+          'property_images[]',
+          await MultipartFile.fromFile(
+            file.path,
+            filename: file.path.split('/').last,
+          ),
+        ),
+      );
+    }
+
+    // Add ID images with array syntax
+    for (var file in idImages.where((f) => f.path.isNotEmpty)) {
+      formData.files.add(
+        MapEntry(
+          'id_images[]',
+          await MultipartFile.fromFile(
+            file.path,
+            filename: file.path.split('/').last,
+          ),
+        ),
+      );
+    }
+
+    // Add property documents with array syntax
+    for (var file in propertyDocument.where((f) => f.path.isNotEmpty)) {
+      formData.files.add(
+        MapEntry(
+          'property_documents[]',
+          await MultipartFile.fromFile(
+            file.path,
+            filename: file.path.split('/').last,
+          ),
+        ),
+      );
+    }
+
+    return formData;
   }
-
-  // Add ID images with array syntax
-  for (var file in idImages.where((f) => f.path.isNotEmpty)) {
-    formData.files.add(MapEntry(
-      'id_images[]',
-      await MultipartFile.fromFile(file.path, filename: file.path.split('/').last),
-    ));
-  }
-
-  // Add property documents with array syntax
-  for (var file in propertyDocument.where((f) => f.path.isNotEmpty)) {
-    formData.files.add(MapEntry(
-      'property_documents[]',
-      await MultipartFile.fromFile(file.path, filename: file.path.split('/').last),
-    ));
-  }
-
-  return formData;
-}
 }

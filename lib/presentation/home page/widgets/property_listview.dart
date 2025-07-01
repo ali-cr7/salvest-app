@@ -43,7 +43,7 @@ class PropertyListView extends StatelessWidget {
         if (deleteUpdate is PropertiesForInvestmentSuccess &&
             deleteUpdate.getPropertiesForInvestmentResponse.data == null) {
           return SomethingWrongWidget(
-            title: "No Questions found !",
+            title: "No Properties found !",
             svgPath: 'assets/images/search.svg',
             elevatedButtonWidget: ElevatedButtonWidget(
               title: "Refresh",
@@ -73,8 +73,7 @@ class PropertyListView extends StatelessWidget {
                 onTap:
                     () => GoRouter.of(
                       context,
-                    ).push(AppRouter.kPropertyDetailsView,
-                    extra: property,),
+                    ).push(AppRouter.kPropertyDetailsView, extra: property),
                 child: PropertyCard(
                   title: property.area!,
                   location: property.state!,

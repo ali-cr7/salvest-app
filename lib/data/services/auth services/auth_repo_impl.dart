@@ -84,7 +84,7 @@ class AuthRepoImpl implements AuthRepo {
         await storeFcmToken(fcm);
 
         if (logInResponse.firebaseToken == null) {
-          print('❌ Firebase token is null!');
+          print(' Firebase token is null!');
         } else {
           try {
             final userCredential = await FirebaseAuth.instance
@@ -118,7 +118,7 @@ class AuthRepoImpl implements AuthRepo {
 
         return logInResponse;
       } catch (e) {
-        print('❌ Error during login process: $e');
+        print(' Error during login process: $e');
         return helperResponse.copyWith(
           servicesResponse: ServicesResponseStatues.modelError,
         );
@@ -126,7 +126,7 @@ class AuthRepoImpl implements AuthRepo {
     }
 
     print(
-      '❌ Backend login failed with status: ${helperResponse.servicesResponse}',
+      ' Backend login failed with status: ${helperResponse.servicesResponse}',
     );
     return helperResponse;
   }

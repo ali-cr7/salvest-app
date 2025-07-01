@@ -5,6 +5,10 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:salvest_app/business_logic/help%20bloc/help_bloc.dart';
+import 'package:salvest_app/business_logic/investment%20mode%20bloc/investment_mode_bloc.dart';
+import 'package:salvest_app/business_logic/investments%20by%20month%20bloc/investments_by_month_bloc.dart';
+import 'package:salvest_app/business_logic/largest%20reward%20bloc/largest_reward_bloc.dart';
+import 'package:salvest_app/business_logic/lines%20chart%20bloc/lines_chart_bloc.dart';
 import 'package:salvest_app/business_logic/property%20for%20investment%20bloc/properties_for_investment_bloc.dart';
 import 'package:salvest_app/business_logic/sale%20property%20bloc/sale_property_bloc.dart';
 import 'package:salvest_app/business_logic/send%20property%20bloc/send_property_bloc.dart';
@@ -14,6 +18,7 @@ import 'package:salvest_app/business_logic/wallet%20bloc/wallet_bloc.dart';
 import 'package:salvest_app/data/services/auth%20services/auth_repo_impl.dart';
 import 'package:salvest_app/data/services/help%20services/help_repo_impl.dart';
 import 'package:salvest_app/data/services/property%20service/sale_property_repo_impl.dart';
+import 'package:salvest_app/data/services/statistics%20srevices/statistics%20_repo_impl.dart';
 import 'package:salvest_app/data/services/wallet%20services/wallet_services_repo_impl.dart';
 import 'package:salvest_app/firebase/flutter_notifications.dart';
 import 'package:salvest_app/utility/app_bloc_observer.dart';
@@ -25,35 +30,37 @@ import 'firebase_options.dart';
 import 'package:salvest_app/utility/router.dart';
 import 'package:salvest_app/utility/service_locator.dart';
 
-FlutterNotificationsClass flutterNotifications = FlutterNotificationsClass();
+//FlutterNotificationsClass flutterNotifications = FlutterNotificationsClass();
  
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  print('Handling a background message ${message.messageId}');
-  flutterNotifications.flutterLocalNotificationsPlugin.show(
-    message.data.hashCode,
-    message.data['title'],
-    message.data['body'],
-    NotificationDetails(
-      android: AndroidNotificationDetails(
-        FlutterNotificationsClass.channel.id,
-        FlutterNotificationsClass.channel.name,
-        enableVibration: true,
-      ),
-    ),
-  );
-}
+// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+//     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+//   print('Handling a background message ${message.messageId}');
+//   flutterNotifications.flutterLocalNotificationsPlugin.show(
+//     message.data.hashCode,
+//     message.data['title'],
+//     message.data['body'],
+//     NotificationDetails(
+//       android: AndroidNotificationDetails(
+        
+//         FlutterNotificationsClass.channel.id,
+//         FlutterNotificationsClass.channel.name,
+//         enableVibration: true,
+//          icon: 'ic_notification',
+//       ),
+//     ),
+//   );
+// }
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  const AndroidInitializationSettings('@drawable/app_icon');
+  //const AndroidInitializationSettings('@drawable/ic_notification');
   FirebaseMessaging.instance.requestPermission();
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+ // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   String? token = await FirebaseMessaging.instance.getToken();
-  print('here is the token');
+
   print('here is the token: $token');
   Stripe.publishableKey =
       'pk_test_51RBxRR2MvyyhT4mR13N5Ucs99rBbvzc4ER9MC1yNlV7xtfNcodqYALDmiGa5bBsKyczBWS06A0bP7ojpvxLdFooB00lRnfBNrT';
@@ -96,27 +103,45 @@ class _SalvestAppState extends State<SalvestApp> {
   // This widget is the root of your application.
   @override
   void initState() {
-    flutterNotifications = FlutterNotificationsClass();
-    flutterNotifications.localNotificationsRequestPermission();
-    flutterNotifications.handleForeGroundNotification();
+    // flutterNotifications = FlutterNotificationsClass();
+    // flutterNotifications.localNotificationsRequestPermission();
+    // flutterNotifications.handleForeGroundNotification();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
+    providers: [
         BlocProvider(create: (context) => UserBloc(getIt.get<AuthRepoImpl>())),
-
-        //HelpBloc
         BlocProvider(create: (context) => HelpBloc(getIt.get<HelpRepoImpl>())),
         BlocProvider(create: (context) => SalePropertyBloc()),
+        BlocProvider(
+          create:
+              (context) =>
+                  LargestRewardBloc(getIt.get<StatisticsRepoImpl>()),
+        ),
         BlocProvider(
           create:
               (context) => SendPropertyBloc(getIt.get<SalePropertyRepoImpl>()),
         ),
         BlocProvider(
+          create:
+              (context) => InvestmentsByMonthBloc(
+                getIt.get<StatisticsRepoImpl>(),
+              ),
+        ),
+        BlocProvider(
+          create: (context) => LinesChartBloc(getIt.get<StatisticsRepoImpl>()),
+        ),
+
+        BlocProvider(
           create: (context) => WalletBloc(getIt.get<WalletServicesRepoImpl>()),
+        ),
+        BlocProvider(
+          create:
+              (context) =>
+                  InvestmentModeBloc(getIt.get<StatisticsRepoImpl>()),
         ),
         BlocProvider(
           create:
