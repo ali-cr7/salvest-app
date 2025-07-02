@@ -72,10 +72,11 @@ abstract class AppRouter {
   static const kSaleStateRequestView = '/SaleStateRequestView';
   static const kStripeTokenTestScreen = '/StripeTokenTestScreen';
   static const kNegotitionChatView = '/NegotitionChatView';
+  static const klogInView = '/LoginView';
 
   static final router = GoRouter(
     routes: [
-    // GoRoute(path: '/', builder: (context, state) => const LoginView()),
+      // GoRoute(path: '/', builder: (context, state) => const LoginView()),
       if (token != null)
         GoRoute(
           path: '/',
@@ -92,6 +93,7 @@ abstract class AppRouter {
         ),
       if (token == null)
         GoRoute(path: '/', builder: (context, state) => const LoginView()),
+         GoRoute(path: klogInView, builder: (context, state) => const LoginView()),
       GoRoute(
         path: kHomePageView,
         builder:
@@ -122,19 +124,19 @@ abstract class AppRouter {
         path: kStripeTokenTestScreen,
         builder: (context, state) => StripePaymentScreen(),
       ),
-    GoRoute(
-  path: kNegotitionChatView,
-  builder: (context, state) {
-    // Extract parameters from the route state
-    final otherUserId = state.uri.queryParameters['userId'] ?? '';
-    final otherUserName = state.uri.queryParameters['userName'] ?? '';
-    
-    return ChatScreen(
-      otherUserId: otherUserId,
-      otherUserName: otherUserName,
-    );
-  },
-),
+      GoRoute(
+        path: kNegotitionChatView,
+        builder: (context, state) {
+          // Extract parameters from the route state
+          final otherUserId = state.uri.queryParameters['userId'] ?? '';
+          final otherUserName = state.uri.queryParameters['userName'] ?? '';
+
+          return ChatScreen(
+            otherUserId: otherUserId,
+            otherUserName: otherUserName,
+          );
+        },
+      ),
       GoRoute(
         path: kInvestingCertificationDetailsView,
         builder: (context, state) => const InvestingCertificationDetailsView(),
@@ -190,7 +192,7 @@ abstract class AppRouter {
               child: const CommonQuestionView(),
             ),
       ),
-     GoRoute(
+      GoRoute(
         path: kCapitalGrowthView,
         builder: (context, state) {
           // يأخذ ال extra كنص
