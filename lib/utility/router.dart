@@ -72,6 +72,7 @@ abstract class AppRouter {
   static const kSaleStateRequestView = '/SaleStateRequestView';
   static const kStripeTokenTestScreen = '/StripeTokenTestScreen';
   static const kNegotitionChatView = '/NegotitionChatView';
+  static const klogInView = '/LoginView';
 
   static final router = GoRouter(
     routes: [
@@ -92,6 +93,7 @@ abstract class AppRouter {
         ),
       if (token == null)
         GoRoute(path: '/', builder: (context, state) => const LoginView()),
+         GoRoute(path: klogInView, builder: (context, state) => const LoginView()),
       GoRoute(
         path: kHomePageView,
         builder:

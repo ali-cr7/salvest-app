@@ -15,7 +15,7 @@ Future<void> setCache(LogInResponse response) async {
     CacheHelper.setData(key: 'email', value: response.data!.email),
     CacheHelper.setData(key: 'name', value: response.data!.name),
     CacheHelper.setData(key: 'phone', value: response.data!.phone),
-    CacheHelper.setData(key: 'joinDate', value:response.data!.createdAt),
+    CacheHelper.setData(key: 'joinDate', value: response.data!.createdAt),
   ]);
 }
 
@@ -25,14 +25,13 @@ Future<void> getCache() async {
   name = await CacheHelper.getData(key: 'name') ?? '';
   phone = await CacheHelper.getData(key: 'phone') ?? '';
   joinDate = await CacheHelper.getData(key: 'joinDate') ?? '';
-
-  // isAdmin = await CacheHelper.getData(key: 'isAdmin') ?? false;
 }
 
 Future<void> removeCache() async {
   await CacheHelper.setData(key: 'firstTime', value: false);
   await CacheHelper.removeData(key: 'token');
-  await CacheHelper.removeData(key: 'userId');
-  await CacheHelper.removeData(key: 'userImage');
-  await CacheHelper.removeData(key: 'kgID');
+  await CacheHelper.removeData(key: 'name');
+  await CacheHelper.removeData(key: 'email');
+  await CacheHelper.removeData(key: 'phone');
+  await CacheHelper.removeData(key: 'joinDate');
 }

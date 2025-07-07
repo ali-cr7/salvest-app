@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salvest_app/presentation/home%20page/widgets/drawer_item.dart';
 import 'package:salvest_app/utility/app_assests.dart';
 import 'package:salvest_app/utility/app_colors.dart';
+import 'package:salvest_app/utility/handle_cash.dart';
 import 'package:salvest_app/utility/router.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -96,7 +97,10 @@ class CustomDrawer extends StatelessWidget {
               DrawerItem(
                 icon: AppAssets.logoutIcon,
                 title: 'Logout',
-                onTap: () {},
+                onTap: () {
+                  removeCache();
+                  GoRouter.of(context).push(AppRouter.klogInView);
+                },
               ),
             ],
           ),
