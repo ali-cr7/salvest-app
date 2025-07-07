@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:salvest_app/data/models/lines%20chart/data.chart.dart';
 
 import 'package:salvest_app/data/services/statistics%20srevices/statistics%20_repo_impl.dart';
 import 'lines_chart_event.dart';
@@ -11,7 +12,7 @@ class LinesChartBloc extends Bloc<LinesChartEvent, LinesChartState> {
       emit(LinesChartLoading());
       try {
         final resp = await _repo.fetchLinesChart(year: event.year);
-        if (resp.data != null) {
+        if (resp is LinesChart) {
           emit(LinesChartLoaded(resp.data!));
         } else {
           emit(LinesChartError('لا توجد بيانات'));

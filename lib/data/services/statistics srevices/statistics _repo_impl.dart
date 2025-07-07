@@ -9,7 +9,7 @@ import 'package:salvest_app/utility/api_config/api_service.dart';
 import 'package:salvest_app/utility/enums.dart';
 
 class StatisticsRepoImpl implements StatisticsRepo {
-    final ApiService _apiService;
+  final ApiService _apiService;
 
   StatisticsRepoImpl(this._apiService);
   @override
@@ -29,7 +29,7 @@ class StatisticsRepoImpl implements StatisticsRepo {
     }
   }
 
-    @override
+  @override
   Future<InvestmentsByMonthResponse> fetchByMonth(int year, int month) async {
     final helper = await _apiService.post(
       endpoint: APIConfig.getInvestmentsByMonthAndYear,
@@ -41,8 +41,6 @@ class StatisticsRepoImpl implements StatisticsRepo {
     } else {
       throw Exception('Failed to load investments by month');
     }
-
-    
   }
 
   @override
@@ -57,21 +55,19 @@ class StatisticsRepoImpl implements StatisticsRepo {
       throw Exception('Failed to load largest reward');
     }
   }
-   @override
+
+  @override
   Future<LinesChartResponse> fetchLinesChart({required int year}) async {
     final helper = await _apiService.post(
       endpoint: APIConfig.getProfitAndInvestmentPercentages,
       token: token,
       data: {'year': year},
     );
+    print(' the statistics response ${helper.fullBody}');
     if (helper.servicesResponse == ServicesResponseStatues.success) {
       return LinesChartResponse.fromJson(helper.fullBody!);
     } else {
       throw Exception('Failed to load lines chart data');
     }
-  }
-
- 
-
-
+  }  
 }

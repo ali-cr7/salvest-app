@@ -15,7 +15,7 @@ class _CategoryTabsState extends State<CategoryTabs> {
   int selectedIndex = 0;
 
   final List<String> categories = [
-    'vila',
+    'Villa',
     'Land',
     'Office',
     'Commercial Store',

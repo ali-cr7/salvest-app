@@ -23,8 +23,11 @@ class PropertiesForInvestmentBloc
           ),
         );
       }
-      else {
+      else if(response is HelperResponse) {
         emit(PropertiesForInvestmentFailure(helperResponse: response));
+      }
+      else {
+        
       }
     });
   }
