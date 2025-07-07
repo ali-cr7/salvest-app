@@ -93,7 +93,7 @@ abstract class AppRouter {
         ),
       if (token == null)
         GoRoute(path: '/', builder: (context, state) => const LoginView()),
-         GoRoute(path: klogInView, builder: (context, state) => const LoginView()),
+      GoRoute(path: klogInView, builder: (context, state) => const LoginView()),
       GoRoute(
         path: kHomePageView,
         builder:
@@ -159,6 +159,8 @@ abstract class AppRouter {
             valuation: args.expectedPrice!,
             yearlyProfit: args.profitPercent.toString(),
             yearlyReturn: args.profitPercent.toString(),
+            economicAdvice: args.economicAdvice,
+            userAdvice: args.userAdvice,
           );
         },
       ),

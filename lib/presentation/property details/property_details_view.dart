@@ -15,6 +15,7 @@ import 'package:salvest_app/presentation/property%20details/widgets/property_inf
 import 'package:salvest_app/presentation/sale%20estate/widgets/custom_button.dart';
 import 'package:salvest_app/utility/dialogs_snackBar.dart';
 import 'package:salvest_app/utility/router.dart';
+
 class PropertyDetailsView extends StatefulWidget {
   const PropertyDetailsView({
     super.key,
@@ -31,7 +32,10 @@ class PropertyDetailsView extends StatefulWidget {
     required this.chancePrice,
     required this.chanceNum,
     required this.propertyId,
+    this.economicAdvice,
+    this.userAdvice,
   });
+
   final String yearlyReturn;
   final String deadline;
   final int chancePrice;
@@ -41,18 +45,22 @@ class PropertyDetailsView extends StatefulWidget {
   final IconData iconData;
   final Color categoryColor;
   final List<PropertyImage> imageUrls;
-  // final double rating;
   final String bedRoomNum;
   final String bathRoomNum;
   final String yearlyProfit;
   final String valuation;
+  final List<String>? economicAdvice;
+  final List<String>? userAdvice;
+
   @override
   State<PropertyDetailsView> createState() => _PropertyDetailsViewState();
 }
+
 class _PropertyDetailsViewState extends State<PropertyDetailsView> {
   bool _isAuthenticated = false;
-  int _opportunityCount = 1; // Add this in your _PropertyDetailsViewState
+  int _opportunityCount = 1;
   final LocalAuthentication _auth = LocalAuthentication();
+
   @override
   Widget build(BuildContext context) {
     void _pay() async {
@@ -79,7 +87,6 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> {
         backgroundColor: Colors.white,
         leading: IconButton(
           onPressed: () {
-            //GoRouter.of(context).push(AppRouter.kHomePageView);
             GoRouter.of(context).pop();
           },
           icon: Icon(Icons.arrow_back_ios),
@@ -105,7 +112,6 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> {
             );
           }
         },
-
         child: Column(
           children: [
             PropertyDetailsCard(
@@ -115,18 +121,15 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> {
               iconData: CupertinoIcons.money_dollar_circle_fill,
               categoryColor: Colors.green,
               imageUrls:
-                  widget.imageUrls?.map((img) => img.path).toList() ??
-                  [], // Replace with real URL
+                  widget.imageUrls?.map((img) => img.path).toList() ?? [],
               rating: 4.5,
             ),
-
             Expanded(
               child: CustomScrollView(
                 slivers: [
                   SliverToBoxAdapter(
                     child: Column(
                       children: [
-                        // Property Info
                         PropertyInfo(
                           bathRoomNum: widget.bathRoomNum,
                           bedRoomNum: widget.bathRoomNum,
@@ -135,7 +138,69 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> {
                           yearlyProfit: widget.yearlyProfit,
                         ),
                         SizedBox(height: 10),
+                        // Replace the Container with Investment Insights in your build method
+                        Container(
+                          width: 365,
+                          padding: const EdgeInsets.all(12),
+                          margin: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (widget.economicAdvice != null &&
+                                  widget.economicAdvice!.isNotEmpty)
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Economic Insights',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    SizedBox(height: 8),
+                                    ...widget.economicAdvice!
+                                        .map(
+                                          (advice) => _buildInsightRow(
+                                            Icons.analytics_outlined,
+                                            advice,
+                                          ),
+                                        )
+                                        .toList(),
+                                    SizedBox(height: 16),
+                                  ],
+                                ),
+
+                              if (widget.userAdvice != null &&
+                                  widget.userAdvice!.isNotEmpty)
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Personalized Recommendations',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    SizedBox(height: 8),
+                                    ...widget.userAdvice!
+                                        .map(
+                                          (advice) => _buildInsightRow(
+                                            Icons.person_outline,
+                                            advice,
+                                          ),
+                                        )
+                                        .toList(),
+                                  ],
+                                ),
+                            ],
+                          ),
+                        ),
                         ProertyDetailsInfo(),
+                        SizedBox(height: 10),
                         Center(
                           child: Container(
                             width: 365,
@@ -161,7 +226,6 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> {
                             ],
                           ),
                         ),
-
                         Padding(
                           padding: const EdgeInsets.only(
                             left: 10.0,
@@ -175,7 +239,6 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> {
                                 children: [
                                   Row(
                                     children: [
-                                      // Add Button
                                       GestureDetector(
                                         onTap: () {
                                           setState(() {
@@ -197,10 +260,7 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> {
                                           child: Icon(Icons.add, size: 20),
                                         ),
                                       ),
-
                                       SizedBox(width: 10),
-
-                                      // Count Text
                                       Text(
                                         '$_opportunityCount',
                                         style: TextStyle(
@@ -210,10 +270,7 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> {
                                           fontWeight: FontWeight.w700,
                                         ),
                                       ),
-
                                       SizedBox(width: 10),
-
-                                      // Remove Button
                                       GestureDetector(
                                         onTap: () {
                                           setState(() {
@@ -247,9 +304,7 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> {
                                   ),
                                 ],
                               ),
-
                               Row(
-                                spacing: 4,
                                 children: [
                                   Text(
                                     widget.chanceNum.toString(),
@@ -260,6 +315,7 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> {
                                       fontWeight: FontWeight.w700,
                                     ),
                                   ),
+                                  SizedBox(width: 4),
                                   Text(
                                     'opportunities',
                                     style: TextStyle(
@@ -278,8 +334,6 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> {
                         CustomSendButton(
                           buttonName: 'invest',
                           onTap: () async {
-                            // bool isAuthenticated =
-                            //     await authService.authenticateWithBiometrics();
                             if (!_isAuthenticated) {
                               final bool caAuthenticateWithBiometrics =
                                   await _auth.canCheckBiometrics;
@@ -301,16 +355,8 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> {
                                 }
                               }
                               EasyLoading.showSuccess('Authentication success');
-
-                              // ScaffoldMessenger.of(context).showSnackBar(
-                              //   SnackBar(
-                              //     backgroundColor: AppColors.green,
-                              //     content: Text('Authentication success'),
-                              //   ),
-                              // );
                               _pay();
                             } else {
-                              // Show an error message
                               setState(() {
                                 _isAuthenticated = false;
                               });
@@ -329,19 +375,32 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> {
       ),
     );
   }
+
+  Widget _buildInsightRow(IconData icon, String text) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(icon, size: 20, color: Colors.green),
+          SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              text,
+              style: TextStyle(fontSize: 14, color: Colors.black),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 String formatJoinedDate(String isoDate) {
   try {
-    // Parse the ISO date string into a DateTime object
     DateTime date = DateTime.parse(isoDate);
-
-    // Format the date as "d MMMM yyyy" (e.g., "14 April 2025")
-    String formattedDate = DateFormat('d MMMM yyyy').format(date);
-
-    return '$formattedDate';
+    return DateFormat('d MMMM yyyy').format(date);
   } catch (e) {
-    // Fallback if parsing fails
     return 'joined in Unknown date';
   }
 }

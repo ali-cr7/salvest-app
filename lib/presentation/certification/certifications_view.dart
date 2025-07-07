@@ -33,11 +33,11 @@ class CertificationsView extends StatelessWidget {
           child: Column(
             spacing: 20,
             children: [
-              CertifiactionsItem(
-                icon: AppAssets.certificateGreen,
-                itemColor: Color(0x477BF383),
-                text: 'Baying Certification',
-              ),
+              // CertifiactionsItem(
+              //   icon: AppAssets.certificateGreen,
+              //   itemColor: Color(0x477BF383),
+              //   text: 'Buying Certification',
+              // ),
               InkWell(
                 onTap: () {
                   GoRouter.of(
@@ -47,7 +47,7 @@ class CertificationsView extends StatelessWidget {
                 child: CertifiactionsItem(
                   icon: AppAssets.certificateBlue,
                   itemColor: Color(0x3F9A8AEC),
-                  text: 'Investing Certification',
+                  text: 'Buying Certification',
                 ),
               ),
             ],

@@ -34,11 +34,11 @@ class InvestingCertificationView extends StatelessWidget {
           child: Column(
             spacing: 20,
             children: [
-            CertifiactionsItem(
-                  icon: AppAssets.certificateBlue,
-                  itemColor: Color(0x3F9A8AEC),
-                  text: 'Investing Certification',
-                ),
+              // CertifiactionsItem(
+              //       icon: AppAssets.certificateBlue,
+              //       itemColor: Color(0x3F9A8AEC),
+              //       text: 'Investing Certification',
+              //     ),
               InkWell(
                 onTap: () {
                   GoRouter.of(
@@ -57,4 +57,4 @@ class InvestingCertificationView extends StatelessWidget {
       ),
     );
   }
-}     
+}

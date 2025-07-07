@@ -60,7 +60,7 @@ class _ProfitsHistoryListState extends State<ProfitsHistoryList> {
         if (state is GetWalletProfitsSuccessState &&
             state.propertyProfits!.isEmpty) {
           return SomethingWrongWidget(
-            title: "No Questions found!",
+            title: "No Profits found!",
             svgPath: 'assets/images/search.svg',
             elevatedButtonWidget: ElevatedButtonWidget(
               title: "Refresh",
