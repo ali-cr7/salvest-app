@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salvest_app/business_logic/sale%20property%20bloc/sale_property_bloc.dart';
 import 'package:salvest_app/presentation/sale%20estate/widgets/property_type_option.dart';
 
-
 class PropertyTypeWidget extends StatefulWidget {
   const PropertyTypeWidget({super.key});
 
@@ -15,7 +14,7 @@ class _PropertyTypeWidgetState extends State<PropertyTypeWidget> {
   String? selectedProperty;
   bool showOtherField = false;
   final TextEditingController _otherController = TextEditingController();
- 
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<SalePropertyBloc, SalePropertyState>(
@@ -26,7 +25,7 @@ class _PropertyTypeWidgetState extends State<PropertyTypeWidget> {
           setState(() {
             selectedProperty = state.propertyType;
             showOtherField = false;
-          });   
+          });
         }
       },
       child: Column(

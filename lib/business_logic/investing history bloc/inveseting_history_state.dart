@@ -11,8 +11,11 @@ final class InvesetingHistorySuccess extends InvesetingHistoryState {
   final List<InvestedProperty> investedProprties;
   final bool hasReachedMax;
 
-  InvesetingHistorySuccess({required this.investedProprties,required this.hasReachedMax});
-    InvesetingHistorySuccess copyWith({
+  InvesetingHistorySuccess({
+    required this.investedProprties,
+    required this.hasReachedMax,
+  });
+  InvesetingHistorySuccess copyWith({
     List<InvestedProperty>? investedProprties,
     bool? hasReachedMax,
   }) {
@@ -27,8 +30,11 @@ final class GetWalletProfitsSuccessState extends InvesetingHistoryState {
   final List<PropertyProfits>? propertyProfits;
   final bool hasReachedMax;
 
-   GetWalletProfitsSuccessState({required this.propertyProfits,required this.hasReachedMax});
-    GetWalletProfitsSuccessState copyWith({
+  GetWalletProfitsSuccessState({
+    required this.propertyProfits,
+    required this.hasReachedMax,
+  });
+  GetWalletProfitsSuccessState copyWith({
     List<PropertyProfits>? propertyProfits,
     bool? hasReachedMax,
   }) {

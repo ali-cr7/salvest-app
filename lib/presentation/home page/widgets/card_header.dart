@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class CardHeader extends StatelessWidget {
   final String category;
   final IconData iconData;
@@ -28,7 +27,7 @@ class CardHeader extends StatelessWidget {
           const SizedBox(width: 6),
           Text(
             category,
-            style:TextStyle(
+            style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.normal,
             ),

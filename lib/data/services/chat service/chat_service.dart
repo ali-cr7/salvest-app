@@ -3,14 +3,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class ChatService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<String> createChatRoom(String currentUserId, String otherUserId) async {
+  Future<String> createChatRoom(
+    String currentUserId,
+    String otherUserId,
+  ) async {
     // Create a unique chat room ID sorted by user IDs
     final chatRoomId = [currentUserId, otherUserId]..sort();
     final roomId = chatRoomId.join('_');
-    
+
     // Check if chat room already exists
     final room = await _firestore.collection('chatRooms').doc(roomId).get();
-    
+
     if (!room.exists) {
       await _firestore.collection('chatRooms').doc(roomId).set({
         'participants': [currentUserId, otherUserId],
@@ -19,7 +22,7 @@ class ChatService {
         'lastMessageTime': FieldValue.serverTimestamp(),
       });
     }
-    
+
     return roomId;
   }
 
@@ -28,13 +31,13 @@ class ChatService {
         .collection('chatRooms')
         .where('participants', arrayContains: userId)
         .snapshots()
-        .map((snapshot) => snapshot.docs.map((doc) {
-              final data = doc.data();
-              return {
-                'id': doc.id,
-                ...data,
-              };
-            }).toList());
+        .map(
+          (snapshot) =>
+              snapshot.docs.map((doc) {
+                final data = doc.data();
+                return {'id': doc.id, ...data};
+              }).toList(),
+        );
   }
 
   Future<void> sendMessage({
@@ -47,10 +50,10 @@ class ChatService {
         .doc(chatRoomId)
         .collection('messages')
         .add({
-      'senderId': senderId,
-      'text': text,
-      'timestamp': FieldValue.serverTimestamp(),
-    });
+          'senderId': senderId,
+          'text': text,
+          'timestamp': FieldValue.serverTimestamp(),
+        });
 
     // Update last message in chat room
     await _firestore.collection('chatRooms').doc(chatRoomId).update({
@@ -66,12 +69,12 @@ class ChatService {
         .collection('messages')
         .orderBy('timestamp', descending: false)
         .snapshots()
-        .map((snapshot) => snapshot.docs.map((doc) {
-              final data = doc.data();
-              return {
-                'id': doc.id,
-                ...data,
-              };
-            }).toList());
+        .map(
+          (snapshot) =>
+              snapshot.docs.map((doc) {
+                final data = doc.data();
+                return {'id': doc.id, ...data};
+              }).toList(),
+        );
   }
 }

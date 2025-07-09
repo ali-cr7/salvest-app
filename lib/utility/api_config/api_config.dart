@@ -46,4 +46,6 @@ class APIConfig {
       'api/get_Investments_ByMonthAndYear';
   static const String getProfitAndInvestmentPercentages =
       'api/get_Profit_Percentage_AND_User_Investment_Percentage_ByMonth';
+  static const String getElectronicCertificates =
+      'api/get_Electronic_Property_Certificate_for_user';
 }

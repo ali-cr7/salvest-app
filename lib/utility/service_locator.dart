@@ -8,6 +8,7 @@ import 'package:salvest_app/data/services/statistics%20srevices/statistics%20_re
 import 'package:salvest_app/data/services/wallet%20services/wallet_services_repo_impl.dart';
 import 'package:salvest_app/utility/api_config/api_config.dart';
 import 'package:salvest_app/utility/api_config/api_service.dart';
+
 final GetIt getIt = GetIt.instance;
 void setupServiceLocator() {
   getIt.registerSingleton<ApiService>(
@@ -24,35 +25,19 @@ void setupServiceLocator() {
       ),
     ),
   );
-  getIt.registerSingleton<AuthRepoImpl>(
-    AuthRepoImpl(
-      getIt.get<ApiService>(),
-    ),
-  );
-    getIt.registerSingleton<SalePropertyRepoImpl>(
-    SalePropertyRepoImpl(
-      getIt.get<ApiService>(),
-    ),
+  getIt.registerSingleton<AuthRepoImpl>(AuthRepoImpl(getIt.get<ApiService>()));
+  getIt.registerSingleton<SalePropertyRepoImpl>(
+    SalePropertyRepoImpl(getIt.get<ApiService>()),
   );
 
-    getIt.registerSingleton<HelpRepoImpl>(
-    HelpRepoImpl(
-      getIt.get<ApiService>(),
-    ),
+  getIt.registerSingleton<HelpRepoImpl>(HelpRepoImpl(getIt.get<ApiService>()));
+  getIt.registerSingleton<WalletServicesRepoImpl>(
+    WalletServicesRepoImpl(getIt.get<ApiService>()),
   );
-   getIt.registerSingleton<WalletServicesRepoImpl>(
-    WalletServicesRepoImpl(
-      getIt.get<ApiService>(),
-    ),
-  );   getIt.registerSingleton<NegotiationRepoImp>(
-    NegotiationRepoImp(
-      getIt.get<ApiService>(),
-    ),
+  getIt.registerSingleton<NegotiationRepoImp>(
+    NegotiationRepoImp(getIt.get<ApiService>()),
   );
   getIt.registerSingleton<StatisticsRepoImpl>(
-    StatisticsRepoImpl(
-      getIt.get<ApiService>(),
-    ),
+    StatisticsRepoImpl(getIt.get<ApiService>()),
   );
-
 }

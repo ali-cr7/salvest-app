@@ -98,13 +98,10 @@ class ProfitWalletViewBody extends StatelessWidget {
               child: Container(width: 365, height: 4, color: Color(0x70088711)),
             ),
 
-            Expanded(
-              child: ProfitsHistoryList(),
-            ),
+            Expanded(child: ProfitsHistoryList()),
           ],
         ),
       ),
     );
   }
 }
-

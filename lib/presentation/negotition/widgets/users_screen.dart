@@ -12,28 +12,30 @@ class UsersScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('All Users')),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection('users')
-            .where('id', isNotEqualTo: currentUserId)
-            .snapshots(),
+        stream:
+            FirebaseFirestore.instance
+                .collection('users')
+                .where('id', isNotEqualTo: currentUserId)
+                .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           }
-          
+
           if (!snapshot.hasData) {
             return Center(child: CircularProgressIndicator());
           }
-          
+
           return ListView(
-            children: snapshot.data!.docs.map((doc) {
-              final user = doc.data() as Map<String, dynamic>;
-              return ListTile(
-                title: Text(user['name'] ?? 'Unknown'),
-                subtitle: Text(user['email'] ?? ''),
-                onTap: () => _startChat(context, doc.id, user['name']),
-              );
-            }).toList(),
+            children:
+                snapshot.data!.docs.map((doc) {
+                  final user = doc.data() as Map<String, dynamic>;
+                  return ListTile(
+                    title: Text(user['name'] ?? 'Unknown'),
+                    subtitle: Text(user['email'] ?? ''),
+                    onTap: () => _startChat(context, doc.id, user['name']),
+                  );
+                }).toList(),
           );
         },
       ),
@@ -44,10 +46,9 @@ class UsersScreen extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ChatScreen(
-          otherUserId: userId,
-          otherUserName: userName,
-        ),
+        builder:
+            (context) =>
+                ChatScreen(otherUserId: userId, otherUserName: userName),
       ),
     );
   }

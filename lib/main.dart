@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:salvest_app/business_logic/Electronic%20Certificate/electronic_certificate_bloc.dart';
 import 'package:salvest_app/business_logic/help%20bloc/help_bloc.dart';
 import 'package:salvest_app/business_logic/investment%20mode%20bloc/investment_mode_bloc.dart';
 import 'package:salvest_app/business_logic/investments%20by%20month%20bloc/investments_by_month_bloc.dart';
@@ -31,7 +32,7 @@ import 'package:salvest_app/utility/router.dart';
 import 'package:salvest_app/utility/service_locator.dart';
 
 //FlutterNotificationsClass flutterNotifications = FlutterNotificationsClass();
- 
+
 // Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 //     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 //   print('Handling a background message ${message.messageId}');
@@ -41,7 +42,7 @@ import 'package:salvest_app/utility/service_locator.dart';
 //     message.data['body'],
 //     NotificationDetails(
 //       android: AndroidNotificationDetails(
-        
+
 //         FlutterNotificationsClass.channel.id,
 //         FlutterNotificationsClass.channel.name,
 //         enableVibration: true,
@@ -57,7 +58,7 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   //const AndroidInitializationSettings('@drawable/ic_notification');
   FirebaseMessaging.instance.requestPermission();
- // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   String? token = await FirebaseMessaging.instance.getToken();
 
@@ -112,14 +113,13 @@ class _SalvestAppState extends State<SalvestApp> {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-    providers: [
+      providers: [
         BlocProvider(create: (context) => UserBloc(getIt.get<AuthRepoImpl>())),
         BlocProvider(create: (context) => HelpBloc(getIt.get<HelpRepoImpl>())),
         BlocProvider(create: (context) => SalePropertyBloc()),
         BlocProvider(
           create:
-              (context) =>
-                  LargestRewardBloc(getIt.get<StatisticsRepoImpl>()),
+              (context) => LargestRewardBloc(getIt.get<StatisticsRepoImpl>()),
         ),
         BlocProvider(
           create:
@@ -127,12 +127,16 @@ class _SalvestAppState extends State<SalvestApp> {
         ),
         BlocProvider(
           create:
-              (context) => InvestmentsByMonthBloc(
-                getIt.get<StatisticsRepoImpl>(),
-              ),
+              (context) =>
+                  InvestmentsByMonthBloc(getIt.get<StatisticsRepoImpl>()),
         ),
         BlocProvider(
           create: (context) => LinesChartBloc(getIt.get<StatisticsRepoImpl>()),
+        ),
+        BlocProvider(
+          create:
+              (context) =>
+                  ElectronicCertificateBloc(getIt.get<StatisticsRepoImpl>()),
         ),
 
         BlocProvider(
@@ -140,8 +144,7 @@ class _SalvestAppState extends State<SalvestApp> {
         ),
         BlocProvider(
           create:
-              (context) =>
-                  InvestmentModeBloc(getIt.get<StatisticsRepoImpl>()),
+              (context) => InvestmentModeBloc(getIt.get<StatisticsRepoImpl>()),
         ),
         BlocProvider(
           create:

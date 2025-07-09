@@ -23,14 +23,6 @@ class HomePageView extends StatelessWidget {
       ),
     );
   }
-}  
-
-
-
-
-
+}
 
 // Card Header Class
-
-
-

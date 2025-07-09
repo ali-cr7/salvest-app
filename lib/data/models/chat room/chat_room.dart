@@ -18,7 +18,7 @@ class ChatRoom {
   factory ChatRoom.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
     return ChatRoom(
-      id: doc.id,  // Document ID from Firestore
+      id: doc.id, // Document ID from Firestore
       participants: List<String>.from(data['participants'] ?? []),
       createdAt: (data['createdAt'] as Timestamp).toDate(),
       lastMessage: data['lastMessage'] ?? '',

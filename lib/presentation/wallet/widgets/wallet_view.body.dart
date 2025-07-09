@@ -26,7 +26,7 @@ class WalletViewBody extends StatelessWidget {
             BlocBuilder<WalletBloc, WalletState>(
               builder: (context, state) {
                 if (state is GetWalletBalanceLoading) {
-               return   Center(
+                  return Center(
                     child: WalletCard(
                       isLoading: true,
                       rfreshCallback: () {
@@ -47,11 +47,8 @@ class WalletViewBody extends StatelessWidget {
                       cardStrting: 'Investment wallet',
                     ),
                   );
-                  
-                } 
+                }
                 //else if(state is GetWalletPerecentageSuccess &&state.response.data.)
-                
-                
                 else if (state is GetWalletBalanceSuccess) {
                   return Center(
                     child: WalletCard(
@@ -113,13 +110,10 @@ class WalletViewBody extends StatelessWidget {
                 color: const Color(0xFF9A8AEC).withAlpha(140),
               ),
             ),
-            Expanded(
-              child: InvestingHistoryList(),
-            ),
+            Expanded(child: InvestingHistoryList()),
           ],
         ),
       ),
     );
   }
 }
-

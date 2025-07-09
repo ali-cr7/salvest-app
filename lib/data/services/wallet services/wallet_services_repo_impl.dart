@@ -135,7 +135,6 @@ class WalletServicesRepoImpl implements WalletServicesRepo {
       return helperResponse;
     }
 
-   
     return HelperResponse(
       servicesResponse: ServicesResponseStatues.modelError,
       fullBody: {},

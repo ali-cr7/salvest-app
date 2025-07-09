@@ -13,6 +13,6 @@ class AcceptExpertNegotiationEvent extends ExpertNegotiationEvent {
 
 class RejectExpertNegotiationEvent extends ExpertNegotiationEvent {
   final String id;
-  
+
   RejectExpertNegotiationEvent({required this.id});
 }

@@ -12,7 +12,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'sale_property_event.dart';
 part 'sale_property_state.dart';
 
-
 class SalePropertyBloc extends Bloc<SalePropertyEvent, SalePropertyState> {
   SalePropertyBloc() : super(SalePropertyState(propertyType: '')) {
     on<UpdatePropertyTypeEvent>((event, emit) {

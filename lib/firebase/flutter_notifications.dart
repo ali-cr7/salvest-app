@@ -31,36 +31,44 @@ class FlutterNotificationsClass {
   );
 
   Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
     print('Handling a background message ${message.messageId}');
     flutterLocalNotificationsPlugin.show(
-        message.data.hashCode,
-        message.data['title'],
-        message.data['body'],
-        NotificationDetails(
-          android: AndroidNotificationDetails(channel.id, channel.name,
-              enableVibration: true
-          ),
-        ));
+      message.data.hashCode,
+      message.data['title'],
+      message.data['body'],
+      NotificationDetails(
+        android: AndroidNotificationDetails(
+          channel.id,
+          channel.name,
+          enableVibration: true,
+        ),
+      ),
+    );
   }
 
   Future initLocalNotificationChannel() async {
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
+          AndroidFlutterLocalNotificationsPlugin
+        >()
         ?.createNotificationChannel(channel);
   }
 
   void localNotificationsRequestPermission() {
     flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
+          AndroidFlutterLocalNotificationsPlugin
+        >()
         ?.requestNotificationsPermission();
   }
 
   Future<void> handleForeGroundNotification() async {
-    var initializationSettingsAndroid =
-        const AndroidInitializationSettings('@drawable/app_icon');
+    var initializationSettingsAndroid = const AndroidInitializationSettings(
+      '@drawable/app_icon',
+    );
     var initializationSettingsIos = const DarwinInitializationSettings(
       requestSoundPermission: true,
       requestBadgePermission: true,
@@ -90,22 +98,23 @@ class FlutterNotificationsClass {
       var responseData = message.data;
       if (notification != null && android != null) {
         flutterLocalNotificationsPlugin.show(
-            notification.hashCode,
-            notification.title,
-            notification.body,
-            NotificationDetails(
-              android: AndroidNotificationDetails(
-                channel.id,
-                channel.name,
-                enableLights: channel.enableLights,
-                ledColor: channel.ledColor,
-                ledOnMs: 100,
-                ledOffMs: 3000,
-                enableVibration: true,
-                icon: android.smallIcon,
-                color: const Color(0xFF145770),
-              ),
-            ));
+          notification.hashCode,
+          notification.title,
+          notification.body,
+          NotificationDetails(
+            android: AndroidNotificationDetails(
+              channel.id,
+              channel.name,
+              enableLights: channel.enableLights,
+              ledColor: channel.ledColor,
+              ledOnMs: 100,
+              ledOffMs: 3000,
+              enableVibration: true,
+              icon: android.smallIcon,
+              color: const Color(0xFF145770),
+            ),
+          ),
+        );
       }
     });
   }

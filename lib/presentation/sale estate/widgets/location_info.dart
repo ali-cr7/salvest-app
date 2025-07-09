@@ -17,7 +17,6 @@ class _LoactionInformationState extends State<LoactionInformation> {
   TextEditingController loactionController = TextEditingController();
 
   final List<String> syrianStates = [
-   
     'Damascus',
     'Rif Dimashq',
     'Aleppo',
@@ -56,7 +55,7 @@ class _LoactionInformationState extends State<LoactionInformation> {
                 ),
               ),
             ),
-    
+
             // const SizedBox(height: 5),
             DropdownField(
               label: 'state:',
@@ -67,11 +66,11 @@ class _LoactionInformationState extends State<LoactionInformation> {
                     UpdateStateEvent(state: val.toString()),
                   ),
             ),
-    
+
             // NumberPicker(
             //   label: 'Expected price:',
             //   value: int.tryParse(state.price) ?? 350,
-    
+
             //   suffix: '\$',
             // )
             Padding(
@@ -94,7 +93,9 @@ class _LoactionInformationState extends State<LoactionInformation> {
                     child: TextField(
                       onChanged: (value) {
                         context.read<SalePropertyBloc>().add(
-                          UpdateExactPositionEvent(exactPosition: value.toString()),
+                          UpdateExactPositionEvent(
+                            exactPosition: value.toString(),
+                          ),
                         );
                       },
                       controller: loactionController,

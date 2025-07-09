@@ -11,9 +11,11 @@ final class PropertiesForInvestmentLoading
 
 final class PropertiesForInvestmentSuccess
     extends PropertiesForInvestmentState {
-  final GetProprtiesForInvestmentResponse  getPropertiesForInvestmentResponse;
+  final GetProprtiesForInvestmentResponse getPropertiesForInvestmentResponse;
 
-  PropertiesForInvestmentSuccess({required this.getPropertiesForInvestmentResponse});
+  PropertiesForInvestmentSuccess({
+    required this.getPropertiesForInvestmentResponse,
+  });
 }
 
 final class PropertiesForInvestmentFailure

@@ -10,7 +10,7 @@ plugins {
 android {
     namespace = "com.example.salvest_app"
     compileSdk = 35
-    ndkVersion = "27.2.12479018"
+    ndkVersion = "29.0.13113456"
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true

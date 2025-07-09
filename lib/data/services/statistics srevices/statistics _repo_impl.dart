@@ -1,4 +1,5 @@
 import 'package:salvest_app/constants.dart';
+import 'package:salvest_app/data/models/electronic%20property%20certificate/electronic.property.certificate.dart';
 import 'package:salvest_app/data/models/get_Investments_ByMonthAndYear/investments.by.month.dart';
 import 'package:salvest_app/data/models/investment/investment.mode.dart';
 import 'package:salvest_app/data/models/lines%20chart/lines.chart.dart';
@@ -69,5 +70,17 @@ class StatisticsRepoImpl implements StatisticsRepo {
     } else {
       throw Exception('Failed to load lines chart data');
     }
-  }  
+  }
+
+  Future<ElectronicResponse> fetchCertificates() async {
+    final helper = await _apiService.get(
+      endpoint: APIConfig.getElectronicCertificates,
+      token: token,
+    );
+    if (helper.servicesResponse == ServicesResponseStatues.success) {
+      return ElectronicResponse.fromJson(helper.fullBody!);
+    } else {
+      throw Exception('Failed to load certificates');
+    }
+  }
 }

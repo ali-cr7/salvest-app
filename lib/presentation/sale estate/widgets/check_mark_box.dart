@@ -24,17 +24,20 @@ class _CheckMarkBoxState extends State<CheckMarkBox> {
         width: 15,
         height: 15,
         decoration: ShapeDecoration(
-          color: isChecked ? Colors.green : Colors.transparent, // Fill if checked
+          color:
+              isChecked ? Colors.green : Colors.transparent, // Fill if checked
           shape: RoundedRectangleBorder(
-            side: BorderSide(
-              width: 2,
-              color: Colors.black38,
-            ),
+            side: BorderSide(width: 2, color: Colors.black38),
           ),
         ),
-        child: isChecked
-            ? const Icon(Icons.check, size: 12, color: Colors.white) // ✅ Show checkmark
-            : null, // Empty if not checked
+        child:
+            isChecked
+                ? const Icon(
+                  Icons.check,
+                  size: 12,
+                  color: Colors.white,
+                ) // ✅ Show checkmark
+                : null, // Empty if not checked
       ),
     );
   }

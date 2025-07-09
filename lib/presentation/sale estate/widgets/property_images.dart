@@ -24,10 +24,11 @@ class PropertyImagesUploader extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SalePropertyBloc, SalePropertyState>(
       builder: (context, state) {
-        final images = isIdImages 
-            ? state.idImages 
-            : isPropertyDocuments 
-                ? state.propertyDocument 
+        final images =
+            isIdImages
+                ? state.idImages
+                : isPropertyDocuments
+                ? state.propertyDocument
                 : state.images;
 
         return Container(
@@ -41,7 +42,10 @@ class PropertyImagesUploader extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
               const SizedBox(height: 4),
               const Text(
@@ -78,16 +82,19 @@ class PropertyImagesUploader extends StatelessWidget {
                     child: GridView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: images.length < maxImages 
-                          ? images.length + 1 
-                          : images.length,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 4,
-                        crossAxisSpacing: 8,
-                        mainAxisSpacing: 8,
-                      ),
+                      itemCount:
+                          images.length < maxImages
+                              ? images.length + 1
+                              : images.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 4,
+                            crossAxisSpacing: 8,
+                            mainAxisSpacing: 8,
+                          ),
                       itemBuilder: (context, index) {
-                        if (index == images.length && images.length < maxImages) {
+                        if (index == images.length &&
+                            images.length < maxImages) {
                           return GestureDetector(
                             onTap: () => _uploadImage(context),
                             child: Container(
@@ -107,7 +114,10 @@ class PropertyImagesUploader extends StatelessWidget {
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(6),
-                              child: Image.file(images[index], fit: BoxFit.cover),
+                              child: Image.file(
+                                images[index],
+                                fit: BoxFit.cover,
+                              ),
                             ),
                             Positioned(
                               top: 1,
@@ -144,10 +154,11 @@ class PropertyImagesUploader extends StatelessWidget {
 
   Future<void> _uploadImage(BuildContext context) async {
     final state = context.read<SalePropertyBloc>().state;
-    final currentImages = isIdImages 
-        ? state.idImages 
-        : isPropertyDocuments 
-            ? state.propertyDocument 
+    final currentImages =
+        isIdImages
+            ? state.idImages
+            : isPropertyDocuments
+            ? state.propertyDocument
             : state.images;
 
     if (currentImages.length >= maxImages) return;
@@ -157,12 +168,18 @@ class PropertyImagesUploader extends StatelessWidget {
     );
 
     if (pickedFile != null) {
-      final event = isIdImages
-          ? UpdateIdImagesEvent(idImages: [...currentImages, File(pickedFile.path)])
-          : isPropertyDocuments
+      final event =
+          isIdImages
+              ? UpdateIdImagesEvent(
+                idImages: [...currentImages, File(pickedFile.path)],
+              )
+              : isPropertyDocuments
               ? UpdatePropertyDocumentsEvent(
-                  propertyDocuments: [...currentImages, File(pickedFile.path)])
-              : UpdateImagesEvent(images: [...currentImages, File(pickedFile.path)]);
+                propertyDocuments: [...currentImages, File(pickedFile.path)],
+              )
+              : UpdateImagesEvent(
+                images: [...currentImages, File(pickedFile.path)],
+              );
 
       context.read<SalePropertyBloc>().add(event);
     }
@@ -170,18 +187,20 @@ class PropertyImagesUploader extends StatelessWidget {
 
   void _removeImage(BuildContext context, int index) {
     final state = context.read<SalePropertyBloc>().state;
-    final currentImages = isIdImages
-        ? List<File>.from(state.idImages)
-        : isPropertyDocuments
+    final currentImages =
+        isIdImages
+            ? List<File>.from(state.idImages)
+            : isPropertyDocuments
             ? List<File>.from(state.propertyDocument)
             : List<File>.from(state.images);
 
     if (index >= 0 && index < currentImages.length) {
       currentImages.removeAt(index);
-      
-      final event = isIdImages
-          ? UpdateIdImagesEvent(idImages: currentImages)
-          : isPropertyDocuments
+
+      final event =
+          isIdImages
+              ? UpdateIdImagesEvent(idImages: currentImages)
+              : isPropertyDocuments
               ? UpdatePropertyDocumentsEvent(propertyDocuments: currentImages)
               : UpdateImagesEvent(images: currentImages);
 

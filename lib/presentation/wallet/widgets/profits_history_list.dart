@@ -38,7 +38,6 @@ class _ProfitsHistoryListState extends State<ProfitsHistoryList> {
       }
     });
   }
-  
 
   @override
   void dispose() {

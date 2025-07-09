@@ -1,7 +1,7 @@
 import 'package:local_auth/local_auth.dart';
 
-class AuthService  {
-   final LocalAuthentication _localAuth = LocalAuthentication();
+class AuthService {
+  final LocalAuthentication _localAuth = LocalAuthentication();
   Future<bool> authenticateWithBiometrics() async {
     bool isAuthenticated = false;
     try {

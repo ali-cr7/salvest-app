@@ -26,12 +26,11 @@ class ExpertNegotiationBloc
       emit(NegotiationLoading());
       final rsponse = await negotiationRepoImp.acceptNegotiationBox(event);
       if (rsponse is String) {
-       
         emit(AcceptRejectNegotiationSuccess(message: rsponse));
-         GetExpertNegotiationEvent();
+        GetExpertNegotiationEvent();
       } else {
         emit(AcceptRejectNegotiationFailure(helperResponse: rsponse));
-          GetExpertNegotiationEvent();
+        GetExpertNegotiationEvent();
       }
     });
 
@@ -40,10 +39,10 @@ class ExpertNegotiationBloc
       final rsponse = await negotiationRepoImp.rejectNegotiationBox(event);
       if (rsponse is String) {
         emit(AcceptRejectNegotiationSuccess(message: rsponse));
-          GetExpertNegotiationEvent();
+        GetExpertNegotiationEvent();
       } else {
         emit(AcceptRejectNegotiationFailure(helperResponse: rsponse));
-          GetExpertNegotiationEvent();
+        GetExpertNegotiationEvent();
       }
     });
   }

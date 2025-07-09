@@ -31,7 +31,7 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
         emit(GetWalletBalanceFailure(helperResponse: response));
       }
     });
-     on<GetProfitsWalletBalanceEvent>((event, emit) async {
+    on<GetProfitsWalletBalanceEvent>((event, emit) async {
       emit(GetWalletBalanceLoading());
       final response = await walletServicesRepoImpl.getWalletBalance(event);
       if (response is GetWalletBalanceResponse) {
@@ -50,7 +50,7 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
         emit(InvestFailure(helperResponse: response));
       }
     });
-         on<GetWalletPercentageEvent>((event, emit) async {
+    on<GetWalletPercentageEvent>((event, emit) async {
       emit(GetWalletBalanceLoading());
       final response = await walletServicesRepoImpl.getWalletPercentage(event);
       if (response is InvestmentOfWalletPercentageResponse) {

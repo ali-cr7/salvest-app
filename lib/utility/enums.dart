@@ -1,5 +1,3 @@
-
-
 enum ServicesResponseStatues {
   success,
   networkError,
@@ -9,7 +7,7 @@ enum ServicesResponseStatues {
   modelError,
   wrongData,
   locationError,
-} 
+}
 
 final EnumValues serviceValues = EnumValues({
   "Sent Successfully": ServicesResponseStatues.success,
@@ -18,12 +16,8 @@ final EnumValues serviceValues = EnumValues({
   "Failed to parse model !": ServicesResponseStatues.modelError,
   "Data sent is not correct !": ServicesResponseStatues.wrongData,
   "The form is saved locally": ServicesResponseStatues.savedToLocal,
-  "No Location Permission !": ServicesResponseStatues.locationError
+  "No Location Permission !": ServicesResponseStatues.locationError,
 });
-
-
-
-
 
 class EnumValues<T> {
   Map<String, T> map;

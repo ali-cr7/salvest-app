@@ -19,7 +19,6 @@ class ResetPasswordView extends StatefulWidget {
 }
 
 class _ResetPasswordViewState extends State<ResetPasswordView> {
-  
   TextEditingController passwordController = TextEditingController();
   TextEditingController passwordConfirmController = TextEditingController();
   @override
@@ -31,7 +30,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
           if (state is UserLoading) {
             EasyLoading.show(status: 'loading...');
           }
-   
+
           if (state is ResetSuccessState) {
             EasyLoading.dismiss();
             EasyLoading.showSuccess('Password Changed successfully!');

@@ -41,7 +41,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
             EasyLoading.dismiss();
             DialogsWidgetsSnackBar.showSnackBarFromStatus(
               context: context,
-              helperResponse: state.helperResponse, 
+              helperResponse: state.helperResponse,
               showServerError: true,
             );
           }
@@ -49,7 +49,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
             EasyLoading.dismiss();
             EasyLoading.showSuccess('Code Sent successfully!');
             GoRouter.of(context).pushReplacement(AppRouter.kResetPasswordView);
-          } 
+          }
         },
         child: Stack(
           children: [
@@ -189,7 +189,6 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                               code: codeController.text,
                             ),
                           );
-                  
                         }, // Implement sign-up logic
                       ),
                     ],

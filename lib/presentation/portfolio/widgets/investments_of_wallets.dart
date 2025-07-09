@@ -12,7 +12,7 @@
 //     return Container(
 //       width: 345,
 //       height: 200,
-//       decoration: ShapeDecoration(  
+//       decoration: ShapeDecoration(
 //         image: const DecorationImage(
 //           image: AssetImage(AppAssets.walletBackg),
 //           fit: BoxFit.fill,

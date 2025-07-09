@@ -44,9 +44,7 @@ class AppColors {
     stops: const [0.0, 0.31, 0.62, 1.0], // Corresponding to 0%, 31%, 62%, 100%
     colors: const [
       Color(0xFF9A8AEC), // 0%
-      Color(
-        0xFF796CB9,
-      ), 
+      Color(0xFF796CB9),
       Color(0xFF685D9F), // 62%
       Color(0xFF574E86), // 100%
     ],

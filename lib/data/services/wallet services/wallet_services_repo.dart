@@ -5,9 +5,7 @@ abstract class WalletServicesRepo {
   Future chargeWallet(ChargeInvestmentWalletEvent event);
   Future getWalletBalance(GetWalletBalanceEvent event);
   Future invest(InvestEvent event);
-  Future getMyInvestingHistory(InvesetingHistoryEvent event,int page);
-  
-    Future getWalletPercentage(GetWalletPercentageEvent event);
-  
+  Future getMyInvestingHistory(InvesetingHistoryEvent event, int page);
+
+  Future getWalletPercentage(GetWalletPercentageEvent event);
 }
-  

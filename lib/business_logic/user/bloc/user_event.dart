@@ -39,7 +39,11 @@ class LogInEvent extends UserEvent {
 }
 
 class ResetPasswordEvent extends UserEvent {
-  ResetPasswordEvent( {required this.passWordConfirm,required this.password, required this.email});
+  ResetPasswordEvent({
+    required this.passWordConfirm,
+    required this.password,
+    required this.email,
+  });
 
   final String password;
   final String email;
@@ -52,11 +56,10 @@ class ResetPasswordEvent extends UserEvent {
 class SendVerificationCodeEvent extends UserEvent {
   SendVerificationCodeEvent({required this.email});
 
-  
   final String email;
 
   @override
-  List<Object?> get props => [ email];
+  List<Object?> get props => [email];
 }
 
 class VerifyCodeEvent extends UserEvent {

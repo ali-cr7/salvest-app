@@ -16,7 +16,7 @@
 //   CardFieldInputDetails? _cardFieldInputDetails;
 //   final TextEditingController _amountController = TextEditingController();
 //   bool _isLoading = false;
-  
+
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(

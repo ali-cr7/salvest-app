@@ -14,14 +14,16 @@ class WalletCard extends StatelessWidget {
     required this.arrowCallback,
     required this.walletValue,
     required this.arrowIconData,
-    required this.deposite, required this.rfreshCallback, required this.isLoading,
+    required this.deposite,
+    required this.rfreshCallback,
+    required this.isLoading,
   });
   final Gradient cardColr;
   final String walletValue;
   final String cardStrting;
   final String cardIcon;
   final VoidCallback arrowCallback;
-   final VoidCallback rfreshCallback;
+  final VoidCallback rfreshCallback;
   final IconData arrowIconData;
   final VoidCallback deposite;
   final bool isLoading;
@@ -43,36 +45,36 @@ class WalletCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            children: [ 
+            children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: 
-                isLoading
-      ? const CupertinoActivityIndicator(radius: 12)
-      :Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: '\$',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w400,
+                child:
+                    isLoading
+                        ? const CupertinoActivityIndicator(radius: 12)
+                        : Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                text: '\$',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              TextSpan(
+                                text: walletValue,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 32,
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      TextSpan(
-                        text: walletValue,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 32,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
               ),
               Spacer(),
               IconButton(

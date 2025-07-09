@@ -72,9 +72,8 @@ class _InvestingHistoryListState extends State<InvestingHistoryList> {
             ),
           );
         }
-      
 
-        if (state is InvesetingHistorySuccess&&
+        if (state is InvesetingHistorySuccess &&
             state.investedProprties.isNotEmpty) {
           return RefreshIndicator(
             onRefresh: () async {

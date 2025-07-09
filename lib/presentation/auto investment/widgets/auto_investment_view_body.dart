@@ -68,7 +68,6 @@ class _AutoInvestmentViewBodyState extends State<AutoInvestmentViewBody> {
           selectedValue: selectedDay,
           onChanged: (val) => setState(() => selectedDay = val),
         ),
-    
       ],
     );
   }

@@ -8,7 +8,7 @@ final class WalletInitial extends WalletState {}
 final class WalletChargeLoading extends WalletState {}
 
 final class WalletChargeFailure extends WalletState {
-    final HelperResponse helperResponse;
+  final HelperResponse helperResponse;
 
   WalletChargeFailure({required this.helperResponse});
 }
@@ -18,30 +18,29 @@ final class WalletChargeSuccess extends WalletState {
 
   WalletChargeSuccess({required this.message});
 }
+
 final class GetWalletBalanceSuccess extends WalletState {
   final GetWalletBalanceResponse response;
 
   GetWalletBalanceSuccess({required this.response});
 }
+
 final class GetWalletPerecentageSuccess extends WalletState {
   final InvestmentOfWalletPercentageResponse response;
 
   GetWalletPerecentageSuccess({required this.response});
 }
 
-
-
-
 final class GetWalletBalanceFailure extends WalletState {
-    final HelperResponse helperResponse;
+  final HelperResponse helperResponse;
 
   GetWalletBalanceFailure({required this.helperResponse});
 }
-final class  GetWalletBalanceLoading extends WalletState {}
 
+final class GetWalletBalanceLoading extends WalletState {}
 
 final class InvestFailure extends WalletState {
-    final HelperResponse helperResponse;
+  final HelperResponse helperResponse;
 
   InvestFailure({required this.helperResponse});
 }

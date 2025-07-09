@@ -6,7 +6,14 @@ import 'package:salvest_app/utility/app_assests.dart';
 import 'package:salvest_app/utility/app_colors.dart';
 
 class PropertyInfo extends StatelessWidget {
-  const PropertyInfo({super.key, required this.bedRoomNum, required this.bathRoomNum, required this.yearlyProfit, required this.deadLine, required this.valuation});
+  const PropertyInfo({
+    super.key,
+    required this.bedRoomNum,
+    required this.bathRoomNum,
+    required this.yearlyProfit,
+    required this.deadLine,
+    required this.valuation,
+  });
   final String bedRoomNum;
   final String bathRoomNum;
   final String yearlyProfit;
@@ -98,15 +105,9 @@ class PropertyInfo extends StatelessWidget {
                   value: yearlyProfit,
                 ),
                 //    const Divider(height: 12, thickness: 0.5),
-                DetailsRow(
-                  title: 'Dead line investment',
-                  value: deadLine,
-                ),
+                DetailsRow(title: 'Dead line investment', value: deadLine),
                 //  const Divider(height: 12, thickness: 0.5),
-                DetailsRow(
-                  title: 'current valuation',
-                  value: valuation,
-                ),
+                DetailsRow(title: 'current valuation', value: valuation),
               ],
             ),
           ),

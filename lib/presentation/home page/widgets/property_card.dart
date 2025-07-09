@@ -55,7 +55,7 @@ class _PropertyCardState extends State<PropertyCard> {
         borderRadius: BorderRadius.circular(12),
         color: Colors.white,
       ),
-      child: Column(  
+      child: Column(
         children: [
           Stack(
             children: [

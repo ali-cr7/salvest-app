@@ -24,46 +24,50 @@ class ElevatedButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     double getWidth = MediaQuery.of(context).size.width;
     double getHeight = MediaQuery.of(context).size.height;
-    return Builder(builder: (context) {
-      if (isLoading) {
-        return const Center(child: CircularProgressIndicator());
-      }
-      return Container(
-        height: getHeight * 0.045,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: const Alignment(0.85, -0.53),
-            end: const Alignment(-0.85, 0.53),
-            colors: [gradientColor, mainColor],
+    return Builder(
+      builder: (context) {
+        if (isLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        return Container(
+          height: getHeight * 0.045,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: const Alignment(0.85, -0.53),
+              end: const Alignment(-0.85, 0.53),
+              colors: [gradientColor, mainColor],
+            ),
+            borderRadius: BorderRadius.all(Radius.circular(8)),
           ),
-          borderRadius: BorderRadius.all(Radius.circular(8)),
-        ),
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent,
-            foregroundColor: const Color(0xff232323),
-            elevation: 0,
-            disabledBackgroundColor: AppColors.gray25,
-            animationDuration: const Duration(milliseconds: 250),
-            minimumSize: Size(double.infinity, getHeight * 0.045),
-            maximumSize: Size(double.infinity, getHeight * 0.1),
-            shape: const RoundedRectangleBorder(
-              borderRadius:BorderRadius.all(Radius.circular(8)), // <-- Radius
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.transparent,
+              shadowColor: Colors.transparent,
+              foregroundColor: const Color(0xff232323),
+              elevation: 0,
+              disabledBackgroundColor: AppColors.gray25,
+              animationDuration: const Duration(milliseconds: 250),
+              minimumSize: Size(double.infinity, getHeight * 0.045),
+              maximumSize: Size(double.infinity, getHeight * 0.1),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(8),
+                ), // <-- Radius
+              ),
+            ),
+            onPressed: onPressed,
+            child: Text(
+              title,
+              style: TextStyle(
+                height: 1,
+                color: AppColors.background,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
             ),
           ),
-          onPressed: onPressed,
-          child: Text(
-            title,
-            style:  TextStyle(
-              height: 1,
-              color: AppColors.background,
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
-          ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }

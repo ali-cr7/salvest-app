@@ -1,12 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class AddButton extends StatelessWidget {
   final VoidCallback tap;
-  const AddButton({
-    super.key, required this.tap,
-  });
+  const AddButton({super.key, required this.tap});
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +24,7 @@ class AddButton extends StatelessWidget {
             ],
           ),
           shape: RoundedRectangleBorder(
-            side: BorderSide(
-              width: 1,
-              color: const Color(0x7A634AE2),
-            ),
+            side: BorderSide(width: 1, color: const Color(0x7A634AE2)),
             borderRadius: BorderRadius.circular(25),
           ),
         ),

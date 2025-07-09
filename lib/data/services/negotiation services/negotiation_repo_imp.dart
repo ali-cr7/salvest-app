@@ -43,11 +43,9 @@ class NegotiationRepoImp implements NegotiationRepo {
       endpoint: APIConfig.acceptNegotiation + event.id,
       token: token,
     );
-        if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {
-  
-     
-    String message = helperResponse.fullBody!['message'];
+        String message = helperResponse.fullBody!['message'];
 
         return message;
       } catch (e) {
@@ -56,20 +54,18 @@ class NegotiationRepoImp implements NegotiationRepo {
         );
       }
     }
-     return helperResponse;
+    return helperResponse;
   }
 
   @override
   Future rejectNegotiationBox(RejectExpertNegotiationEvent event) async {
-      HelperResponse helperResponse = await _apiService.post(
+    HelperResponse helperResponse = await _apiService.post(
       endpoint: APIConfig.rejecttNegotiation + event.id,
       token: token,
     );
-        if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {
-  
-     
-    String message = helperResponse.fullBody!['message'];
+        String message = helperResponse.fullBody!['message'];
 
         return message;
       } catch (e) {

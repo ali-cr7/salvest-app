@@ -142,4 +142,5 @@ class NotificationsView extends StatelessWidget {
     );
   }
 }
-//NegotiationNotification 
+
+//NegotiationNotification

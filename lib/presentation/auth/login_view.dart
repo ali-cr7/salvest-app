@@ -28,7 +28,7 @@ class _LoginViewState extends State<LoginView> {
         listener: (context, state) async {
           if (state is UserLoginState) {
             GoRouter.of(context).push(AppRouter.kHomePageView);
-          } 
+          }
           if (state is UserErrorState) {
             DialogsWidgetsSnackBar.showSnackBarFromStatus(
               context: context,
@@ -37,7 +37,7 @@ class _LoginViewState extends State<LoginView> {
             );
           }
         },
-        
+
         child: Stack(
           children: [
             /// Background Image (Full Screen)
@@ -142,9 +142,7 @@ class _LoginViewState extends State<LoginView> {
                       Center(
                         child: TextButton(
                           onPressed: () {
-                            GoRouter.of(
-                              context,
-                            ).push(AppRouter.kSignupView);
+                            GoRouter.of(context).push(AppRouter.kSignupView);
                           },
                           child: const Text.rich(
                             TextSpan(

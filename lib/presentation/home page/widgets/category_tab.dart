@@ -18,7 +18,7 @@ class CategoryTab extends StatelessWidget {
       ),
       child: Text(
         text,
-        style:TextStyle(
+        style: TextStyle(
           color: isSelected ? Colors.white : Colors.grey,
           fontSize: 14,
         ),

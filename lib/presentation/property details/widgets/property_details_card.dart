@@ -129,8 +129,6 @@ class _PropertyDetailsCardState extends State<PropertyDetailsCard> {
                 ),
               ),
 
-         
-
               // Star Rating
             ],
           ),

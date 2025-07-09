@@ -28,7 +28,7 @@ class _ToggleSwitchWidgetState extends State<ToggleSwitchWidget> {
           activeTrackColor: Colors.green.shade200,
           inactiveThumbColor: Colors.black,
           inactiveTrackColor: Colors.grey.shade400,
-          
+
           onChanged: (bool value) {
             setState(() {
               isActive = value;

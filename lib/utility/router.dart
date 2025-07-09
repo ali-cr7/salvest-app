@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:salvest_app/business_logic/Electronic%20Certificate/electronic_certificate_bloc.dart';
+import 'package:salvest_app/business_logic/Electronic%20Certificate/electronic_certificate_event.dart';
 import 'package:salvest_app/business_logic/expert%20negotiation%20bloc/expert_negotiation_bloc.dart';
 import 'package:salvest_app/business_logic/help%20bloc/help_bloc.dart';
 import 'package:salvest_app/business_logic/investing%20history%20bloc/inveseting_history_bloc.dart';
@@ -16,6 +18,7 @@ import 'package:salvest_app/data/models/get_proprties_for_investment_response/pr
 import 'package:salvest_app/data/services/help%20services/help_repo_impl.dart';
 import 'package:salvest_app/data/services/negotiation%20services/negotiation_repo_imp.dart';
 import 'package:salvest_app/data/services/property%20service/sale_property_repo_impl.dart';
+import 'package:salvest_app/data/services/statistics%20srevices/statistics%20_repo_impl.dart';
 import 'package:salvest_app/data/services/wallet%20services/wallet_services_repo_impl.dart';
 import 'package:salvest_app/presentation/auth/forgot_password_view.dart';
 import 'package:salvest_app/presentation/auth/login_view.dart';
@@ -137,9 +140,21 @@ abstract class AppRouter {
           );
         },
       ),
+      // GoRoute(
+      //   path: kInvestingCertificationDetailsView,
+      //   builder: (context, state) => const InvestingCertificationDetailsView(),
+      // ),
       GoRoute(
         path: kInvestingCertificationDetailsView,
-        builder: (context, state) => const InvestingCertificationDetailsView(),
+        builder: (context, state) {
+          return BlocProvider(
+            create:
+                (_) =>
+                    ElectronicCertificateBloc(getIt.get<StatisticsRepoImpl>())
+                      ..add(LoadElectronicCertificates()),
+            child: const InvestingCertificationDetailsView(),
+          );
+        },
       ),
       GoRoute(
         path: kPropertyDetailsView,

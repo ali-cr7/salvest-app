@@ -112,7 +112,8 @@ class Property {
                       e as Map<String, dynamic>,
                     ),
               )
-              .toList(),    economicAdvice:
+              .toList(),
+      economicAdvice:
           (data['economic_advice'] as List<dynamic>?)?.cast<String>(),
       userAdvice: (data['user_advice'] as List<dynamic>?)?.cast<String>(),
     );

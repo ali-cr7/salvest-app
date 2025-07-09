@@ -1,7 +1,6 @@
 // Details Row Class
 import 'package:flutter/material.dart';
 
-
 class DetailsRow extends StatelessWidget {
   final String title;
   final String value;
@@ -13,7 +12,7 @@ class DetailsRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title, style:TextStyle(fontSize: 12)),
+        Text(title, style: TextStyle(fontSize: 12)),
         Text(
           value,
           style: TextStyle(

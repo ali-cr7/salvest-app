@@ -85,5 +85,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'real-estate-investment-7aad8.firebasestorage.app',
     measurementId: 'G-GXLRYXP3F4',
   );
-
 }
