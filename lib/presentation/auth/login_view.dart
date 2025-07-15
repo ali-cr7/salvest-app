@@ -138,27 +138,48 @@ class _LoginViewState extends State<LoginView> {
                         height: MediaQuery.of(context).size.height * 0.02,
                       ),
 
-                      /// Signup Redirect
+                      /// Signup Redirect and Guest Option
                       Center(
-                        child: TextButton(
-                          onPressed: () {
-                            GoRouter.of(context).push(AppRouter.kSignupView);
-                          },
-                          child: const Text.rich(
-                            TextSpan(
-                              text: "Don’t have an account? ",
-                              style: TextStyle(color: Colors.black54),
-                              children: [
+                        child: Column(
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                GoRouter.of(
+                                  context,
+                                ).push(AppRouter.kSignupView);
+                              },
+                              child: const Text.rich(
                                 TextSpan(
-                                  text: "Sign up",
-                                  style: TextStyle(
-                                    color: AppColors.lightPurple,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                                  text: "Don’t have an account? ",
+                                  style: TextStyle(color: Colors.black54),
+                                  children: [
+                                    TextSpan(
+                                      text: "Sign up",
+                                      style: TextStyle(
+                                        color: AppColors.lightPurple,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
+                            TextButton(
+                              onPressed: () {
+                                GoRouter.of(
+                                  context,
+                                ).push(AppRouter.kHomePageView);
+                              },
+                              child: const Text(
+                                "Continue as Guest",
+                                style: TextStyle(
+                                  color: AppColors.lightPurple,
+                                  fontWeight: FontWeight.w500,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],

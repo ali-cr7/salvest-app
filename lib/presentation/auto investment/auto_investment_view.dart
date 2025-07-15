@@ -35,8 +35,8 @@ class AutoInvestmentView extends StatelessWidget {
           SizedBox(height: 12),
           Center(
             child: Container(
-              width: 334,
-              height: 259,
+              width: 360,
+              height: 400,
               decoration: ShapeDecoration(
                 color: const Color(0x7FE8E8E8),
                 shape: RoundedRectangleBorder(
@@ -44,13 +44,6 @@ class AutoInvestmentView extends StatelessWidget {
                 ),
               ),
               child: AutoInvestmentViewBody(),
-            ),
-          ),
-          Expanded(child: SizedBox()),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: CustomSendButton(buttonName: 'applay', onTap: () {}),
             ),
           ),
         ],

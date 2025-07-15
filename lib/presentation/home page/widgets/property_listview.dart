@@ -41,7 +41,11 @@ class PropertyListView extends StatelessWidget {
         }
 
         if (deleteUpdate is PropertiesForInvestmentSuccess &&
-            deleteUpdate.getPropertiesForInvestmentResponse.data == null) {
+            deleteUpdate
+                .getPropertiesForInvestmentResponse
+                .data!
+                .properties!
+                .isEmpty) {
           return SomethingWrongWidget(
             title: "No Properties found !",
             svgPath: 'assets/images/search.svg',
@@ -49,6 +53,17 @@ class PropertyListView extends StatelessWidget {
               title: "Refresh",
               onPressed: () {
                 // context.read<PropertiesForInvestmentBloc>().add(GetFqmEvent());
+                print(
+                  "the property typr ${deleteUpdate.getPropertiesForInvestmentResponse.propertyType!}",
+                );
+                context.read<PropertiesForInvestmentBloc>().add(
+                  GetPropertiesForInvestmentsEvent(
+                    propertyType:
+                        deleteUpdate
+                            .getPropertiesForInvestmentResponse
+                            .propertyType!,
+                  ),
+                );
               },
             ),
           );

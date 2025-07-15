@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:salvest_app/business_logic/Electronic%20Certificate/electronic_certificate_bloc.dart';
+import 'package:salvest_app/business_logic/acivate%20investment%20settings%20bloc/activate_auto_ivnestment_bloc.dart';
+import 'package:salvest_app/business_logic/auto%20investment%20settings%20bloc/auto_investment_settings_bloc.dart';
 import 'package:salvest_app/business_logic/help%20bloc/help_bloc.dart';
 import 'package:salvest_app/business_logic/investment%20mode%20bloc/investment_mode_bloc.dart';
 import 'package:salvest_app/business_logic/investments%20by%20month%20bloc/investments_by_month_bloc.dart';
@@ -112,54 +115,75 @@ class _SalvestAppState extends State<SalvestApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => UserBloc(getIt.get<AuthRepoImpl>())),
-        BlocProvider(create: (context) => HelpBloc(getIt.get<HelpRepoImpl>())),
-        BlocProvider(create: (context) => SalePropertyBloc()),
-        BlocProvider(
-          create:
-              (context) => LargestRewardBloc(getIt.get<StatisticsRepoImpl>()),
-        ),
-        BlocProvider(
-          create:
-              (context) => SendPropertyBloc(getIt.get<SalePropertyRepoImpl>()),
-        ),
-        BlocProvider(
-          create:
-              (context) =>
-                  InvestmentsByMonthBloc(getIt.get<StatisticsRepoImpl>()),
-        ),
-        BlocProvider(
-          create: (context) => LinesChartBloc(getIt.get<StatisticsRepoImpl>()),
-        ),
-        BlocProvider(
-          create:
-              (context) =>
-                  ElectronicCertificateBloc(getIt.get<StatisticsRepoImpl>()),
-        ),
+    return ScreenUtilInit(
+      designSize: const Size(393, 852),
+      minTextAdapt: true,
+      splitScreenMode: true,
 
-        BlocProvider(
-          create: (context) => WalletBloc(getIt.get<WalletServicesRepoImpl>()),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => UserBloc(getIt.get<AuthRepoImpl>()),
+          ),
+          BlocProvider(
+            create: (context) => HelpBloc(getIt.get<HelpRepoImpl>()),
+          ),
+          BlocProvider(create: (context) => SalePropertyBloc()),
+          BlocProvider(
+            create:
+                (context) => LargestRewardBloc(getIt.get<StatisticsRepoImpl>()),
+          ),
+          BlocProvider(
+            create:
+                (context) =>
+                    SendPropertyBloc(getIt.get<SalePropertyRepoImpl>()),
+          ),
+          BlocProvider(
+            create:
+                (context) =>
+                    InvestmentsByMonthBloc(getIt.get<StatisticsRepoImpl>()),
+          ),
+          BlocProvider(
+            create:
+                (context) => LinesChartBloc(getIt.get<StatisticsRepoImpl>()),
+          ),
+          BlocProvider(
+            create:
+                (context) =>
+                    ElectronicCertificateBloc(getIt.get<StatisticsRepoImpl>()),
+          ),
+
+          BlocProvider(
+            create:
+                (context) => WalletBloc(getIt.get<WalletServicesRepoImpl>()),
+          ),
+          BlocProvider(
+            create:
+                (context) =>
+                    InvestmentModeBloc(getIt.get<StatisticsRepoImpl>()),
+          ),
+          BlocProvider(
+            create:
+                (context) => PropertiesForInvestmentBloc(
+                  getIt.get<SalePropertyRepoImpl>(),
+                ),
+          ),
+          BlocProvider(
+            create: (context) => UserQuestionsBloc(getIt.get<HelpRepoImpl>()),
+          ),
+            BlocProvider(
+            create: (context) => ActivateAutoIvnestmentBloc(getIt.get<SalePropertyRepoImpl>()),
+          ),
+            BlocProvider(
+            create: (context) => AutoInvestmentSettingsBloc(),
+          ),
+          
+        ],
+        child: MaterialApp.router(
+          builder: EasyLoading.init(),
+          debugShowCheckedModeBanner: false,
+          routerConfig: AppRouter.router,
         ),
-        BlocProvider(
-          create:
-              (context) => InvestmentModeBloc(getIt.get<StatisticsRepoImpl>()),
-        ),
-        BlocProvider(
-          create:
-              (context) => PropertiesForInvestmentBloc(
-                getIt.get<SalePropertyRepoImpl>(),
-              ),
-        ),
-        BlocProvider(
-          create: (context) => UserQuestionsBloc(getIt.get<HelpRepoImpl>()),
-        ),
-      ],
-      child: MaterialApp.router(
-        builder: EasyLoading.init(),
-        debugShowCheckedModeBanner: false,
-        routerConfig: AppRouter.router,
       ),
     );
   }

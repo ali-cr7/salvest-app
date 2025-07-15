@@ -20,7 +20,7 @@ class CertificationsView extends StatelessWidget {
           },
         ),
         title: const Text(
-          ' Investing Certifications',
+          ' Selling Certifications',
           style: TextStyle(color: Colors.black, fontSize: 18),
         ),
         centerTitle: true,
@@ -42,12 +42,12 @@ class CertificationsView extends StatelessWidget {
                 onTap: () {
                   GoRouter.of(
                     context,
-                  ).push(AppRouter.kInvestingCertificationView);
+                  ).push(AppRouter.kInvestingCertificationDetailsView);
                 },
                 child: CertifiactionsItem(
                   icon: AppAssets.certificateBlue,
                   itemColor: Color(0x3F9A8AEC),
-                  text: 'Buying Certification',
+                  text: 'Selling Certification',
                 ),
               ),
             ],

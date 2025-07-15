@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:salvest_app/business_logic/acivate%20investment%20settings%20bloc/activate_auto_ivnestment_bloc.dart';
 import 'package:salvest_app/business_logic/offered%20properties%20bloc/offered_properties_bloc.dart';
 import 'package:salvest_app/business_logic/property%20for%20investment%20bloc/properties_for_investment_bloc.dart';
 import 'package:salvest_app/business_logic/send%20property%20bloc/send_property_bloc.dart';
@@ -64,7 +65,7 @@ class SalePropertyRepoImpl implements SalePropertyRepo {
   ) async {
     HelperResponse helperResponse = await _apiService.post(
       endpoint: APIConfig.getPrpertyForInvestments,
-      token: token,
+     token: token,
       data: {'property_type': event.propertyType},
     );
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
@@ -77,6 +78,47 @@ class SalePropertyRepoImpl implements SalePropertyRepo {
           servicesResponse: ServicesResponseStatues.modelError,
         );
       }
+    }
+  }
+
+  @override
+  Future activateAutoInvestment(ActicvateAutoInvestmentApiEvent event) async {
+    try {
+      final formData = await event.autoInvestmentSettingsState.toFormData();
+      HelperResponse helperResponse = await _apiService.post(
+        endpoint: APIConfig.activateAutoInvestment,
+        data: formData,
+        token: token,
+      );
+
+      return helperResponse;
+    } catch (e) {
+      return HelperResponse(
+        fullBody: {'error': 'Failed to prepare request: ${e.toString()}'},
+        response: 'Failed to prepare property data',
+        servicesResponse: ServicesResponseStatues.someThingWrong,
+      );
+    }
+  }
+
+  @override
+  Future deActivateAutoInvestment(
+    DeActicvateAutoInvestmentApiEvent event,
+  ) async {
+    try {
+      HelperResponse helperResponse = await _apiService.post(
+        endpoint: APIConfig.deactivateAutoInvestment,
+
+        token: token,
+      );
+
+      return helperResponse;
+    } catch (e) {
+      return HelperResponse(
+        fullBody: {'error': 'Failed to prepare request: ${e.toString()}'},
+        response: 'Failed to prepare property data',
+        servicesResponse: ServicesResponseStatues.someThingWrong,
+      );
     }
   }
 }

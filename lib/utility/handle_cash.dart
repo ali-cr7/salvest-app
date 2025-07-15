@@ -28,10 +28,18 @@ Future<void> getCache() async {
 }
 
 Future<void> removeCache() async {
-  await CacheHelper.setData(key: 'firstTime', value: false);
+  print("logout is executed");
+
   await CacheHelper.removeData(key: 'token');
   await CacheHelper.removeData(key: 'name');
   await CacheHelper.removeData(key: 'email');
   await CacheHelper.removeData(key: 'phone');
   await CacheHelper.removeData(key: 'joinDate');
+
+  // Clear memory
+  token = null; // Make sure it's declared as String? token;
+  name = '';
+  email = '';
+  phone = '';
+  joinDate = '';
 }

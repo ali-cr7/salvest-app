@@ -1,17 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NumberPicker extends StatefulWidget {
   final String label;
   final int value;
   final Function(int) onChanged;
   final String? suffix;
+  final double? width;
+  final MainAxisAlignment numberAlignment;
 
   const NumberPicker({
     required this.label,
     required this.value,
     required this.onChanged,
     this.suffix,
+    this.width,
+    this.numberAlignment = MainAxisAlignment.spaceBetween,
     super.key,
   });
 
@@ -20,58 +25,125 @@ class NumberPicker extends StatefulWidget {
 }
 
 class _NumberPickerState extends State<NumberPicker> {
+  late TextEditingController _controller;
+  late FocusNode _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.value.toString());
+    _focusNode = FocusNode();
+  }
+
+  @override
+  void didUpdateWidget(covariant NumberPicker oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Only update controller if the user is not typing
+    if (!_focusNode.hasFocus && widget.value.toString() != _controller.text) {
+      _controller.text = widget.value.toString();
+    }
+  }
+
+  void _handleTextChange(String value) {
+    final parsed = int.tryParse(value);
+    if (parsed != null) {
+      widget.onChanged(parsed);
+    }
+  }
+
+  void _increment() {
+    final newValue = widget.value + 1;
+    _controller.text = newValue.toString();
+    widget.onChanged(newValue);
+  }
+
+  void _decrement() {
+    final newValue = widget.value - 1;
+    _controller.text = newValue.toString();
+    widget.onChanged(newValue);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20.0),
+      padding: EdgeInsets.only(left: 20.0.w),
       child: Row(
-        spacing: 10,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             widget.label,
             style: TextStyle(
-              color: Colors.black.withValues(alpha: 80),
-              fontSize: 14,
+              color: Colors.black.withOpacity(0.8),
+              fontSize: 14.sp,
               fontFamily: 'Inter',
               fontWeight: FontWeight.w400,
             ),
           ),
+          SizedBox(width: 10.w),
           Container(
-            width: 107,
-            height: 26.63,
+            width: widget.width ?? 105.w,
+            height: 30.63.h,
             decoration: ShapeDecoration(
               color: Colors.white,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(10.r),
               ),
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: widget.numberAlignment,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 12.0),
-                  child: Text(
-                    '${widget.value}',
-                    style: const TextStyle(fontSize: 14),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+                    child: TextField(
+                      controller: _controller,
+                      focusNode: _focusNode,
+                      keyboardType: TextInputType.numberWithOptions(
+                        signed: true,
+                      ),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      onChanged: _handleTextChange,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        isDense: true,
+                        contentPadding: EdgeInsets.zero,
+                      ),
+                    ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(right: 7.0, top: 5.0),
+                  padding: EdgeInsets.only(right: 7.0.w),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       GestureDetector(
-                        onTap: () => widget.onChanged(widget.value + 1),
+                        behavior: HitTestBehavior.opaque,
+                        onTap: _increment,
                         child: Transform.rotate(
                           angle: 90 * (3.1415926535 / 180),
-                          child: const Icon(Icons.arrow_back_ios, size: 10),
+                          child: Icon(
+                            Icons.arrow_back_ios,
+                            size: 10.sp,
+                            color: Colors.black.withOpacity(0.6),
+                          ),
                         ),
                       ),
-                      //
+                      SizedBox(height: 2.h),
                       GestureDetector(
-                        onTap: () => widget.onChanged(widget.value - 1),
+                        behavior: HitTestBehavior.opaque,
+                        onTap: _decrement,
                         child: Transform.rotate(
                           angle: -90 * (3.1415926535 / 180),
-                          child: const Icon(Icons.arrow_back_ios, size: 10),
+                          child: Icon(
+                            Icons.arrow_back_ios,
+                            size: 10.sp,
+                            color: Colors.black.withOpacity(0.6),
+                          ),
                         ),
                       ),
                     ],
@@ -81,11 +153,24 @@ class _NumberPickerState extends State<NumberPicker> {
             ),
           ),
           if (widget.suffix != null) ...[
-            //  const SizedBox(width: 2),
-            Text(widget.suffix!, style: const TextStyle(fontSize: 14)),
+            SizedBox(width: 4.w),
+            Text(
+              widget.suffix!,
+              style: TextStyle(
+                fontSize: 14.sp,
+                color: Colors.black.withOpacity(0.8),
+              ),
+            ),
           ],
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _focusNode.dispose();
+    super.dispose();
   }
 }

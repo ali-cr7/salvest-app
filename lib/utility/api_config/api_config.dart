@@ -48,4 +48,8 @@ class APIConfig {
       'api/get_Profit_Percentage_AND_User_Investment_Percentage_ByMonth';
   static const String getElectronicCertificates =
       'api/get_Electronic_Property_Certificate_for_user';
+  static const String activateAutoInvestment =
+      "api/automatic_investment/activate";
+  static const String deactivateAutoInvestment =
+      "/api/automatic_investment/deactivate";
 }

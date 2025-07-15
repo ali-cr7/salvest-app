@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:salvest_app/business_logic/Electronic%20Certificate/electronic_certificate_bloc.dart';
@@ -13,7 +12,6 @@ import 'package:salvest_app/business_logic/property%20for%20investment%20bloc/pr
 import 'package:salvest_app/business_logic/sale%20property%20bloc/sale_property_bloc.dart';
 import 'package:salvest_app/business_logic/wallet%20bloc/wallet_bloc.dart';
 import 'package:salvest_app/constants.dart';
-import 'package:salvest_app/data/models/get_proprties_for_investment_response/get_proprties_for_investment_response.dart';
 import 'package:salvest_app/data/models/get_proprties_for_investment_response/property.dart';
 import 'package:salvest_app/data/services/help%20services/help_repo_impl.dart';
 import 'package:salvest_app/data/services/negotiation%20services/negotiation_repo_imp.dart';
@@ -24,7 +22,6 @@ import 'package:salvest_app/presentation/auth/forgot_password_view.dart';
 import 'package:salvest_app/presentation/auth/login_view.dart';
 import 'package:salvest_app/presentation/auth/reset_password_view.dart';
 import 'package:salvest_app/presentation/auth/signup_view.dart';
-import 'package:salvest_app/presentation/auth/widgets/stripe.dart';
 import 'package:salvest_app/presentation/auto%20investment/auto_investment_view.dart';
 import 'package:salvest_app/presentation/certification/certifications_view.dart';
 import 'package:salvest_app/presentation/certification/widgets/investing_certification__details_view.dart';
@@ -32,10 +29,7 @@ import 'package:salvest_app/presentation/certification/widgets/investing_certifi
 import 'package:salvest_app/presentation/help/common_question_view.dart';
 import 'package:salvest_app/presentation/help/help_view.dart';
 import 'package:salvest_app/presentation/home%20page/home_page_view.dart';
-import 'package:salvest_app/presentation/negotition/negotition_chat_view.dart';
 import 'package:salvest_app/presentation/negotition/widgets/chat_screen.dart';
-// import 'package:salvest_app/presentation/negotition/widgets/chat_room_screen.dart';
-import 'package:salvest_app/presentation/negotition/widgets/users_screen.dart';
 import 'package:salvest_app/presentation/negotition/negotiation_notification_view.dart';
 import 'package:salvest_app/presentation/notifications/noftifications_view.dart';
 import 'package:salvest_app/presentation/portfolio/capital_growth_view.dart';
@@ -80,7 +74,7 @@ abstract class AppRouter {
   static final router = GoRouter(
     routes: [
       // GoRoute(path: '/', builder: (context, state) => const LoginView()),
-      if (token != null)
+      if (token != null && token!.isNotEmpty)
         GoRoute(
           path: '/',
           builder:
@@ -89,12 +83,12 @@ abstract class AppRouter {
                     (context) => PropertiesForInvestmentBloc(
                       getIt.get<SalePropertyRepoImpl>(),
                     )..add(
-                      GetPropertiesForInvestmentsEvent(propertyType: 'Villa'),
+                      GetPropertiesForInvestmentsEvent(propertyType: 'villa'),
                     ),
                 child: const HomePageView(),
               ),
         ),
-      if (token == null)
+      if (token!.isEmpty)
         GoRoute(path: '/', builder: (context, state) => const LoginView()),
       GoRoute(path: klogInView, builder: (context, state) => const LoginView()),
       GoRoute(
@@ -179,10 +173,10 @@ abstract class AppRouter {
           );
         },
       ),
-      GoRoute(
-        path: kInvestingCertificationView,
-        builder: (context, state) => const InvestingCertificationView(),
-      ),
+      // GoRoute(
+      //   path: kInvestingCertificationView,
+      //   builder: (context, state) => const InvestingCertificationView(),
+      // ),
       GoRoute(
         path: kCertificationsView,
         builder: (context, state) => const CertificationsView(),

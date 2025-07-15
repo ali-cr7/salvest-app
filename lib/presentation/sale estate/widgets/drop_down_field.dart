@@ -45,7 +45,7 @@ class _DropdownFieldState extends State<DropdownField> {
             ),
           ),
           Container(
-            width: 107,
+            width: 130,
             height: 26.63,
             decoration: ShapeDecoration(
               color: Colors.white,
@@ -68,16 +68,13 @@ class _DropdownFieldState extends State<DropdownField> {
                         .map(
                           (item) => DropdownMenuItem(
                             value: item,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Text(
-                                item,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w400,
-                                ),
+                            child: Text(
+                              item,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 14,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w400,
                               ),
                             ),
                           ),
