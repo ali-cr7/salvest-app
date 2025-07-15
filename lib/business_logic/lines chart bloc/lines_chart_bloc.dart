@@ -12,7 +12,7 @@ class LinesChartBloc extends Bloc<LinesChartEvent, LinesChartState> {
       emit(LinesChartLoading());
       try {
         final resp = await _repo.fetchLinesChart(year: event.year);
-        if (resp is LinesChart) {
+        if (resp.data != null) {
           emit(LinesChartLoaded(resp.data!));
         } else {
           emit(LinesChartError('لا توجد بيانات'));

@@ -25,7 +25,7 @@ import 'package:salvest_app/presentation/auth/signup_view.dart';
 import 'package:salvest_app/presentation/auto%20investment/auto_investment_view.dart';
 import 'package:salvest_app/presentation/certification/certifications_view.dart';
 import 'package:salvest_app/presentation/certification/widgets/investing_certification__details_view.dart';
-import 'package:salvest_app/presentation/certification/widgets/investing_certification_view.dart';
+
 import 'package:salvest_app/presentation/help/common_question_view.dart';
 import 'package:salvest_app/presentation/help/help_view.dart';
 import 'package:salvest_app/presentation/home%20page/home_page_view.dart';

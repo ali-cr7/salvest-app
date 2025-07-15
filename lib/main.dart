@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:salvest_app/business_logic/Electronic%20Certificate/electronic_certificate_bloc.dart';
@@ -56,8 +57,9 @@ import 'package:salvest_app/utility/service_locator.dart';
 // }
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
+ // WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   //const AndroidInitializationSettings('@drawable/ic_notification');
   FirebaseMessaging.instance.requestPermission();

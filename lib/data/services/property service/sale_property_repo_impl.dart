@@ -90,7 +90,6 @@ class SalePropertyRepoImpl implements SalePropertyRepo {
         data: formData,
         token: token,
       );
-
       return helperResponse;
     } catch (e) {
       return HelperResponse(
