@@ -167,7 +167,6 @@ class DoubleLineChartCard extends StatelessWidget {
     return BlocBuilder<LinesChartBloc, LinesChartState>(
       builder: (context, state) {
         if (state is LinesChartLoading || state is LinesChartInitial) {
-          print("state is loading");
           return Container(
             width: 345,
             height: 200,
@@ -176,7 +175,6 @@ class DoubleLineChartCard extends StatelessWidget {
           );
         }
         if (state is LinesChartError) {
-          print("state is LinesChartError ");
           return Container(
             width: 345,
             height: 200,

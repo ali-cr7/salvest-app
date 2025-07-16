@@ -2,7 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-//import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:salvest_app/business_logic/Electronic%20Certificate/electronic_certificate_bloc.dart';
@@ -24,6 +24,7 @@ import 'package:salvest_app/data/services/help%20services/help_repo_impl.dart';
 import 'package:salvest_app/data/services/property%20service/sale_property_repo_impl.dart';
 import 'package:salvest_app/data/services/statistics%20srevices/statistics%20_repo_impl.dart';
 import 'package:salvest_app/data/services/wallet%20services/wallet_services_repo_impl.dart';
+import 'package:salvest_app/firebase/flutter_notifications.dart';
 import 'package:salvest_app/utility/app_bloc_observer.dart';
 import 'package:salvest_app/utility/app_colors.dart';
 import 'package:salvest_app/utility/cash_helper.dart';
@@ -56,8 +57,7 @@ import 'package:salvest_app/utility/service_locator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   //const AndroidInitializationSettings('@drawable/ic_notification');
   FirebaseMessaging.instance.requestPermission();
@@ -171,13 +171,13 @@ class _SalvestAppState extends State<SalvestApp> {
           BlocProvider(
             create: (context) => UserQuestionsBloc(getIt.get<HelpRepoImpl>()),
           ),
-          BlocProvider(
-            create:
-                (context) => ActivateAutoIvnestmentBloc(
-                  getIt.get<SalePropertyRepoImpl>(),
-                ),
+            BlocProvider(
+            create: (context) => ActivateAutoIvnestmentBloc(getIt.get<SalePropertyRepoImpl>()),
           ),
-          BlocProvider(create: (context) => AutoInvestmentSettingsBloc()),
+            BlocProvider(
+            create: (context) => AutoInvestmentSettingsBloc(),
+          ),
+          
         ],
         child: MaterialApp.router(
           builder: EasyLoading.init(),
