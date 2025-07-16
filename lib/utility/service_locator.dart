@@ -26,17 +26,22 @@ void setupServiceLocator() {
     ),
   );
   getIt.registerSingleton<AuthRepoImpl>(AuthRepoImpl(getIt.get<ApiService>()));
+
+
   getIt.registerSingleton<SalePropertyRepoImpl>(
     SalePropertyRepoImpl(getIt.get<ApiService>()),
   );
 
   getIt.registerSingleton<HelpRepoImpl>(HelpRepoImpl(getIt.get<ApiService>()));
+
   getIt.registerSingleton<WalletServicesRepoImpl>(
     WalletServicesRepoImpl(getIt.get<ApiService>()),
   );
+
   getIt.registerSingleton<NegotiationRepoImp>(
     NegotiationRepoImp(getIt.get<ApiService>()),
   );
+
   getIt.registerSingleton<StatisticsRepoImpl>(
     StatisticsRepoImpl(getIt.get<ApiService>()),
   );
