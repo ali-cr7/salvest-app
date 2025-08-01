@@ -43,6 +43,9 @@ class FlutterNotificationsClass {
         android: AndroidNotificationDetails(
           channel.id,
           channel.name,
+          icon: 'ic_notification',
+          importance: Importance.max,
+          priority: Priority.high,
           enableVibration: true,
         ),
       ),
@@ -50,12 +53,22 @@ class FlutterNotificationsClass {
   }
 
   Future initLocalNotificationChannel() async {
-    await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin
-        >()
-        ?.createNotificationChannel(channel);
-  }
+  const AndroidInitializationSettings initializationSettingsAndroid = 
+    AndroidInitializationSettings('ic_notification');
+  
+  final InitializationSettings initializationSettings = InitializationSettings(
+    android: initializationSettingsAndroid,
+    iOS: const DarwinInitializationSettings(),
+  );
+  
+  await flutterLocalNotificationsPlugin.initialize(
+    initializationSettings,
+  );
+  
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(channel);
+}
 
   void localNotificationsRequestPermission() {
     flutterLocalNotificationsPlugin
@@ -67,7 +80,7 @@ class FlutterNotificationsClass {
 
   Future<void> handleForeGroundNotification() async {
     var initializationSettingsAndroid = const AndroidInitializationSettings(
-      '@drawable/app_icon',
+      'ic_notification',
     );
     var initializationSettingsIos = const DarwinInitializationSettings(
       requestSoundPermission: true,
@@ -102,15 +115,16 @@ class FlutterNotificationsClass {
           notification.title,
           notification.body,
           NotificationDetails(
+            
             android: AndroidNotificationDetails(
               channel.id,
               channel.name,
+              icon: 'ic_notification',
               enableLights: channel.enableLights,
               ledColor: channel.ledColor,
               ledOnMs: 100,
               ledOffMs: 3000,
               enableVibration: true,
-              icon: android.smallIcon,
               color: const Color(0xFF145770),
             ),
           ),

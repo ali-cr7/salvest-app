@@ -1,4 +1,4 @@
-part of 'sale_property_bloc.dart';
+                                   part of 'sale_property_bloc.dart';
 
 @immutable
 class SalePropertyState {
@@ -29,7 +29,7 @@ class SalePropertyState {
     this.numberOfRooms = '',
     this.numberOfBathRooms = '',
     this.propertyAge = '',
-    this.decoration = 'deluxe',
+    this.decoration = 'deluxe',       
     this.kitchenType = 'western',
     this.flooringType = 'granite',
     this.overlookFrom = '',

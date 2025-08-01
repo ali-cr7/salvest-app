@@ -200,7 +200,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             ),
                             onPressed: () async {
                               if (_messageController.text.trim().isNotEmpty) {
-                                await _chatService.sendMessage(
+                                await _chatService.sendMessageToApi(
                                   chatRoomId: _chatRoomId,
                                   senderId: _currentUserId,
                                   text: _messageController.text.trim(),

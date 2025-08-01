@@ -115,7 +115,7 @@ class SaleStateRequestView extends StatelessWidget {
                       status: propertyItem.accept!,
                       address: propertyItem.state!,
                       exactLocation: propertyItem.exactPosition!,
-                      propertyType: propertyItem.paintingType!,
+                      propertyType: propertyItem.propertyType!,
                     ),
                   );
                 },

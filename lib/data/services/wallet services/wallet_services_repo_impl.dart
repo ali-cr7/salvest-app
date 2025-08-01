@@ -1,4 +1,5 @@
 import 'package:salvest_app/business_logic/investing%20history%20bloc/inveseting_history_bloc.dart';
+import 'package:salvest_app/business_logic/send%20api%20withdraw%20bloc/send_api_withdraw_money_bloc_bloc.dart';
 import 'package:salvest_app/business_logic/wallet%20bloc/wallet_bloc.dart';
 import 'package:salvest_app/constants.dart';
 import 'package:salvest_app/data/models/get_investing_history_response/get_investing_history_response.dart';
@@ -161,4 +162,65 @@ class WalletServicesRepoImpl implements WalletServicesRepo {
     }
     return helperResponse;
   }
+
+  @override
+  Future transferToInvestment(TransferToInvestmentWalletEvent event) async {
+    HelperResponse helperResponse = await _apiService.post(
+      endpoint: APIConfig.transferToInvestment,
+      token: token,
+      data: {'amount': event.amount},
+    );
+  
+    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+      try {
+        String message = helperResponse.fullBody!['message'];
+        return message;
+        
+      } catch (e) {
+        return helperResponse.copyWith(
+          servicesResponse: ServicesResponseStatues.modelError,
+        );
+      }
+    }
+    return helperResponse;
+  }
+
+  @override
+  Future withDrawMoney(WithdrawMoneyApiEvent event) async {
+    try {
+      final formData = await event.withdrawMoneyState.toFormData();
+      HelperResponse helperResponse = await _apiService.post(
+        endpoint: APIConfig.makeWithdrawalRequest,
+        data: formData,
+        token: token,
+      );
+
+      return helperResponse;
+    } catch (e) {
+      return HelperResponse(
+        fullBody: {'error': 'Failed to prepare request: ${e.toString()}'},
+        response: 'Failed to prepare property data',
+        servicesResponse: ServicesResponseStatues.someThingWrong,
+      );
+    }
+  }
 }
+
+  // Future activateAutoInvestment(ActicvateAutoInvestmentApiEvent event) async {
+  //   try {
+  //     final formData = await event.autoInvestmentSettingsState.toFormData();
+  //     HelperResponse helperResponse = await _apiService.post(
+  //       endpoint: APIConfig.activateAutoInvestment,
+  //       data: formData,
+  //       token: token,
+  //     );
+
+  //     return helperResponse;
+  //   } catch (e) {
+  //     return HelperResponse(
+  //       fullBody: {'error': 'Failed to prepare request: ${e.toString()}'},
+  //       response: 'Failed to prepare property data',
+  //       servicesResponse: ServicesResponseStatues.someThingWrong,
+  //     );
+  //   }
+  // }

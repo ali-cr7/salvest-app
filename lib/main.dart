@@ -15,10 +15,12 @@ import 'package:salvest_app/business_logic/largest%20reward%20bloc/largest_rewar
 import 'package:salvest_app/business_logic/lines%20chart%20bloc/lines_chart_bloc.dart';
 import 'package:salvest_app/business_logic/property%20for%20investment%20bloc/properties_for_investment_bloc.dart';
 import 'package:salvest_app/business_logic/sale%20property%20bloc/sale_property_bloc.dart';
+import 'package:salvest_app/business_logic/send%20api%20withdraw%20bloc/send_api_withdraw_money_bloc_bloc.dart';
 import 'package:salvest_app/business_logic/send%20property%20bloc/send_property_bloc.dart';
 import 'package:salvest_app/business_logic/user%20question%20bloc/user_questions_bloc.dart';
 import 'package:salvest_app/business_logic/user/bloc/user_bloc.dart';
 import 'package:salvest_app/business_logic/wallet%20bloc/wallet_bloc.dart';
+import 'package:salvest_app/business_logic/withdraw%20money%20bloc/withdraw_money_bloc.dart';
 import 'package:salvest_app/data/services/auth%20services/auth_repo_impl.dart';
 import 'package:salvest_app/data/services/help%20services/help_repo_impl.dart';
 import 'package:salvest_app/data/services/property%20service/sale_property_repo_impl.dart';
@@ -34,34 +36,35 @@ import 'firebase_options.dart';
 import 'package:salvest_app/utility/router.dart';
 import 'package:salvest_app/utility/service_locator.dart';
 
-//FlutterNotificationsClass flutterNotifications = FlutterNotificationsClass();
+FlutterNotificationsClass flutterNotifications = FlutterNotificationsClass();
 
-// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-//     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-//   print('Handling a background message ${message.messageId}');
-//   flutterNotifications.flutterLocalNotificationsPlugin.show(
-//     message.data.hashCode,
-//     message.data['title'],
-//     message.data['body'],
-//     NotificationDetails(
-//       android: AndroidNotificationDetails(
-
-//         FlutterNotificationsClass.channel.id,
-//         FlutterNotificationsClass.channel.name,
-//         enableVibration: true,
-//          icon: 'ic_notification',
-//       ),
-//     ),
-//   );
-// }
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  flutterNotifications = FlutterNotificationsClass();
+  await flutterNotifications.initLocalNotificationChannel();
+  print('Handling a background message ${message.messageId}');
+  flutterNotifications.flutterLocalNotificationsPlugin.show(
+    message.data.hashCode,
+    message.data['title'],
+    message.data['body'],
+    NotificationDetails(
+      android: AndroidNotificationDetails(
+        FlutterNotificationsClass.channel.id,
+        FlutterNotificationsClass.channel.name,
+        enableVibration: true,
+        icon: 'ic_notification',
+      ),
+    ),
+  );
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  //const AndroidInitializationSettings('@drawable/ic_notification');
+  AndroidInitializationSettings('ic_notification');
   FirebaseMessaging.instance.requestPermission();
-  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   String? token = await FirebaseMessaging.instance.getToken();
 
@@ -107,9 +110,9 @@ class _SalvestAppState extends State<SalvestApp> {
   // This widget is the root of your application.
   @override
   void initState() {
-    // flutterNotifications = FlutterNotificationsClass();
-    // flutterNotifications.localNotificationsRequestPermission();
-    // flutterNotifications.handleForeGroundNotification();
+    flutterNotifications = FlutterNotificationsClass();
+    flutterNotifications.localNotificationsRequestPermission();
+    flutterNotifications.handleForeGroundNotification();
     super.initState();
   }
 
@@ -171,13 +174,19 @@ class _SalvestAppState extends State<SalvestApp> {
           BlocProvider(
             create: (context) => UserQuestionsBloc(getIt.get<HelpRepoImpl>()),
           ),
-            BlocProvider(
-            create: (context) => ActivateAutoIvnestmentBloc(getIt.get<SalePropertyRepoImpl>()),
+          BlocProvider(
+            create:
+                (context) => ActivateAutoIvnestmentBloc(
+                  getIt.get<SalePropertyRepoImpl>(),
+                ),
           ),
-            BlocProvider(
-            create: (context) => AutoInvestmentSettingsBloc(),
+          BlocProvider(create: (context) => AutoInvestmentSettingsBloc()),
+          BlocProvider(create: (context) => WithdrawMoneyBloc()),
+          //
+           BlocProvider(
+            create:
+                (context) => SendApiWithdrawMoneyBlocBloc(getIt.get<WalletServicesRepoImpl>()),
           ),
-          
         ],
         child: MaterialApp.router(
           builder: EasyLoading.init(),

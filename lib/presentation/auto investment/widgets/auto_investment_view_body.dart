@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salvest_app/business_logic/auto%20investment%20settings%20bloc/auto_investment_settings_bloc.dart';
+import 'package:salvest_app/constants.dart';
 import 'package:salvest_app/presentation/sale%20estate/widgets/custom_button.dart';
 import 'package:salvest_app/presentation/sale%20estate/widgets/drop_down_field.dart';
 import 'package:salvest_app/presentation/sale%20estate/widgets/number_picker.dart';
+import 'package:salvest_app/utility/cash_helper.dart';
 
 class AutoInvestmentViewBody extends StatefulWidget {
   const AutoInvestmentViewBody({super.key});
@@ -26,7 +28,25 @@ class _AutoInvestmentViewBodyState extends State<AutoInvestmentViewBody> {
     'Balanced',
     'High Incoming',
   ];
+bool isActive = true;
+  @override
+  void initState() {
+    super.initState();
+    _loadSavedState();
+  }
 
+  Future<void> _loadSavedState() async {
+    final savedState = await CacheHelper.getData(key: kAutoInvestmentActiveKey);
+    if (savedState != null) {
+      setState(() {
+        isActive = savedState == 'true';
+      });
+    }
+  }
+
+  Future<void> _saveState(bool value) async {
+    await CacheHelper.setData(key: kAutoInvestmentActiveKey, value: value.toString());
+  }
   @override
   Widget build(BuildContext context) {
     return Column(

@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart' show GoRouter;
+import 'package:salvest_app/business_logic/wallet%20bloc/wallet_bloc.dart';
 import 'package:salvest_app/presentation/wallet/widgets/profits_wallet_view_body.dart';
 import 'package:salvest_app/presentation/wallet/widgets/wallet_card.dart';
 import 'package:salvest_app/presentation/wallet/widgets/wallet_listview_item.dart';
@@ -34,3 +37,4 @@ class ProfitWalletView extends StatelessWidget {
     );
   }
 }
+ 

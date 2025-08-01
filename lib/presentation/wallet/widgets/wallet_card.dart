@@ -17,6 +17,7 @@ class WalletCard extends StatelessWidget {
     required this.deposite,
     required this.rfreshCallback,
     required this.isLoading,
+    this.withdraw,
   });
   final Gradient cardColr;
   final String walletValue;
@@ -26,6 +27,7 @@ class WalletCard extends StatelessWidget {
   final VoidCallback rfreshCallback;
   final IconData arrowIconData;
   final VoidCallback deposite;
+  final VoidCallback? withdraw;
   final bool isLoading;
 
   @override
@@ -84,7 +86,6 @@ class WalletCard extends StatelessWidget {
               ),
             ],
           ),
-
           const Expanded(child: SizedBox()),
           Padding(
             padding: const EdgeInsets.only(right: 6.0),
@@ -97,7 +98,6 @@ class WalletCard extends StatelessWidget {
             ),
           ),
           const Expanded(child: SizedBox()),
-
           Padding(
             padding: const EdgeInsets.only(left: 16.0),
             child: Row(
@@ -107,13 +107,26 @@ class WalletCard extends StatelessWidget {
                 InkWell(
                   onTap: deposite,
                   child: WalletButton(
-                    iconData: CupertinoIcons.plus,
-                    text: 'Deposit',
+                    iconData:
+                        cardStrting == "Profits wallet"
+                            ? CupertinoIcons.money_dollar
+                            : CupertinoIcons.plus,
+                    text:
+                        cardStrting == "Profits wallet" ? "Charge" : 'Deposit',
                   ),
                 ),
-                WalletButton(
-                  iconData: CupertinoIcons.arrow_2_circlepath,
-                  text: 'Exchange',
+                InkWell(
+                  onTap: withdraw,
+                  child: WalletButton(
+                    iconData:
+                        cardStrting == "Profits wallet"
+                            ? Icons.wallet
+                            : CupertinoIcons.arrow_2_circlepath,
+                    text:
+                        cardStrting == "Profits wallet"
+                            ? "Withdraw"
+                            : 'Exchange',
+                  ),
                 ),
                 SizedBox(width: 120),
                 Column(

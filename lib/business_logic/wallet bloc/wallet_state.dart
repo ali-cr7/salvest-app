@@ -50,3 +50,18 @@ final class InvestSuccess extends WalletState {
 
   InvestSuccess({required this.message});
 }
+final class TransferToInvestmentSuccess extends WalletState {
+  final String message;
+
+  TransferToInvestmentSuccess({required this.message});
+}
+final class TransferToInvestmentLoading extends WalletState {
+
+}
+final class TransferToInvestmentFailure extends WalletState {
+  final HelperResponse helperResponse;
+
+  TransferToInvestmentFailure({required this.helperResponse});
+}
+
+//TransferToInvestment

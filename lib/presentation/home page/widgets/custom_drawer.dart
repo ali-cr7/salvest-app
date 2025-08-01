@@ -141,7 +141,7 @@ class CustomDrawer extends StatelessWidget {
                 icon: AppAssets.certificateWhite,
                 title: 'Certifications',
                 onTap:
-                    () => _requireAuth(
+                    () => _requireAuth(            
                       context,
                       () => GoRouter.of(
                         context,

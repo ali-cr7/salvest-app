@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salvest_app/business_logic/acivate%20investment%20settings%20bloc/activate_auto_ivnestment_bloc.dart';
 import 'package:salvest_app/business_logic/auto%20investment%20settings%20bloc/auto_investment_settings_bloc.dart';
+import 'package:salvest_app/utility/cash_helper.dart';
 import 'package:salvest_app/utility/enums.dart';
 
 class ToggleSwitchWidget extends StatefulWidget {
@@ -13,6 +14,24 @@ class ToggleSwitchWidget extends StatefulWidget {
 
 class _ToggleSwitchWidgetState extends State<ToggleSwitchWidget> {
   bool isActive = true;
+  @override
+  void initState() {
+    super.initState();
+    _loadToggleState();
+  }
+
+  Future<void> _loadToggleState() async {
+    final storedValue = await CacheHelper.getData(key: 'autoInvestToggle');
+    if (storedValue != null && mounted) {
+      setState(() {
+        isActive = storedValue == true;
+      });
+    }
+  }
+
+  Future<void> _storeToggleState(bool value) async {
+    await CacheHelper.setData(key: 'autoInvestToggle', value: value);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,8 +83,12 @@ class _ToggleSwitchWidgetState extends State<ToggleSwitchWidget> {
                   onChanged:
                       isLoading
                           ? null
-                          : (bool value) {
+                          : (bool value) async {
                             setState(() => isActive = value);
+                            await _storeToggleState(
+                              value,
+                            ); // Persist the user choice
+
                             final bloc =
                                 context.read<ActivateAutoIvnestmentBloc>();
 

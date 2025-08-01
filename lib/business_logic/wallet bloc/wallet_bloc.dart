@@ -59,6 +59,14 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
         emit(GetWalletBalanceFailure(helperResponse: response));
       }
     });
-    // InvestEvent
+   on<TransferToInvestmentWalletEvent>((event, emit) async {
+      emit(TransferToInvestmentLoading());
+      final response = await walletServicesRepoImpl.transferToInvestment(event);
+      if (response is String) {
+        emit(TransferToInvestmentSuccess(message: response));
+      } else {
+        emit(TransferToInvestmentFailure(helperResponse: response));
+      }
+    });
   }
 }

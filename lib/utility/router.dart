@@ -25,7 +25,7 @@ import 'package:salvest_app/presentation/auth/signup_view.dart';
 import 'package:salvest_app/presentation/auto%20investment/auto_investment_view.dart';
 import 'package:salvest_app/presentation/certification/certifications_view.dart';
 import 'package:salvest_app/presentation/certification/widgets/investing_certification__details_view.dart';
-import 'package:salvest_app/presentation/certification/widgets/investing_certification_view.dart';
+//import 'package:salvest_app/presentation/certification/widgets/investing_certification_view.dart';
 import 'package:salvest_app/presentation/help/common_question_view.dart';
 import 'package:salvest_app/presentation/help/help_view.dart';
 import 'package:salvest_app/presentation/home%20page/home_page_view.dart';
@@ -41,6 +41,7 @@ import 'package:salvest_app/presentation/sale%20estate/sale_state_request_view.d
 import 'package:salvest_app/presentation/wallet/profits_wallet_view.dart';
 import 'package:salvest_app/presentation/wallet/wallet_view.dart';
 import 'package:salvest_app/presentation/wallet/widgets/stripe_payment.dart';
+import 'package:salvest_app/presentation/withdrawal%20money/withdrawl_money_view.dart';
 import 'package:salvest_app/utility/service_locator.dart';
 
 abstract class AppRouter {
@@ -69,6 +70,7 @@ abstract class AppRouter {
   static const kSaleStateRequestView = '/SaleStateRequestView';
   static const kStripeTokenTestScreen = '/StripeTokenTestScreen';
   static const kNegotitionChatView = '/NegotitionChatView';
+  static const kWithdrawalMoneyView ='/WithdrawalMoneyView';
   static const klogInView = '/LoginView';
 
   static final router = GoRouter(
@@ -121,6 +123,11 @@ abstract class AppRouter {
         path: kStripeTokenTestScreen,
         builder: (context, state) => StripePaymentScreen(),
       ),
+         GoRoute(
+        path: kWithdrawalMoneyView,
+        builder: (context, state) => WithdrawalMoneyView(),
+      ),
+      
       GoRoute(
         path: kNegotitionChatView,
         builder: (context, state) {
