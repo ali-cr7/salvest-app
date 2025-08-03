@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:salvest_app/business_logic/user%20notifications%20bloc/user_notifications_bloc.dart';
 import 'package:salvest_app/business_logic/user/bloc/user_bloc.dart';
 import 'package:salvest_app/constants.dart';
+import 'package:salvest_app/data/models/get_notifications_response/get_notifications_response.dart';
 import 'package:salvest_app/data/models/log_in_response/log_in_response.dart';
 import 'package:salvest_app/data/models/sign_up_response/sign_up_response.dart';
 import 'package:salvest_app/data/services/auth%20services/auth_repo.dart';
@@ -210,6 +212,25 @@ class AuthRepoImpl implements AuthRepo {
       try {
         final responseBody = helperResponse.fullBody;
         return responseBody?['message'];
+      } catch (e) {
+        return helperResponse.copyWith(
+          servicesResponse: ServicesResponseStatues.modelError,
+        );
+      }
+    }
+  }
+
+  @override
+  Future getUserNotifcations(GetUserNotificationsEvent event) async {
+     HelperResponse helperResponse = await _apiService.get(
+      endpoint: APIConfig.getNotifications,
+      token: token,
+    );
+    print('here is the response of saving the fcm:${helperResponse.fullBody}');
+    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+      try {
+        final GetNotificationsResponse getNotificationsResponse = GetNotificationsResponse.from(helperResponse.fullBody!);
+        return getNotificationsResponse;
       } catch (e) {
         return helperResponse.copyWith(
           servicesResponse: ServicesResponseStatues.modelError,

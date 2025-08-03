@@ -1,6 +1,7 @@
 import 'package:salvest_app/business_logic/investing%20history%20bloc/inveseting_history_bloc.dart';
 import 'package:salvest_app/business_logic/send%20api%20withdraw%20bloc/send_api_withdraw_money_bloc_bloc.dart';
 import 'package:salvest_app/business_logic/wallet%20bloc/wallet_bloc.dart';
+import 'package:salvest_app/business_logic/withdrawls%20request%20bloc/withdrawls_request_bloc.dart';
 
 abstract class WalletServicesRepo {
   Future chargeWallet(ChargeInvestmentWalletEvent event);
@@ -10,4 +11,5 @@ abstract class WalletServicesRepo {
   Future getWalletPercentage(GetWalletPercentageEvent event);
   Future transferToInvestment(TransferToInvestmentWalletEvent event);
   Future withDrawMoney(WithdrawMoneyApiEvent event);
+  Future getWithdrawlsRequests(GetWithdrawlsRequest event);
 }

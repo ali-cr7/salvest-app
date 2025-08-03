@@ -21,6 +21,7 @@ class AppAssets {
   static const syriaFlag = 'assets/images/new_syria_flag.png';
   static const homeIcon = 'assets/images/home.png';
   static const profileIcon = 'assets/images/profile.png';
+  
   static const saleState = 'assets/images/sale_state.png';
   static const questionMark = 'assets/images/question_mark.png';
   static const settingICon = 'assets/images/setting.png';

@@ -55,7 +55,10 @@ class APIConfig {
   static const String deactivateAutoInvestment =
       "/api/v1/automatic_investment/deactivate";
   static const String transferToInvestment = "/api/v1/transfer_To_Investment";
-  static const String  makeWithdrawalRequest = "/api/v1/withdrawals/make_request";
- static const String  getAllWithdrawalRequestForUser = "/api/v1/getAllWithdrawalRequestForUser";
+  static const String makeWithdrawalRequest =
+      "/api/v1/withdrawals/make_request";
+  static const String getAllWithdrawalRequestForUser =
+      "/api/v1/getAllWithdrawalRequestForUser";
+  static const String getNotifications = 'api/v1/notifications';
   //getAllWithdrawalRequestForUser
 }

@@ -1,3 +1,4 @@
+import 'package:salvest_app/business_logic/user%20notifications%20bloc/user_notifications_bloc.dart';
 import 'package:salvest_app/business_logic/user/bloc/user_bloc.dart';
 
 abstract class AuthRepo {
@@ -7,4 +8,5 @@ abstract class AuthRepo {
   Future resetPassword(ResetPasswordEvent event);
   Future verifyCode(VerifyCodeEvent event);
   Future storeFcmToken(String fcm);
+  Future getUserNotifcations(GetUserNotificationsEvent event);
 }

@@ -1,6 +1,7 @@
 import 'package:salvest_app/business_logic/investing%20history%20bloc/inveseting_history_bloc.dart';
 import 'package:salvest_app/business_logic/send%20api%20withdraw%20bloc/send_api_withdraw_money_bloc_bloc.dart';
 import 'package:salvest_app/business_logic/wallet%20bloc/wallet_bloc.dart';
+import 'package:salvest_app/business_logic/withdrawls%20request%20bloc/withdrawls_request_bloc.dart';
 import 'package:salvest_app/constants.dart';
 import 'package:salvest_app/data/models/get_investing_history_response/get_investing_history_response.dart';
 
@@ -8,10 +9,13 @@ import 'package:salvest_app/data/models/get_my_investing_profits_history_respons
 
 import 'package:salvest_app/data/models/get_wallet_balance_response/get_wallet_balance_response.dart';
 import 'package:salvest_app/data/models/investment_of_wallet_percentage_response/investment_of_wallet_percentage_response.dart';
+import 'package:salvest_app/data/models/my_withdrawls_requests/my_withdrawls_requests_reponse.dart';
 import 'package:salvest_app/data/services/wallet%20services/wallet_services_repo.dart';
 import 'package:salvest_app/utility/api_config/api_config.dart';
 import 'package:salvest_app/utility/api_config/api_service.dart';
 import 'package:salvest_app/utility/enums.dart';
+
+import '../../models/my_withdrawls_requests/my_withdrawls_requests.dart';
 
 class WalletServicesRepoImpl implements WalletServicesRepo {
   final ApiService _apiService;
@@ -170,12 +174,11 @@ class WalletServicesRepoImpl implements WalletServicesRepo {
       token: token,
       data: {'amount': event.amount},
     );
-  
+
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {
         String message = helperResponse.fullBody!['message'];
         return message;
-        
       } catch (e) {
         return helperResponse.copyWith(
           servicesResponse: ServicesResponseStatues.modelError,
@@ -203,6 +206,29 @@ class WalletServicesRepoImpl implements WalletServicesRepo {
         servicesResponse: ServicesResponseStatues.someThingWrong,
       );
     }
+  }
+
+  @override
+  Future getWithdrawlsRequests(GetWithdrawlsRequest event) async {
+    HelperResponse helperResponse = await _apiService.get(
+      endpoint: 'api/v1/getAllWithdrawalRequestForUser',
+      token: token,
+    );
+    print(helperResponse.fullBody);
+    print(helperResponse.servicesResponse);
+    print(helperResponse.response);
+    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+      try {
+        MyWithdrawlsRequestsReponse myWithdrawlsRequestsReponse =
+            MyWithdrawlsRequestsReponse.from(helperResponse.fullBody!);
+        return myWithdrawlsRequestsReponse;
+      } catch (e) {
+        return helperResponse.copyWith(
+          servicesResponse: ServicesResponseStatues.modelError,
+        );
+      }
+    }
+    return helperResponse;
   }
 }
 

@@ -10,6 +10,11 @@ class AppColors {
   static const Color darkGreen = Color(0xFF22842D);
   static const Color green15 = Color(0x26FFCC02);
   static const Color redColor = Color(0xFFD81721);
+ static const Color darkGray = Color(0xFF2C2C2E);
+  static const Color blueGray = Color(0xFF607D8B);
+  static const Color indigo = Color(0xFF3F51B5);
+  static const Color teal = Color(0xFF009688);
+  static const Color navyBlue = Color(0xFF1A237E);
   static const Color lightBlue = Color(0x3F9A8AEC);
   static const Color blue = Color(0xFF9A8AEC);
   static const Color black82 = Color(0xD1000000); // 82% opacity
@@ -22,7 +27,7 @@ class AppColors {
   static const Color mediumGreen = Color(0xFF088711);
   static const Color brightGreen = Color(0xFF21D937);
   static const Color oliveGreen = Color(0xFF686F08);
-  static const Color teal = Color(0xFF8CE996);
+ // static const Color teal = Color(0xFF8CE996);
   static const Color mutedYellow = Color(0xFFD8EC43);
   static const Color gray25 = Color(0x40D9D9D9); // 25% opacity
   static const Color brightRed = Color(0xFFF1272B);

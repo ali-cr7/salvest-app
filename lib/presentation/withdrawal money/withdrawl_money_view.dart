@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
 import 'package:salvest_app/business_logic/send%20api%20withdraw%20bloc/send_api_withdraw_money_bloc_bloc.dart';
 import 'package:salvest_app/business_logic/withdraw%20money%20bloc/withdraw_money_bloc.dart';
 import 'package:salvest_app/utility/app_colors.dart';
 import 'package:salvest_app/utility/enums.dart';
+import 'package:salvest_app/utility/router.dart';
 
 class WithdrawalMoneyView extends StatefulWidget {
   const WithdrawalMoneyView({super.key});
@@ -106,31 +108,6 @@ class _WithdrawlMoneyViewState extends State<WithdrawalMoneyView> {
     );
   }
 
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      final bloc = context.read<WithdrawMoneyBloc>();
-      bloc.add(UpdateWithdrawAmountEvent(double.parse(_amountController.text)));
-      bloc.add(UpdateWithdrawMethodEvent(_method));
-      switch (_method) {
-        case 'bank':
-          bloc.add(UpdateCardNumberEvent(_cardNumberController.text));
-          bloc.add(UpdateAccountHolderNameEvent(_fullNameController.text));
-          break;
-        case 'harem':
-        case 'western_union':
-          bloc.add(UpdateFullNameEvent(_fullNameController.text));
-          bloc.add(UpdatePhoneEvent(_cardNumberController.text));
-          bloc.add(UpdateStateEvent(_stateController.text));
-          break;
-        case 'crypto':
-          bloc.add(UpdateWalletAddressEvent(_cryptoWalletController.text));
-          break;
-      }
-      debugPrint('Submitting form...');
-      debugPrint('Form Submitted: ${bloc.state.toMap()}');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocListener<
@@ -138,13 +115,15 @@ class _WithdrawlMoneyViewState extends State<WithdrawalMoneyView> {
       SendApiWithdrawMoneyBlocState
     >(
       listener: (context, state) {
+        if (state is SendApiWithdrawMoneyLoading) {
+          EasyLoading.show(status: 'loading...');
+        }
         if (state is SendApiWithdrawMoneyStatus) {
+          EasyLoading.dismiss();
           final message = state.helperResponse.fullBody!["message"] ?? '';
           final success =
               state.helperResponse.servicesResponse ==
-                      ServicesResponseStatues.success
-                  ? true
-                  : false;
+              ServicesResponseStatues.success;
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
@@ -168,117 +147,172 @@ class _WithdrawlMoneyViewState extends State<WithdrawalMoneyView> {
           ),
           backgroundColor: AppColors.green,
         ),
-
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                _buildTextField(
-                  controller: _amountController,
-                  label: 'Amount (SYP)',
-                  icon: Icons.attach_money,
-                ),
-                const SizedBox(height: 12),
-                DropdownButtonFormField<String>(
-                  value: _method,
-                  items: const [
-                    DropdownMenuItem(value: 'bank', child: Text('Bank')),
-                    DropdownMenuItem(value: 'harem', child: Text('Harem')),
-                    DropdownMenuItem(
-                      value: 'western_union',
-                      child: Text('Western Union'),
-                    ),
-                    DropdownMenuItem(value: 'crypto', child: Text('Crypto')),
-                  ],
-                  onChanged: (value) {
-                    setState(() {
-                      _method = value!;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Withdrawal Method',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    prefixIcon: Icon(Icons.payment, color: AppColors.green),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                _buildMethodDetails(),
-                const SizedBox(height: 20),
-                BlocBuilder<WithdrawMoneyBloc, WithdrawMoneyState>(
-                  builder: (context, state) {
-                    return ElevatedButton.icon(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          final bloc = context.read<WithdrawMoneyBloc>();
-                          bloc.add(
-                            UpdateWithdrawAmountEvent(
-                              double.parse(_amountController.text),
+        body: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      _buildTextField(
+                        controller: _amountController,
+                        label: 'Amount (SYP)',
+                        icon: Icons.attach_money,
+                      ),
+                      const SizedBox(height: 12),
+                      DropdownButtonFormField<String>(
+                        value: _method,
+                        items: const [
+                          DropdownMenuItem(value: 'bank', child: Text('Bank')),
+                          DropdownMenuItem(
+                            value: 'harem',
+                            child: Text('Harem'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'western_union',
+                            child: Text('Western Union'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'crypto',
+                            child: Text('Crypto'),
+                          ),
+                        ],
+                        onChanged: (value) {
+                          setState(() {
+                            _method = value!;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'Withdrawal Method',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          prefixIcon: Icon(
+                            Icons.payment,
+                            color: AppColors.green,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      _buildMethodDetails(),
+                      const SizedBox(height: 20),
+                      BlocBuilder<WithdrawMoneyBloc, WithdrawMoneyState>(
+                        builder: (context, state) {
+                          return ElevatedButton.icon(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                final bloc = context.read<WithdrawMoneyBloc>();
+                                bloc.add(
+                                  UpdateWithdrawAmountEvent(
+                                    double.parse(_amountController.text),
+                                  ),
+                                );
+                                bloc.add(UpdateWithdrawMethodEvent(_method));
+                                switch (_method) {
+                                  case 'bank':
+                                    bloc.add(
+                                      UpdateCardNumberEvent(
+                                        _cardNumberController.text,
+                                      ),
+                                    );
+                                    bloc.add(
+                                      UpdateAccountHolderNameEvent(
+                                        _fullNameController.text,
+                                      ),
+                                    );
+                                    break;
+                                  case 'harem':
+                                  case 'western_union':
+                                    bloc.add(
+                                      UpdateFullNameEvent(
+                                        _fullNameController.text,
+                                      ),
+                                    );
+                                    bloc.add(
+                                      UpdatePhoneEvent(
+                                        _cardNumberController.text,
+                                      ),
+                                    );
+                                    bloc.add(
+                                      UpdateStateEvent(_stateController.text),
+                                    );
+                                    break;
+                                  case 'crypto':
+                                    bloc.add(
+                                      UpdateWalletAddressEvent(
+                                        _cryptoWalletController.text,
+                                      ),
+                                    );
+                                    break;
+                                }
+                                debugPrint('Submitting form...');
+                                debugPrint(
+                                  'Form Submitted: ${bloc.state.toMap()}',
+                                );
+                                context
+                                    .read<SendApiWithdrawMoneyBlocBloc>()
+                                    .add(
+                                      WithdrawMoneyApiEvent(
+                                        withdrawMoneyState: state,
+                                      ),
+                                    );
+                              }
+                            },
+                            icon: const Icon(
+                              Icons.send,
+                              color: AppColors.background,
+                            ),
+                            label: const Text(
+                              'Submit',
+                              style: TextStyle(color: AppColors.background),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.green15,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 24,
+                                vertical: 12,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
                             ),
                           );
-                          bloc.add(UpdateWithdrawMethodEvent(_method));
-                          switch (_method) {
-                            case 'bank':
-                              bloc.add(
-                                UpdateCardNumberEvent(
-                                  _cardNumberController.text,
-                                ),
-                              );
-                              bloc.add(
-                                UpdateAccountHolderNameEvent(
-                                  _fullNameController.text,
-                                ),
-                              );
-                              break;
-                            case 'harem':
-                            case 'western_union':
-                              bloc.add(
-                                UpdateFullNameEvent(_fullNameController.text),
-                              );
-                              bloc.add(
-                                UpdatePhoneEvent(_cardNumberController.text),
-                              );
-                              bloc.add(UpdateStateEvent(_stateController.text));
-                              break;
-                            case 'crypto':
-                              bloc.add(
-                                UpdateWalletAddressEvent(
-                                  _cryptoWalletController.text,
-                                ),
-                              );
-                              break;
-                          }
-                          debugPrint('Submitting form...');
-                          debugPrint('Form Submitted: ${bloc.state.toMap()}');
-                          context.read<SendApiWithdrawMoneyBlocBloc>().add(
-                            WithdrawMoneyApiEvent(withdrawMoneyState: state),
-                          );
-                        }
-                      },
-                      icon: const Icon(Icons.send, color: AppColors.background),
-                      label: const Text(
-                        'Submit',
-                        style: TextStyle(color: AppColors.background),
+                        },
                       ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.green15,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 24,
-                          vertical: 12,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                    );
-                  },
+                    ],
+                  ),
                 ),
-              ],
+              ),
             ),
-          ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: ElevatedButton(
+                  onPressed: () {
+                    GoRouter.of(context).push(AppRouter.kWithdrawlRequestsView);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                        12,
+                      ), // Rounded square corners
+                    ),
+                    padding: const EdgeInsets.all(16), // Size of the button
+                    elevation: 4,
+                  ),
+                  child: const Icon(
+                    Icons.list_alt,
+                    color: AppColors.background,
+                    size: 22,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

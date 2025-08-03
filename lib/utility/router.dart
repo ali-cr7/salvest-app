@@ -10,9 +10,12 @@ import 'package:salvest_app/business_logic/investing%20history%20bloc/inveseting
 import 'package:salvest_app/business_logic/offered%20properties%20bloc/offered_properties_bloc.dart';
 import 'package:salvest_app/business_logic/property%20for%20investment%20bloc/properties_for_investment_bloc.dart';
 import 'package:salvest_app/business_logic/sale%20property%20bloc/sale_property_bloc.dart';
+import 'package:salvest_app/business_logic/user%20notifications%20bloc/user_notifications_bloc.dart';
 import 'package:salvest_app/business_logic/wallet%20bloc/wallet_bloc.dart';
+import 'package:salvest_app/business_logic/withdrawls%20request%20bloc/withdrawls_request_bloc.dart';
 import 'package:salvest_app/constants.dart';
 import 'package:salvest_app/data/models/get_proprties_for_investment_response/property.dart';
+import 'package:salvest_app/data/services/auth%20services/auth_repo_impl.dart';
 import 'package:salvest_app/data/services/help%20services/help_repo_impl.dart';
 import 'package:salvest_app/data/services/negotiation%20services/negotiation_repo_imp.dart';
 import 'package:salvest_app/data/services/property%20service/sale_property_repo_impl.dart';
@@ -42,6 +45,7 @@ import 'package:salvest_app/presentation/wallet/profits_wallet_view.dart';
 import 'package:salvest_app/presentation/wallet/wallet_view.dart';
 import 'package:salvest_app/presentation/wallet/widgets/stripe_payment.dart';
 import 'package:salvest_app/presentation/withdrawal%20money/withdrawl_money_view.dart';
+import 'package:salvest_app/presentation/withdrawal%20money/withdrawl_requests_view.dart';
 import 'package:salvest_app/utility/service_locator.dart';
 
 abstract class AppRouter {
@@ -70,9 +74,10 @@ abstract class AppRouter {
   static const kSaleStateRequestView = '/SaleStateRequestView';
   static const kStripeTokenTestScreen = '/StripeTokenTestScreen';
   static const kNegotitionChatView = '/NegotitionChatView';
-  static const kWithdrawalMoneyView ='/WithdrawalMoneyView';
+  static const kWithdrawalMoneyView = '/WithdrawalMoneyView';
   static const klogInView = '/LoginView';
-
+  static const kWithdrawlRequestsView = '/WithdrawlRequestsView';
+  //WithdrawlRequestsView
   static final router = GoRouter(
     routes: [
       // GoRoute(path: '/', builder: (context, state) => const LoginView()),
@@ -123,11 +128,22 @@ abstract class AppRouter {
         path: kStripeTokenTestScreen,
         builder: (context, state) => StripePaymentScreen(),
       ),
-         GoRoute(
+      GoRoute(
         path: kWithdrawalMoneyView,
         builder: (context, state) => WithdrawalMoneyView(),
       ),
-      
+      GoRoute(
+        path: kWithdrawlRequestsView,
+        builder:
+            (context, state) => BlocProvider(
+              create:
+                  (context) =>
+                      WithdrawlsRequestBloc(getIt.get<WalletServicesRepoImpl>())
+                        ..add(GetWithdrawlsRequest()),
+              child: WithdrawlRequestsView(),
+            ),
+      ),
+      //
       GoRoute(
         path: kNegotitionChatView,
         builder: (context, state) {
@@ -344,7 +360,14 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kNotificationView,
-        builder: (context, state) => const NotificationsView(),
+        builder:
+            (context, state) => BlocProvider(
+              create:
+                  (context) =>
+                      UserNotificationsBloc(getIt.get<AuthRepoImpl>())
+                        ..add(GetUserNotificationsEvent()),
+              child: const NotificationsView(),
+            ),
       ),
     ],
   );
