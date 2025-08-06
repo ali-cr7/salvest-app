@@ -1,4 +1,5 @@
 import 'package:salvest_app/business_logic/acivate%20investment%20settings%20bloc/activate_auto_ivnestment_bloc.dart';
+import 'package:salvest_app/business_logic/get%20suer%20properties%20owner%20ship%20bloc/get_user_properties_owner_ship_e_bloc.dart';
 import 'package:salvest_app/business_logic/offered%20properties%20bloc/offered_properties_bloc.dart';
 import 'package:salvest_app/business_logic/property%20for%20investment%20bloc/properties_for_investment_bloc.dart';
 import 'package:salvest_app/business_logic/send%20property%20bloc/send_property_bloc.dart';
@@ -8,5 +9,7 @@ abstract class SalePropertyRepo {
   Future getOfferdProperties(GetOfferedPropertiesEvent event);
   Future getPropertiesForInvestment(GetPropertiesForInvestmentsEvent event);
   Future activateAutoInvestment(ActicvateAutoInvestmentApiEvent event);
-   Future deActivateAutoInvestment(DeActicvateAutoInvestmentApiEvent event);
+  Future deActivateAutoInvestment(DeActicvateAutoInvestmentApiEvent event);
+  Future getProperiesOwnerShip(GetOwneredProprtiesEvent event);
+  Future transferOwnenrShip(TransferOwneredProprties event);
 }

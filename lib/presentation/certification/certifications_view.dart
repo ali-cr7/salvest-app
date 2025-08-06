@@ -50,6 +50,18 @@ class CertificationsView extends StatelessWidget {
                   text: 'Selling Certification',
                 ),
               ),
+              InkWell(
+                onTap: () {
+                  GoRouter.of(
+                    context,
+                  ).push(AppRouter.kOwneredStakesCretifications);
+                },
+                child: CertifiactionsItem(
+                  icon: AppAssets.certificateBlue,
+                  itemColor: Color(0x3F9A8AEC),
+                  text: 'Ownered Stakes Certification',
+                ),
+              ),
             ],
           ),
         ),

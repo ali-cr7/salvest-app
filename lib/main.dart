@@ -8,6 +8,7 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:salvest_app/business_logic/Electronic%20Certificate/electronic_certificate_bloc.dart';
 import 'package:salvest_app/business_logic/acivate%20investment%20settings%20bloc/activate_auto_ivnestment_bloc.dart';
 import 'package:salvest_app/business_logic/auto%20investment%20settings%20bloc/auto_investment_settings_bloc.dart';
+import 'package:salvest_app/business_logic/get%20suer%20properties%20owner%20ship%20bloc/get_user_properties_owner_ship_e_bloc.dart';
 import 'package:salvest_app/business_logic/help%20bloc/help_bloc.dart';
 import 'package:salvest_app/business_logic/investment%20mode%20bloc/investment_mode_bloc.dart';
 import 'package:salvest_app/business_logic/investments%20by%20month%20bloc/investments_by_month_bloc.dart';
@@ -15,8 +16,10 @@ import 'package:salvest_app/business_logic/largest%20reward%20bloc/largest_rewar
 import 'package:salvest_app/business_logic/lines%20chart%20bloc/lines_chart_bloc.dart';
 import 'package:salvest_app/business_logic/property%20for%20investment%20bloc/properties_for_investment_bloc.dart';
 import 'package:salvest_app/business_logic/sale%20property%20bloc/sale_property_bloc.dart';
+import 'package:salvest_app/business_logic/search%20user%20email%20bloc/search_user_email_bloc.dart';
 import 'package:salvest_app/business_logic/send%20api%20withdraw%20bloc/send_api_withdraw_money_bloc_bloc.dart';
 import 'package:salvest_app/business_logic/send%20property%20bloc/send_property_bloc.dart';
+import 'package:salvest_app/business_logic/user%20notifications%20bloc/user_notifications_bloc.dart';
 import 'package:salvest_app/business_logic/user%20question%20bloc/user_questions_bloc.dart';
 import 'package:salvest_app/business_logic/user/bloc/user_bloc.dart';
 import 'package:salvest_app/business_logic/wallet%20bloc/wallet_bloc.dart';
@@ -183,10 +186,19 @@ class _SalvestAppState extends State<SalvestApp> {
           BlocProvider(create: (context) => AutoInvestmentSettingsBloc()),
           BlocProvider(create: (context) => WithdrawMoneyBloc()),
           //
-           BlocProvider(
+          BlocProvider(
             create:
-                (context) => SendApiWithdrawMoneyBlocBloc(getIt.get<WalletServicesRepoImpl>()),
+                (context) => SendApiWithdrawMoneyBlocBloc(
+                  getIt.get<WalletServicesRepoImpl>(),
+                ),
           ),
+BlocProvider(
+            create: (context) => SearchUserEmailBloc(getIt.get<AuthRepoImpl>()),
+          ),
+          BlocProvider(
+            create: (context) => GetUserPropertiesOwnerShipEBloc(getIt.get<SalePropertyRepoImpl>()),
+          ),
+          //
         ],
         child: MaterialApp.router(
           builder: EasyLoading.init(),

@@ -60,5 +60,9 @@ class APIConfig {
   static const String getAllWithdrawalRequestForUser =
       "/api/v1/getAllWithdrawalRequestForUser";
   static const String getNotifications = 'api/v1/notifications';
-  //getAllWithdrawalRequestForUser
+  static const String transferOwnership =
+      'api/v1/transfer_Investment_Ownership';
+  static const String getOwneredProprties =
+      'api/v1/get_all_investment_certificates_for_user';
+  static const String searchAboutUser = 'api/v1/search_about_user';
 }

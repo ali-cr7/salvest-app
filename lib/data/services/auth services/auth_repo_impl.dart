@@ -3,11 +3,13 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:salvest_app/business_logic/search%20user%20email%20bloc/search_user_email_bloc.dart';
 import 'package:salvest_app/business_logic/user%20notifications%20bloc/user_notifications_bloc.dart';
 import 'package:salvest_app/business_logic/user/bloc/user_bloc.dart';
 import 'package:salvest_app/constants.dart';
 import 'package:salvest_app/data/models/get_notifications_response/get_notifications_response.dart';
 import 'package:salvest_app/data/models/log_in_response/log_in_response.dart';
+import 'package:salvest_app/data/models/search_user_response/search_user_response.dart';
 import 'package:salvest_app/data/models/sign_up_response/sign_up_response.dart';
 import 'package:salvest_app/data/services/auth%20services/auth_repo.dart';
 import 'package:salvest_app/utility/api_config/api_config.dart';
@@ -231,6 +233,26 @@ class AuthRepoImpl implements AuthRepo {
       try {
         final GetNotificationsResponse getNotificationsResponse = GetNotificationsResponse.from(helperResponse.fullBody!);
         return getNotificationsResponse;
+      } catch (e) {
+        return helperResponse.copyWith(
+          servicesResponse: ServicesResponseStatues.modelError,
+        );
+      }
+    }
+  }
+
+  @override
+  Future searchuserEvent(SearhForUserEvent event) async {
+   HelperResponse helperResponse = await _apiService.post(
+      endpoint: APIConfig.searchAboutUser,
+      data: {'email': event.email},
+    );
+  
+    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+      try {
+         SearchUserResponse searchUserResponse =
+            SearchUserResponse.from(helperResponse.fullBody!);
+        return searchUserResponse;
       } catch (e) {
         return helperResponse.copyWith(
           servicesResponse: ServicesResponseStatues.modelError,

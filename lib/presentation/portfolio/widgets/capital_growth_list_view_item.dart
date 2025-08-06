@@ -71,7 +71,7 @@ class CapitalGrowthListViewItem extends StatelessWidget {
                   titleColor: const Color(0xFF21D836),
                   titleFontSize: 10,
                   titleFontWeight: FontWeight.w700,
-                  availability: '${mode.investorCount} investors',
+                  availability: '${mode.investorCount} Chances',
                   availabilityColor: Colors.black.withValues(alpha: 117),
                   availabilityFontSize: 15,
                   availabilityFontWeight: FontWeight.w700,

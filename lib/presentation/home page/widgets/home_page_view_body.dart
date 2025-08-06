@@ -36,9 +36,41 @@ class HomePageViewBody extends StatelessWidget {
             onTap: () {
               GoRouter.of(context).push(AppRouter.kNotificationView);
             },
-            child: Icon(Icons.notifications, color: Colors.black),
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                const Icon(Icons.notifications, color: Colors.black),
+                Positioned(
+                  right: -2,
+                  top: -2,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 2,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    constraints: const BoxConstraints(
+                      minWidth: 8,
+                      minHeight: 8,
+                    ),
+                    child: const Text(
+                      '+9',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 8,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
         ],
       ),
       drawer: const CustomDrawer(),
