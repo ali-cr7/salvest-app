@@ -197,7 +197,8 @@ class WalletServicesRepoImpl implements WalletServicesRepo {
         data: formData,
         token: token,
       );
-
+      print("the withdraw response ${helperResponse.fullBody}");
+      print("the withdraw request ${formData.fields}");
       return helperResponse;
     } catch (e) {
       return HelperResponse(

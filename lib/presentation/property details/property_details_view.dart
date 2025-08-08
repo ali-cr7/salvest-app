@@ -335,34 +335,51 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> {
                           buttonName: 'invest',
                           onTap: () async {
                             if (!_isAuthenticated) {
-                              final bool caAuthenticateWithBiometrics =
+                              final bool canAuthenticateWithBiometrics =
                                   await _auth.canCheckBiometrics;
-                              if (caAuthenticateWithBiometrics) {
+
+                              if (canAuthenticateWithBiometrics) {
                                 try {
                                   final bool
                                   didAuthenticate = await _auth.authenticate(
                                     localizedReason:
-                                        'Please authenticate to in confirm the investing',
-                                    options: AuthenticationOptions(
+                                        'Please authenticate to confirm the investment',
+                                    options: const AuthenticationOptions(
                                       biometricOnly: false,
                                     ),
                                   );
-                                  setState(() {
-                                    _isAuthenticated = didAuthenticate;
-                                  });
+
+                                  if (didAuthenticate) {
+                                    setState(() {
+                                      _isAuthenticated = true;
+                                    });
+                                    EasyLoading.showSuccess(
+                                      'Authentication success',
+                                    );
+                                    _pay();
+                                  } else {
+                                    EasyLoading.showError(
+                                      'Authentication failed',
+                                    );
+                                  }
                                 } catch (e) {
                                   print(e);
+                                  EasyLoading.showError('Authentication error');
                                 }
+                              } else {
+                                EasyLoading.showError(
+                                  'Biometric authentication not available',
+                                );
                               }
-                              EasyLoading.showSuccess('Authentication success');
-                              _pay();
                             } else {
+                              // Optional: Reset authentication state if needed
                               setState(() {
                                 _isAuthenticated = false;
                               });
                             }
                           },
                         ),
+
                         SizedBox(height: 10),
                       ],
                     ),

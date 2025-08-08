@@ -51,7 +51,7 @@ class _WithdrawlMoneyViewState extends State<WithdrawalMoneyView> {
             ),
           ],
         );
-      case 'harem':
+      case 'pyramid':
       case 'western_union':
         return Column(
           children: [
@@ -167,8 +167,8 @@ class _WithdrawlMoneyViewState extends State<WithdrawalMoneyView> {
                         items: const [
                           DropdownMenuItem(value: 'bank', child: Text('Bank')),
                           DropdownMenuItem(
-                            value: 'harem',
-                            child: Text('Harem'),
+                            value: 'pyramid',
+                            child: Text('pyramid'),
                           ),
                           DropdownMenuItem(
                             value: 'western_union',
@@ -223,7 +223,7 @@ class _WithdrawlMoneyViewState extends State<WithdrawalMoneyView> {
                                       ),
                                     );
                                     break;
-                                  case 'harem':
+                                  case 'pyramid':
                                   case 'western_union':
                                     bloc.add(
                                       UpdateFullNameEvent(

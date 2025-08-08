@@ -50,7 +50,10 @@ class CapitalGrowthView extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               itemCount: state.modes.length,
               itemBuilder: (ctx, i) {
-                return CapitalGrowthListViewItem(mode: state.modes[i]);
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CapitalGrowthListViewItem(mode: state.modes[i]),
+                );
               },
             );
           }
