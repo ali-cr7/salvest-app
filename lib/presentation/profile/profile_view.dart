@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,7 +16,6 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // نرسل الحدث عند إنشاء الصفحة
     context.read<LargestRewardBloc>().add(FetchLargestRewardEvent());
 
     return Scaffold(
@@ -35,177 +33,239 @@ class ProfileView extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(height: 24),
-          // صف التاج + الصورة
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 48),
-            child: Row(
-              children: [
-                // العمود الذي فيه التاج وصورة البروفايل
-                Column(
-                  children: [
-                    BlocBuilder<LargestRewardBloc, LargestRewardState>(
-                      builder: (context, state) {
-                        if (state is LargestRewardLoading ||
-                            state is LargestRewardInitial) {
-                          // أثناء التحميل: سبنر بدل التاج
-                          return const SizedBox(
-                            height: 80,
-                            width: 80,
-                            child: Center(child: CircularProgressIndicator()),
-                          );
-                        }
-                        Color crownColor;
-                        //   String subtitle; // إما أعلى ربح أو رسالة خطأ
-                        if (state is LargestRewardLoaded) {
-                          final tier = state.reward.level ?? '';
-                          // نختار اللون بناءً على المستوى
-                          switch (tier.toLowerCase()) {
-                            case 'silver':
-                              crownColor = const Color(0xFFC0C0C0);
-                              break;
-                            case 'gold':
-                              crownColor = const Color(0xFFFFD700);
-                              break;
-                            case 'platinum':
-                              crownColor = const Color(0xFFB0E0E6);
-                              break;
-                            default:
-                              crownColor = Colors.grey;
-                          }
-                          //   subtitle = ' ${state.reward.amountProfit}%';
-                          // } else if (state is LargestRewardError) {
-                          //   crownColor = Colors.grey; // حالة الخطأ
-                          //   subtitle = 'خطأ في التحميل';
-                        } else {
-                          crownColor = Colors.grey;
-                          // subtitle = '';
-                        }
+      body: Padding(
+        padding: const EdgeInsets.only(bottom: 80.0),
+        child: SingleChildScrollView(
+          // ✅ Scrollable if too long
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 24),
 
-                        return Column(
-                          children: [
-                            Icon(
+              // ===== PROFILE HEADER =====
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Row(
+                  children: [
+                    Column(
+                      children: [
+                        BlocBuilder<LargestRewardBloc, LargestRewardState>(
+                          builder: (context, state) {
+                            Color crownColor = Colors.grey;
+                            if (state is LargestRewardLoaded) {
+                              switch (state.reward.level?.toLowerCase()) {
+                                case 'silver':
+                                  crownColor = const Color(0xFFC0C0C0);
+                                  break;
+                                case 'gold':
+                                  crownColor = const Color(0xFFFFD700);
+                                  break;
+                                case 'platinum':
+                                  crownColor = const Color.fromARGB(
+                                    255,
+                                    33,
+                                    86,
+                                    93,
+                                  );
+                                  break;
+                              }
+                            }
+                            return Icon(
                               FontAwesomeIcons.crown,
                               color: crownColor,
                               size: 80,
-                            ),
-                            const SizedBox(height: 8),
-                            // Text(
-                            // subtitle,
-                            // style: const TextStyle(
-                            //   fontSize: 14,
-                            //   fontWeight: FontWeight.w500,
-                            //   color: Colors.black87,
-                            // ),
-                            // ),
-                          ],
-                        );
-                      },
-                    ),
-
-                    const SizedBox(height: 0),
-
-                    // صورة البروفايل (ثابتة كما في التصميم)
-                    Container(
-                      width: 103,
-                      height: 103,
-                      decoration: ShapeDecoration(
-                        color: const Color(0x669A8AEC),
-                        shape: const OvalBorder(
-                          side: BorderSide(width: 4, color: Color(0xFF836DF3)),
+                            );
+                          },
                         ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          getInitials(name!),
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 36,
-                            fontWeight: FontWeight.w500,
+                        const SizedBox(height: 8),
+                        Container(
+                          width: 100,
+                          height: 100,
+                          decoration: ShapeDecoration(
+                            color: const Color(0x669A8AEC),
+                            shape: const OvalBorder(
+                              side: BorderSide(
+                                width: 4,
+                                color: Color(0xFF836DF3),
+                              ),
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              getInitials(name!),
+                              style: const TextStyle(
+                                fontSize: 36,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
                           ),
                         ),
+                      ],
+                    ),
+                    const SizedBox(width: 24),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 50.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            name!,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            formatJoinedDate(joinDate!),
+                            style: TextStyle(
+                              color: Colors.black.withOpacity(0.53),
+                              fontSize: 13,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
+              ),
 
-                const SizedBox(width: 35),
+              const SizedBox(height: 24),
 
-                // بيانات المستخدم (الاسم وتاريخ الانضمام)
-                Column(
+              // ===== CONTACT INFO CARD =====
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: const Color(0x3F9A8AEC),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: const Color(0xFF836DF3), width: 3),
+                ),
+                child: Column(
+                  children: [
+                    ProfileInfoRow(
+                      icon: AppAssets.messageIcon,
+                      text: email!,
+                      onTap: () {},
+                    ),
+                    const SizedBox(height: 10),
+                    ProfileInfoRow(
+                      icon: AppAssets.phoneIcon,
+                      text: phone!,
+                      onTap: () {},
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 24),
+
+              // ===== REWARD SYSTEM EXPLANATION =====
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: const Color(0x3F9A8AEC),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: const Color(0xFF836DF3), width: 3),
+                ),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 60),
-                    Text(
-                      name!,
-                      style: const TextStyle(
+                    const Text(
+                      "🎯 Reward System",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                         color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                    const SizedBox(height: 4),
-                    Text(
-                      formatJoinedDate(joinDate!),
-                      style: TextStyle(
-                        color: Colors.black.withOpacity(0.53),
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500,
-                      ),
+                    const SizedBox(height: 12),
+
+                    // Silver Level
+                    rewardRow(
+                      FontAwesomeIcons.crown,
+                      "Silver",
+                      "Spend ≥ 1,000,000.00 to get 2% cashback & 4% discount (4 times)",
+                      iconColor: const Color(0xFFC0C0C0), // silver
+                    ),
+                    const SizedBox(height: 8),
+
+                    // Gold Level
+                    rewardRow(
+                      FontAwesomeIcons.crown,
+                      "Gold",
+                      "Spend ≥ 2,000,000.00 to get 3% cashback & 5% discount (4 times)",
+                      iconColor: const Color(0xFFFFD700), // gold
+                    ),
+                    const SizedBox(height: 8),
+
+                    // Platinum Level
+                    rewardRow(
+                      FontAwesomeIcons.crown,
+                      "Platinum",
+                      "Spend ≥ 3,000,000.00 to get 5% cashback & 6% discount (4 times)",
+                      iconColor: const Color.fromARGB(
+                        255,
+                        33,
+                        86,
+                        93,
+                      ), // platinum
                     ),
                   ],
                 ),
-              ],
-            ),
-          ),
-
-          const SizedBox(height: 30),
-
-          // بطاقة المعلومات (إيميل + هاتف)
-          Container(
-            width: 349,
-            height: 217,
-            decoration: ShapeDecoration(
-              color: const Color(0x3F9A8AEC),
-              shape: RoundedRectangleBorder(
-                side: const BorderSide(width: 3, color: Color(0xFF836DF3)),
-                borderRadius: BorderRadius.circular(20),
               ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
-              child: Column(
-                children: [
-                  ProfileInfoRow(
-                    icon: AppAssets.messageIcon,
-                    text: email!,
-                    onTap: () {},
-                  ),
-                  const SizedBox(height: 10),
-                  ProfileInfoRow(
-                    icon: AppAssets.phoneIcon,
-                    text: phone!,
-                    onTap: () {},
-                  ),
-                ],
-              ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
+    );
+  }
+
+  Widget rewardRow(
+    IconData icon,
+    String title,
+    String desc, {
+    Color iconColor = Colors.white,
+  }) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(icon, color: iconColor, size: 28),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  color: Colors.black87,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                desc,
+                style: const TextStyle(
+                  color: Colors.black87,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
   String formatJoinedDate(String isoDate) {
     try {
       final date = DateTime.parse(isoDate);
-      final formatted = DateFormat('d MMMM yyyy').format(date);
-      return 'joined in $formatted';
+      return 'Joined in ${DateFormat('d MMMM yyyy').format(date)}';
     } catch (_) {
-      return 'joined in Unknown date';
+      return 'Joined in Unknown date';
     }
   }
 

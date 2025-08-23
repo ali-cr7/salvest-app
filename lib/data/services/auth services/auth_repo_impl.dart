@@ -80,9 +80,9 @@ class AuthRepoImpl implements AuthRepo {
         LogInResponse logInResponse = LogInResponse.from(
           helperResponse.fullBody!,
         );
-        print('✅ Backend login successful');
-        print('📦 Full backend response: ${helperResponse.fullBody}');
-        print('📨 Message from backend: ${logInResponse.message}');
+        print(' Backend login successful');
+        print(' Full backend response: ${helperResponse.fullBody}');
+        print(' Message from backend: ${logInResponse.message}');
 
         await setCache(logInResponse);
         await storeFcmToken(fcm);
@@ -261,3 +261,4 @@ class AuthRepoImpl implements AuthRepo {
     }
   }
 }
+    

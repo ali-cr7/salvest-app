@@ -93,7 +93,7 @@ abstract class AppRouter {
                     (context) => PropertiesForInvestmentBloc(
                       getIt.get<SalePropertyRepoImpl>(),
                     )..add(
-                      GetPropertiesForInvestmentsEvent(propertyType: 'villa'),
+                      GetPropertiesForInvestmentsEvent(propertyType: 'Villa'),
                     ),
                 child: const HomePageView(),
               ),

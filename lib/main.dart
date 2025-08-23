@@ -8,6 +8,7 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:salvest_app/business_logic/Electronic%20Certificate/electronic_certificate_bloc.dart';
 import 'package:salvest_app/business_logic/acivate%20investment%20settings%20bloc/activate_auto_ivnestment_bloc.dart';
 import 'package:salvest_app/business_logic/auto%20investment%20settings%20bloc/auto_investment_settings_bloc.dart';
+import 'package:salvest_app/business_logic/deputizations%20bloc/deputizations_bloc.dart';
 import 'package:salvest_app/business_logic/get%20suer%20properties%20owner%20ship%20bloc/get_user_properties_owner_ship_e_bloc.dart';
 import 'package:salvest_app/business_logic/help%20bloc/help_bloc.dart';
 import 'package:salvest_app/business_logic/investment%20mode%20bloc/investment_mode_bloc.dart';
@@ -183,12 +184,30 @@ class _SalvestAppState extends State<SalvestApp> {
                   getIt.get<SalePropertyRepoImpl>(),
                 ),
           ),
+           BlocProvider(
+            create:
+                (context) => PropertiesForInvestmentBloc(
+                  getIt.get<SalePropertyRepoImpl>(),
+                )..add(
+                      GetPropertiesForInvestmentsEvent(propertyType: 'Villa'),
+          ),
+
+           ),
+
+
+
           BlocProvider(create: (context) => AutoInvestmentSettingsBloc()),
           BlocProvider(create: (context) => WithdrawMoneyBloc()),
           //
           BlocProvider(
             create:
                 (context) => SendApiWithdrawMoneyBlocBloc(
+                  getIt.get<WalletServicesRepoImpl>(),
+                ),
+          ),
+              BlocProvider(
+            create:
+                (context) => DeputizationsBloc(
                   getIt.get<WalletServicesRepoImpl>(),
                 ),
           ),

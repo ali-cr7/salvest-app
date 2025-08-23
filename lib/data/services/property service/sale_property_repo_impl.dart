@@ -65,20 +65,42 @@ class SalePropertyRepoImpl implements SalePropertyRepo {
   Future getPropertiesForInvestment(
     GetPropertiesForInvestmentsEvent event,
   ) async {
-    HelperResponse helperResponse = await _apiService.post(
-      endpoint: APIConfig.getPrpertyForInvestments,
-      token: token,
-      data: {'property_type': event.propertyType},
-    );
-    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
-      try {
-        GetProprtiesForInvestmentResponse getPropertiesForInvestmentResponse =
-            GetProprtiesForInvestmentResponse.from(helperResponse.fullBody!);
-        return getPropertiesForInvestmentResponse;
-      } catch (e) {
-        return helperResponse.copyWith(
-          servicesResponse: ServicesResponseStatues.modelError,
-        );
+    print("heeeet is token $token");
+    if (token == '') {
+      print('1'); 
+      HelperResponse helperResponse = await _apiService.post(
+        endpoint: APIConfig.getPrpertyForInvestments,
+        
+        data: {'property_type': event.propertyType},
+      );
+      if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+        try {
+          GetProprtiesForInvestmentResponse getPropertiesForInvestmentResponse =
+              GetProprtiesForInvestmentResponse.from(helperResponse.fullBody!);
+          return getPropertiesForInvestmentResponse;
+        } catch (e) {
+          return helperResponse.copyWith(
+            servicesResponse: ServicesResponseStatues.modelError,
+          );
+        }
+      }
+    } else {
+      print('2');
+      HelperResponse helperResponse = await _apiService.post(
+        endpoint: APIConfig.getPrpertyForInvestments,
+token: token,
+        data: {'property_type': event.propertyType},
+      );
+      if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+        try {
+          GetProprtiesForInvestmentResponse getPropertiesForInvestmentResponse =
+              GetProprtiesForInvestmentResponse.from(helperResponse.fullBody!);
+          return getPropertiesForInvestmentResponse;
+        } catch (e) {
+          return helperResponse.copyWith(
+            servicesResponse: ServicesResponseStatues.modelError,
+          );
+        }
       }
     }
   }

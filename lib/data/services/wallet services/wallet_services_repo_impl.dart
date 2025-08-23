@@ -1,3 +1,4 @@
+import 'package:salvest_app/business_logic/deputizations%20bloc/deputizations_bloc.dart';
 import 'package:salvest_app/business_logic/investing%20history%20bloc/inveseting_history_bloc.dart';
 import 'package:salvest_app/business_logic/send%20api%20withdraw%20bloc/send_api_withdraw_money_bloc_bloc.dart';
 import 'package:salvest_app/business_logic/wallet%20bloc/wallet_bloc.dart';
@@ -223,6 +224,31 @@ class WalletServicesRepoImpl implements WalletServicesRepo {
         MyWithdrawlsRequestsReponse myWithdrawlsRequestsReponse =
             MyWithdrawlsRequestsReponse.from(helperResponse.fullBody!);
         return myWithdrawlsRequestsReponse;
+      } catch (e) {
+        return helperResponse.copyWith(
+          servicesResponse: ServicesResponseStatues.modelError,
+        );
+      }
+    }
+    return helperResponse;
+  }
+
+  @override
+  Future createDeputizations(CreateDeputizationsEvent event) async {
+    HelperResponse helperResponse = await _apiService.post(
+      endpoint: APIConfig.createDeputizations,
+      token: token,
+      data: {
+        'ID_Number': event.nationalId,
+        'deputization_Content': event.deputizationContent,
+
+      },
+    );
+    print("the Helper Resposne for charging ${helperResponse.fullBody}");
+    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+      try {
+        var response = helperResponse.fullBody!['message'];
+        return response;
       } catch (e) {
         return helperResponse.copyWith(
           servicesResponse: ServicesResponseStatues.modelError,

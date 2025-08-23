@@ -9,14 +9,11 @@ import 'package:salvest_app/utility/app_colors.dart';
 import 'package:salvest_app/utility/dialogs_snackBar.dart';
 import 'package:salvest_app/utility/handle_cash.dart';
 import 'package:salvest_app/utility/router.dart';
-
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
-
   @override
   State<LoginView> createState() => _LoginViewState();
 }
-
 class _LoginViewState extends State<LoginView> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -37,7 +34,6 @@ class _LoginViewState extends State<LoginView> {
             );
           }
         },
-
         child: Stack(
           children: [
             /// Background Image (Full Screen)
@@ -48,7 +44,6 @@ class _LoginViewState extends State<LoginView> {
                 fit: BoxFit.contain,
               ),
             ),
-
             /// Content (Half of Screen)
             Positioned(
               bottom: 0,
@@ -137,7 +132,6 @@ class _LoginViewState extends State<LoginView> {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.02,
                       ),
-
                       /// Signup Redirect and Guest Option
                       Center(
                         child: Column(

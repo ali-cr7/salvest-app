@@ -15,9 +15,16 @@ Future<void> setCache(LogInResponse response) async {
     CacheHelper.setData(key: 'email', value: response.data!.email),
     CacheHelper.setData(key: 'name', value: response.data!.name),
     CacheHelper.setData(key: 'phone', value: response.data!.phone),
-     CacheHelper.setData(key: 'autoInvestToggle', value: true),
+    CacheHelper.setData(key: 'autoInvestToggle', value: true),
     CacheHelper.setData(key: 'joinDate', value: response.data!.createdAt),
   ]);
+}
+
+Future<void> setDeputizationState(String deputizationState) async {
+  await Future.wait([
+    CacheHelper.setData(key: 'deputizationState', value: deputizationState),
+  ]);
+  //  deputizationState = "true";
 }
 
 Future<void> getCache() async {
@@ -26,6 +33,7 @@ Future<void> getCache() async {
   name = await CacheHelper.getData(key: 'name') ?? '';
   phone = await CacheHelper.getData(key: 'phone') ?? '';
   joinDate = await CacheHelper.getData(key: 'joinDate') ?? '';
+  deputizationState = await CacheHelper.getData(key: 'deputizationState') ?? '';
 }
 
 Future<void> removeCache() async {
