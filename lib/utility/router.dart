@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:salvest_app/business_logic/Electronic%20Certificate/electronic_certificate_bloc.dart';
 import 'package:salvest_app/business_logic/Electronic%20Certificate/electronic_certificate_event.dart';
+import 'package:salvest_app/business_logic/deputizations%20bloc/deputizations_bloc.dart';
 import 'package:salvest_app/business_logic/expert%20negotiation%20bloc/expert_negotiation_bloc.dart';
 import 'package:salvest_app/business_logic/get%20suer%20properties%20owner%20ship%20bloc/get_user_properties_owner_ship_e_bloc.dart';
 import 'package:salvest_app/business_logic/help%20bloc/help_bloc.dart';
@@ -28,6 +29,7 @@ import 'package:salvest_app/presentation/auth/reset_password_view.dart';
 import 'package:salvest_app/presentation/auth/signup_view.dart';
 import 'package:salvest_app/presentation/auto%20investment/auto_investment_view.dart';
 import 'package:salvest_app/presentation/certification/certifications_view.dart';
+import 'package:salvest_app/presentation/certification/deputizations_view.dart';
 import 'package:salvest_app/presentation/certification/owner_stakes_certifications_view.dart';
 import 'package:salvest_app/presentation/certification/widgets/investing_certification__details_view.dart';
 //import 'package:salvest_app/presentation/certification/widgets/investing_certification_view.dart';
@@ -80,6 +82,7 @@ abstract class AppRouter {
   static const klogInView = '/LoginView';
   static const kWithdrawlRequestsView = '/WithdrawlRequestsView';
   static const kOwneredStakesCretifications = '/OwneredStakesCretifications';
+  static const kDeputizationsView = '/DeputizationsView';
   //WithdrawlRequestsView
   static final router = GoRouter(
     routes: [
@@ -140,6 +143,16 @@ abstract class AppRouter {
                     getIt.get<SalePropertyRepoImpl>(),
                   )..add(GetOwneredProprtiesEvent()),
               child: OwneredStakesCretifications(),
+            ),
+      ),
+      GoRoute(
+        path: kDeputizationsView,
+        builder:
+            (context, state) => BlocProvider(
+              create:
+                  (context) =>
+                      DeputizationsBloc(getIt.get<WalletServicesRepoImpl>()),
+              child: const DeputizationsView(),
             ),
       ),
 
@@ -381,11 +394,11 @@ abstract class AppRouter {
                   (context) =>
                       UserNotificationsBloc(getIt.get<AuthRepoImpl>())
                         ..add(GetUserNotificationsEvent()),
-              child:  NotificationsView(),
+              child: NotificationsView(),
             ),
       ),
 
-         GoRoute(
+      GoRoute(
         path: kWithdrawlRequestsView,
         builder:
             (context, state) => BlocProvider(

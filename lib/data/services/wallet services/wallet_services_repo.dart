@@ -9,6 +9,7 @@ abstract class WalletServicesRepo {
   Future getWalletBalance(GetWalletBalanceEvent event);
   Future invest(InvestEvent event);
   Future createDeputizations(CreateDeputizationsEvent event);
+  Future getAllDeputizationsForUser();
   Future getMyInvestingHistory(InvesetingHistoryEvent event, int page);
   Future getWalletPercentage(GetWalletPercentageEvent event);
   Future transferToInvestment(TransferToInvestmentWalletEvent event);

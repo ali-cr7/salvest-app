@@ -9,3 +9,5 @@ class CreateDeputizationsEvent extends DeputizationsEvent {
 
   CreateDeputizationsEvent({required this.nationalId, required this.deputizationContent});
 }
+
+class GetDeputizationsEvent extends DeputizationsEvent {}

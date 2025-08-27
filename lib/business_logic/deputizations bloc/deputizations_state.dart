@@ -18,3 +18,17 @@ final class CreateDeputizationsSuccess extends DeputizationsState {
 
   CreateDeputizationsSuccess({required this.message});
 }
+
+final class GetDeputizationsLoading extends DeputizationsState {}
+
+final class GetDeputizationsFailure extends DeputizationsState {
+  final HelperResponse helperResponse;
+
+  GetDeputizationsFailure({required this.helperResponse});
+}
+
+final class GetDeputizationsSuccess extends DeputizationsState {
+  final GetDeputaiztionForUserResponse deputizationsResponse;
+
+  GetDeputizationsSuccess({required this.deputizationsResponse});
+}

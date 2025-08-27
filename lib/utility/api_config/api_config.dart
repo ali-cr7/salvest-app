@@ -68,4 +68,6 @@ class APIConfig {
       'api/v1/get_all_investment_certificates_for_user';
   static const String searchAboutUser = 'api/v1/search_about_user';
   static const String createDeputizations = 'api/v1/deputizations';
+  static const String getAllDeputizationsForUser =
+      'api/v1/get_all_deputizations_for_user';
 }
